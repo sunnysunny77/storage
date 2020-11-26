@@ -23,7 +23,7 @@ class Index extends React.Component {
     log = () => {
         window.event.preventDefault()
         let s = { user: this.state.uname, psw: this.state.psw }
-        axios.post(`https:///post0`, s)
+        axios.post(`https://sunnytemp.theworkpc.com/post0`, s)
             .then(res => {
                 if (res.data) {
                     ReactDOM.render(<Nav />, document.getElementById('root'))
@@ -49,7 +49,7 @@ class Index extends React.Component {
                 </header>
                 <main>
                     <div className="left0 bg-dark"></div>
-                    <div className="mid0 bg-light mx-auto" style={{padding: "calc(50vh - 201px) 0"}}>
+                    <div className="mid0 bg-light mx-auto" style={{padding: "calc(50vh - 202px) 0"}}>
                         <div className="text-center" style={this.state.disp }>
                             <Alertb  alert="Incorrect Credentials" />
                         </div>
