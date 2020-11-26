@@ -50,7 +50,7 @@ app.post("/post0", function (req, res) {
   let a = req.body.user;
   let b = req.body.psw;
   let c = false;
-  if (a === "store" && b === "store") {
+  if (a === "" && b === "") {
     c = true;
   }
   res.json(c);
