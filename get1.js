@@ -29,7 +29,7 @@ pool.getConnection(function(err, connection) {
     if (err) throw err; // not connected!
 
     // Use the connection
-    connection.query("CREATE TABLE store.posiInfo ( ID DECIMAL(10, 5), posiPosition CHAR(25), posiWeight SMALLINT UNSIGNED, jobNum INT UNSIGNED, clientName CHAR(128), PRIMARY KEY (ID), FOREIGN KEY (jobNum, clientName) REFERENCES store.jobBook(jobNum, clientName))", function(error, results, fields) {
+    connection.query("CREATE TABLE store.posiInfo ( ID DECIMAL(10, 5), posiPosition CHAR(25), posiWeight SMALLINT UNSIGNED, jobNum INT UNSIGNED, clientName CHAR(128), PRIMARY KEY (ID))", function(error, results, fields) {
         // When done with the connection, release it.
         connection.release();
 
