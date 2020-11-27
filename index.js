@@ -727,8 +727,14 @@ app.post("/post10", function (req, res) {
         let w = results.length;
         for (let op = 0; op < w; op++) {
           pool.query(
-            "DELETE FROM store.posiInfo WHERE jobNum=  '" + results[op].jobNum +  "'; DROP TABLE store." + results[op].jobNum + "; DELETE FROM store.jobBook WHERE clientName=  '" + x + "'",
-            function (error, results) {
+            "DELETE FROM store.posiInfo WHERE jobNum=  '" +
+              results[op].jobNum +
+              "'; DROP TABLE store." +
+              results[op].jobNum +
+              "; DELETE FROM store.jobBook WHERE clientName=  '" +
+              x +
+              "'",
+            function (error, results, fields) {
               if (error) {
                 return res.json({ e: error });
               } else if (!error && results) {
@@ -738,8 +744,8 @@ app.post("/post10", function (req, res) {
               }
             }
           );
-        }        
-      } else if (!error && !results) {
+        }
+      } else if (!error && !results.length) {
         return res.json({
           e: {
             code: " IS_NOT_VALID",
@@ -749,6 +755,7 @@ app.post("/post10", function (req, res) {
       }
     }
   );
+});
 
 
 app.post("/loc", function (req, res) {
