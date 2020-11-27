@@ -727,11 +727,11 @@ app.post("/post10", function (req, res) {
         let w = results.length;
         for (let op = 0; op < w; op++) {
           pool.query(
-            "DELETE FROM store.posiInfo WHERE jobNum=  '" +
+            " DROP TABLE store." +
               results[op].jobNum +
-              "'; DROP TABLE store." +
+              "; DELETE FROM store.posiInfo WHERE jobNum=  '" +
               results[op].jobNum +
-              "",
+              "'",
             function (error, results, fields) {
               if (error) {
                 return res.json({ e: error });
@@ -764,6 +764,7 @@ app.post("/post10", function (req, res) {
     }
   );
 });
+
 
 app.post("/loc", function (req, res) {
   let loc = fs.readFileSync("../files/positions/positions.json");
