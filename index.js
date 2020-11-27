@@ -727,36 +727,18 @@ app.post("/post10", function (req, res) {
         let w = results.length;
         for (let op = 0; op < w; op++) {
           pool.query(
-            "DELETE FROM store.posiInfo WHERE jobNum=  '" +
-              results[op].jobNum +
-              "'",
+            "DELETE FROM store.posiInfo WHERE jobNum=  '" + results[op].jobNum +  "'; DROP TABLE store." + results[op].jobNum + "; DELETE FROM store.jobBook WHERE clientName=  '" + x + "'",
             function (error, results) {
               if (error) {
                 return res.json({ e: error });
+              } else if (!error && results) {
+                let t = Number(x);
+                let m = t.toFixed(5);
+                return res.json({ u: [{ Updated: x }] });
               }
             }
           );
-          pool.query(
-            "DROP TABLE store." + results[op].jobNum + "",
-            function (error, results) {
-              if (error) {
-                return res.json({ e: error });
-              }
-            }
-          );
-        }
-        pool.query(
-          "DELETE FROM store.jobBook WHERE clientName=  '" + x + "'",
-          function (error, results) {
-            if (error) {
-              return res.json({ e: error });
-            } else if (!error && results) {
-              let t = Number(x);
-              let m = t.toFixed(5);
-              return res.json({ u: [{ Updated: x }] });
-            }
-          }
-        );
+        }        
       } else if (!error && !results) {
         return res.json({
           e: {
@@ -767,8 +749,6 @@ app.post("/post10", function (req, res) {
       }
     }
   );
-});
-
 
 
 app.post("/loc", function (req, res) {
