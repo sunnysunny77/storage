@@ -313,13 +313,13 @@ const columns9 = [
   {
     dataField: "Updated",
     text: "Updated",
-  }
+  },
 ];
 const columns10 = [
   {
     dataField: "Updated",
     text: "Updated",
-  }
+  },
 ];
 
 class Tabs extends React.Component {
@@ -350,8 +350,7 @@ class Tabs extends React.Component {
     };
   }
   rss = () => {
-
-    this.setState({ 
+    this.setState({
       clientName: null,
       insertJob: null,
       insertJobID: null,
@@ -373,8 +372,8 @@ class Tabs extends React.Component {
       h: this.props.page,
       jstb: [],
       products: [],
-    })
-  }
+    });
+  };
   go = () => {
     if (this.state.h === 1) {
       return (
@@ -408,29 +407,31 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
-            <Form onSubmit={this.rest1} id="a1">
-              <Input
-                required
-                type="number"
-                name="insertJob"
-                placeholder="Job Number:"
-                min="0"
-                max="99999"
-                onChange={this.change}
-              ></Input>
-              <Input
-                required
-                type="text"
-                name="clientName"
-                placeholder="Client Name:"
-                maxLength="128"
-                onChange={this.change}
-              ></Input>
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+          <footer id="foot" className="bg-dark">
+            <div id="a1">
+              <Form onSubmit={this.rest1}>
+                <Input
+                  required
+                  type="number"
+                  name="insertJob"
+                  placeholder="Job Number:"
+                  min="0"
+                  max="99999"
+                  onChange={this.change}
+                ></Input>
+                <Input
+                  required
+                  type="text"
+                  name="clientName"
+                  placeholder="Client Name:"
+                  maxLength="128"
+                  onChange={this.change}
+                ></Input>
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -468,36 +469,38 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
-            <Form onSubmit={this.rest2} id="a1">
-              <Input
-                required
-                type="number"
-                name="insertJob"
-                placeholder="Job Number:"
-                min="0"
-                max="99999"
-                onChange={this.change}
-              ></Input>
-              <Modale onC={this.change} plh={this.state.descrip} />
-              <h4 className="text-white">↓ Select Container</h4>
-              <Input
-                required
-                type="select"
-                value={this.state.cont}
-                name="cont"
-                onChange={this.change}
-              >
-                <option value="Container = N/A">N/A:</option>
-                <option value="200L Drum">200L Drum</option>
-                <option value="Cage">Cage</option>
-                <option value="Bag">Bag</option>
-                <option value="Box">Box</option>
-              </Input>
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+          <footer id="foot" className="bg-dark">
+            <div id="a1">
+              <Form onSubmit={this.rest2}>
+                <Input
+                  required
+                  type="number"
+                  name="insertJob"
+                  placeholder="Job Number:"
+                  min="0"
+                  max="99999"
+                  onChange={this.change}
+                ></Input>
+                <Modale onC={this.change} plh={this.state.descrip} />
+                <h4 className="text-white">↓ Select Container</h4>
+                <Input
+                  required
+                  type="select"
+                  value={this.state.cont}
+                  name="cont"
+                  onChange={this.change}
+                >
+                  <option value="Container = N/A">N/A:</option>
+                  <option value="200L Drum">200L Drum</option>
+                  <option value="Cage">Cage</option>
+                  <option value="Bag">Bag</option>
+                  <option value="Box">Box</option>
+                </Input>
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -534,45 +537,44 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
+          <footer id="foot" className="bg-dark">
             <div style={this.state.disp}>
               <Alertb alert="Position Not Vaild" />
             </div>
-
-          
-
-            <Form onSubmit={this.rest3} id="a1">
-            <Button className="btn btn-light btn-block" onClick={this.bt0}>
-              View Position's
-            </Button>
-              <Input
-                required
-                type="number"
-                step="any"
-                name="insertJobID"
-                placeholder="Insert ID:"
-                onChange={this.change}
-              ></Input>
-              <Input
-                required
-                type="text"
-                onChange={this.change0}
-                maxLength="8"
-                placeholder="Positon:"
-              ></Input>
-              <Input
-                required
-                type="number"
-                name="weight"
-                placeholder="Weight Kg:"
-                min="0"
-                max="3000"
-                onChange={this.change}
-              ></Input>
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+            <div id="a1">
+              <Form onSubmit={this.rest3}>
+                <Button className="btn btn-light btn-block" onClick={this.bt0}>
+                  View Position's
+                </Button>
+                <Input
+                  required
+                  type="number"
+                  step="any"
+                  name="insertJobID"
+                  placeholder="Insert ID:"
+                  onChange={this.change}
+                ></Input>
+                <Input
+                  required
+                  type="text"
+                  onChange={this.change0}
+                  maxLength="8"
+                  placeholder="Positon:"
+                ></Input>
+                <Input
+                  required
+                  type="number"
+                  name="weight"
+                  placeholder="Weight Kg:"
+                  min="0"
+                  max="3000"
+                  onChange={this.change}
+                ></Input>
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -609,20 +611,22 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
-            <Form onSubmit={this.rest4} id="a1">
-              <Input
-                required
-                type="number"
-                step="any"
-                name="insertJobID"
-                placeholder="Insert ID:"
-                onChange={this.change}
-              ></Input>
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+          <footer id="foot" className="bg-dark">
+            <div id="a1">
+              <Form onSubmit={this.rest4}>
+                <Input
+                  required
+                  type="number"
+                  step="any"
+                  name="insertJobID"
+                  placeholder="Insert ID:"
+                  onChange={this.change}
+                ></Input>
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -659,19 +663,21 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
-            <Form onSubmit={this.rest5} id="a1">
-              <Input
-                required
-                type="text"
-                name="clientName"
-                placeholder="Client Name:"
-                onChange={this.change}
-              ></Input>
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+          <footer id="foot" className="bg-dark">
+            <div id="a1">
+              <Form onSubmit={this.rest5}>
+                <Input
+                  required
+                  type="text"
+                  name="clientName"
+                  placeholder="Client Name:"
+                  onChange={this.change}
+                ></Input>
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -726,48 +732,49 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
+          <footer id="foot" className="bg-dark">
             <div style={this.state.disp}>
               <Alertb alert="Select Checked IN or OUT" />
             </div>
-
-            <Form onSubmit={this.rest6} id="a1">
-              <Input
-                required
-                type="number"
-                name="insertJob"
-                placeholder="Job Number:"
-                min="0"
-                max="99999"
-                onChange={this.change}
-              ></Input>
-              <ButtonGroup>
-                <Button
-                  onClick={() => this.chk(0)}
-                  style={this.state.colorf}
-                  className="btn btn-warning"
-                >
-                  Cecked Out
+            <div id="a1">
+              <Form onSubmit={this.rest6}>
+                <Input
+                  required
+                  type="number"
+                  name="insertJob"
+                  placeholder="Job Number:"
+                  min="0"
+                  max="99999"
+                  onChange={this.change}
+                ></Input>
+                <ButtonGroup>
+                  <Button
+                    onClick={() => this.chk(0)}
+                    style={this.state.colorf}
+                    className="btn btn-warning"
+                  >
+                    Cecked Out
+                  </Button>
+                  <Button
+                    onClick={() => this.chk(1)}
+                    style={this.state.color}
+                    className="btn btn-warning"
+                  >
+                    In Position
+                  </Button>
+                  <Button
+                    onClick={() => this.chk(2)}
+                    style={this.state.colorff}
+                    className="btn btn-warning"
+                  >
+                    Un Allocated
+                  </Button>
+                </ButtonGroup>
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
                 </Button>
-                <Button
-                  onClick={() => this.chk(1)}
-                  style={this.state.color}
-                  className="btn btn-warning"
-                >
-                  In Position
-                </Button>
-                <Button
-                  onClick={() => this.chk(2)}
-                  style={this.state.colorff}
-                  className="btn btn-warning"
-                >
-                  Un Allocated
-                </Button>
-              </ButtonGroup>
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -821,22 +828,24 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
-            <Form onSubmit={this.rest7} id="a1">
-              <Input
-                required
-                type="number"
-                name="insertJob"
-                placeholder="Job Number:"
-                min="0"
-                max="99999"
-                onChange={this.change}
-              ></Input>
-              <Modale onC={this.change} value={this.state.descrip} />
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+          <footer id="foot" className="bg-dark">
+            <div id="a1">
+              <Form onSubmit={this.rest7}>
+                <Input
+                  required
+                  type="number"
+                  name="insertJob"
+                  placeholder="Job Number:"
+                  min="0"
+                  max="99999"
+                  onChange={this.change}
+                ></Input>
+                <Modale onC={this.change} value={this.state.descrip} />
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -876,34 +885,36 @@ class Tabs extends React.Component {
             </div>
           </main>
 
-          <footer className="bg-dark">
-            <Form onSubmit={this.rest8} id="a1">
-              <Input
-                required
-                type="text"
-                name="clientName"
-                placeholder="Client Name:"
-                onChange={this.change}
-              ></Input>
-              <h4 className="text-white">↓ Select Container</h4>
-              <Input
-                required
-                type="select"
-                value={this.state.cont}
-                name="cont"
-                onChange={this.change}
-              >
-                <option value="Container = N/A">N/A:</option>
-                <option value="200L Drum">200L Drum</option>
-                <option value="Cage">Cage</option>
-                <option value="Bag">Bag</option>
-                <option value="Box">Box</option>
-              </Input>
+          <footer id="foot" className="bg-dark">
+            <div id="a1">
+              <Form onSubmit={this.rest8}>
+                <Input
+                  required
+                  type="text"
+                  name="clientName"
+                  placeholder="Client Name:"
+                  onChange={this.change}
+                ></Input>
+                <h4 className="text-white">↓ Select Container</h4>
+                <Input
+                  required
+                  type="select"
+                  value={this.state.cont}
+                  name="cont"
+                  onChange={this.change}
+                >
+                  <option value="Container = N/A">N/A:</option>
+                  <option value="200L Drum">200L Drum</option>
+                  <option value="Cage">Cage</option>
+                  <option value="Bag">Bag</option>
+                  <option value="Box">Box</option>
+                </Input>
 
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -940,22 +951,24 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
-            <Form onSubmit={this.rest9} id="a1">
-              <Input
-                required
-                type="number"
-                name="delJob"
-                placeholder="Job Number:"
-                min="0"
-                max="99999"
-                onChange={this.change}
-              ></Input>
-             
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+          <footer id="foot" className="bg-dark">
+            <div id="a1">
+              <Form onSubmit={this.rest9}>
+                <Input
+                  required
+                  type="number"
+                  name="delJob"
+                  placeholder="Job Number:"
+                  min="0"
+                  max="99999"
+                  onChange={this.change}
+                ></Input>
+
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
@@ -992,38 +1005,68 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer className="bg-dark">
-            <Form onSubmit={this.rest10} id="a1">
-            <Input
-                required
-                type="text"
-                name="delClientName"
-                placeholder="Client Name:"
-                maxLength="128"
-                onChange={this.change}
-              ></Input>
-             
-              <Button className="btn btn-light btn-block" type="submit">
-                Submit
-              </Button>
-            </Form>
+          <footer id="foot" className="bg-dark">
+            <div id="a1">
+              <Form onSubmit={this.rest10}>
+                <Input
+                  required
+                  type="text"
+                  name="delClientName"
+                  placeholder="Client Name:"
+                  maxLength="128"
+                  onChange={this.change}
+                ></Input>
+
+                <Button className="btn btn-light btn-block" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </div>
           </footer>
         </div>
       );
     }
   };
- 
+
   reload() {
     ReactDOM.render(<Nav />, document.getElementById("root"));
   }
   rest1 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest1}>
+        <Input
+          required
+          type="number"
+          name="insertJob"
+          placeholder="Job Number:"
+          min="0"
+          max="99999"
+          onChange={this.change}
+        ></Input>
+        <Input
+          required
+          type="text"
+          name="clientName"
+          placeholder="Client Name:"
+          maxLength="128"
+          onChange={this.change}
+        ></Input>
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     let send = {
       insertJob: this.state.insertJob,
       clientName: this.state.clientName,
     };
-    this.rss()
+    this.rss();
     axios.post(`https:///post1`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1041,12 +1084,47 @@ class Tabs extends React.Component {
   rest2 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest2}>
+        <Input
+          required
+          type="number"
+          name="insertJob"
+          placeholder="Job Number:"
+          min="0"
+          max="99999"
+          onChange={this.change}
+        ></Input>
+        <Modale onC={this.change} plh={this.state.descrip} />
+        <h4 className="text-white">↓ Select Container</h4>
+        <Input
+          required
+          type="select"
+          value={this.state.cont}
+          name="cont"
+          onChange={this.change}
+        >
+          <option value="Container = N/A">N/A:</option>
+          <option value="200L Drum">200L Drum</option>
+          <option value="Cage">Cage</option>
+          <option value="Bag">Bag</option>
+          <option value="Box">Box</option>
+        </Input>
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     let send = {
       insertJob: this.state.insertJob,
       cont: this.state.cont,
       descrip: this.state.descrip,
     };
-    this.rss()
+    this.rss();
     axios.post(`https:///post2`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1064,13 +1142,51 @@ class Tabs extends React.Component {
   rest3 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest3}>
+        <Button className="btn btn-light btn-block" onClick={this.bt0}>
+          View Position's
+        </Button>
+        <Input
+          required
+          type="number"
+          step="any"
+          name="insertJobID"
+          placeholder="Insert ID:"
+          onChange={this.change}
+        ></Input>
+        <Input
+          required
+          type="text"
+          onChange={this.change0}
+          maxLength="8"
+          placeholder="Positon:"
+        ></Input>
+        <Input
+          required
+          type="number"
+          name="weight"
+          placeholder="Weight Kg:"
+          min="0"
+          max="3000"
+          onChange={this.change}
+        ></Input>
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     if (this.state.posi.length === 8) {
       let send = {
         insertJobID: this.state.insertJobID,
         posi: this.state.posi,
         weight: this.state.weight,
       };
-      this.rss()
+      this.rss();
       axios.post(`https:///post3`, send).then((res) => {
         res.data.e
           ? this.setState({
@@ -1091,8 +1207,27 @@ class Tabs extends React.Component {
   rest4 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest4} id="a1">
+        <Input
+          required
+          type="number"
+          step="any"
+          name="insertJobID"
+          placeholder="Insert ID:"
+          onChange={this.change}
+        ></Input>
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     let send = { insertJobID: this.state.insertJobID };
-    this.rss()
+    this.rss();
     axios.post(`https:///post4`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1110,8 +1245,26 @@ class Tabs extends React.Component {
   rest5 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest5}>
+        <Input
+          required
+          type="text"
+          name="clientName"
+          placeholder="Client Name:"
+          onChange={this.change}
+        ></Input>
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     let send = { clientName: this.state.clientName };
-    this.rss()
+    this.rss();
     axios.post(`https:///post5`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1129,13 +1282,56 @@ class Tabs extends React.Component {
   rest6 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest6}>
+        <Input
+          required
+          type="number"
+          name="insertJob"
+          placeholder="Job Number:"
+          min="0"
+          max="99999"
+          onChange={this.change}
+        ></Input>
+        <ButtonGroup>
+          <Button
+            onClick={() => this.chk(0)}
+            style={this.state.colorf}
+            className="btn btn-warning"
+          >
+            Cecked Out
+          </Button>
+          <Button
+            onClick={() => this.chk(1)}
+            style={this.state.color}
+            className="btn btn-warning"
+          >
+            In Position
+          </Button>
+          <Button
+            onClick={() => this.chk(2)}
+            style={this.state.colorff}
+            className="btn btn-warning"
+          >
+            Un Allocated
+          </Button>
+        </ButtonGroup>
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     if (this.state.insertJob) {
       if (this.state.cout) {
         let send = {
           insertJob: this.state.insertJob,
           count: this.state.count,
         };
-        this.rss()
+        this.rss();
         axios
           .post(`https:///post6`, send)
           .then((res) => {
@@ -1159,11 +1355,32 @@ class Tabs extends React.Component {
   rest7 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest7}>
+        <Input
+          required
+          type="number"
+          name="insertJob"
+          placeholder="Job Number:"
+          min="0"
+          max="99999"
+          onChange={this.change}
+        ></Input>
+        <Modale onC={this.change} value={this.state.descrip} />
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     let send = {
       insertJob: this.state.insertJob,
       descrip: this.state.descrip,
     };
-    this.rss()
+    this.rss();
     axios.post(`https:///post7`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1181,11 +1398,44 @@ class Tabs extends React.Component {
   rest8 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest8}>
+        <Input
+          required
+          type="text"
+          name="clientName"
+          placeholder="Client Name:"
+          onChange={this.change}
+        ></Input>
+        <h4 className="text-white">↓ Select Container</h4>
+        <Input
+          required
+          type="select"
+          value={this.state.cont}
+          name="cont"
+          onChange={this.change}
+        >
+          <option value="Container = N/A">N/A:</option>
+          <option value="200L Drum">200L Drum</option>
+          <option value="Cage">Cage</option>
+          <option value="Bag">Bag</option>
+          <option value="Box">Box</option>
+        </Input>
+
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     let send = {
       clientName: this.state.clientName,
       cont: this.state.cont,
     };
-    this.rss()
+    this.rss();
     axios.post(`https:///post8`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1203,8 +1453,29 @@ class Tabs extends React.Component {
   rest9 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest9}>
+        <Input
+          required
+          type="number"
+          name="delJob"
+          placeholder="Job Number:"
+          min="0"
+          max="99999"
+          onChange={this.change}
+        ></Input>
+
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     let send = { delJob: this.state.delJob };
-    this.rss()
+    this.rss();
     axios.post(`https:///post9`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1222,8 +1493,28 @@ class Tabs extends React.Component {
   rest10 = () => {
     window.event.preventDefault();
     document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(
+      <Form onSubmit={this.rest10}>
+        <Input
+          required
+          type="text"
+          name="delClientName"
+          placeholder="Client Name:"
+          maxLength="128"
+          onChange={this.change}
+        ></Input>
+
+        <Button className="btn btn-light btn-block" type="submit">
+          Submit
+        </Button>
+      </Form>,
+      document.getElementById("a1")
+    );
     let send = { delClientName: this.state.delClientName };
-    this.rss()
+    this.rss();
     axios.post(`https:///post10`, send).then((res) => {
       res.data.e
         ? this.setState({
