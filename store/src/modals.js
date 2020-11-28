@@ -6,7 +6,7 @@ import styles from './modals.module.css'
 const Modale = (props) => {
   const {    
     onChange = props.onC,    
-    placeholder = props.plh
+   
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -19,7 +19,7 @@ const Modale = (props) => {
       <Modal className={styles.modals} isOpen={modal} toggle={toggle} >
         <ModalHeader >Details</ModalHeader>
         <ModalBody>
-          <textarea className={styles.txt} placeholder={placeholder} required name="descrip" rows="8" onChange={onChange} ></textarea>
+          <textarea className={styles.txt}  required name="descrip" rows="8" onChange={onChange} ></textarea>
         </ModalBody>
         <ModalFooter>
           <Button className="btn btn-light btn-block" onClick={toggle}>Enter</Button>

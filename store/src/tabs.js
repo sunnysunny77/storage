@@ -1531,7 +1531,7 @@ class Tabs extends React.Component {
     this.setState({ disp1: { display: "none" }, disp1p1: { display: "none" } });
     let nam = event.target.name;
     let val = event.target.value;
-    console.log({ [nam]: val });
+
     this.setState({ [nam]: val });
   };
   change0 = (posi) => {
