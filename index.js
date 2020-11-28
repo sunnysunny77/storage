@@ -680,12 +680,12 @@ app.post("/post9", function (req, res) {
   let obj = req.body;
   let x = obj.delJob;
   pool.query(
-    "DELETE FROM store.posiInfo WHERE jobNum=  " + x + "",
+    "DROP TABLE store." + x + "",
     function (error, results) {
       if (error) {
         return res.json({ e: error });
       } else if (!error && results) {
-        pool.query("DROP TABLE store." + x + "", function (error, results) {
+        pool.query("DELETE FROM store.posiInfo WHERE jobNum=  " + x + "", function (error, results) {
           if (error) {
             return res.json({ e: error });
           } else if (!error && results) {
