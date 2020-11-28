@@ -349,7 +349,32 @@ class Tabs extends React.Component {
       products: [],
     };
   }
+  rss = () => {
 
+    this.setState({ 
+      clientName: null,
+      insertJob: null,
+      insertJobID: null,
+      delJob: null,
+      delClientName: null,
+      descrip: null,
+      cont: "Container = N/A",
+      posi: null,
+      weight: null,
+      disp: { display: "none" },
+      disp1: { display: "none" },
+      disp1p1: { display: "none" },
+      color: { color: "black" },
+      colorf: { color: "black" },
+      colorff: { color: "black" },
+      locs: null,
+      cout: false,
+      count: null,
+      h: this.props.page,
+      jstb: [],
+      products: [],
+    })
+  }
   go = () => {
     if (this.state.h === 1) {
       return (
@@ -998,6 +1023,7 @@ class Tabs extends React.Component {
       insertJob: this.state.insertJob,
       clientName: this.state.clientName,
     };
+    this.rss()
     axios.post(`https:///post1`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1020,6 +1046,7 @@ class Tabs extends React.Component {
       cont: this.state.cont,
       descrip: this.state.descrip,
     };
+    this.rss()
     axios.post(`https:///post2`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1043,6 +1070,7 @@ class Tabs extends React.Component {
         posi: this.state.posi,
         weight: this.state.weight,
       };
+      this.rss()
       axios.post(`https:///post3`, send).then((res) => {
         res.data.e
           ? this.setState({
@@ -1064,6 +1092,7 @@ class Tabs extends React.Component {
     window.event.preventDefault();
     document.getElementById("a1").remove();
     let send = { insertJobID: this.state.insertJobID };
+    this.rss()
     axios.post(`https:///post4`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1082,6 +1111,7 @@ class Tabs extends React.Component {
     window.event.preventDefault();
     document.getElementById("a1").remove();
     let send = { clientName: this.state.clientName };
+    this.rss()
     axios.post(`https:///post5`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1105,6 +1135,7 @@ class Tabs extends React.Component {
           insertJob: this.state.insertJob,
           count: this.state.count,
         };
+        this.rss()
         axios
           .post(`https:///post6`, send)
           .then((res) => {
@@ -1132,6 +1163,7 @@ class Tabs extends React.Component {
       insertJob: this.state.insertJob,
       descrip: this.state.descrip,
     };
+    this.rss()
     axios.post(`https:///post7`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1153,6 +1185,7 @@ class Tabs extends React.Component {
       clientName: this.state.clientName,
       cont: this.state.cont,
     };
+    this.rss()
     axios.post(`https:///post8`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1171,6 +1204,7 @@ class Tabs extends React.Component {
     window.event.preventDefault();
     document.getElementById("a1").remove();
     let send = { delJob: this.state.delJob };
+    this.rss()
     axios.post(`https:///post9`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1189,6 +1223,7 @@ class Tabs extends React.Component {
     window.event.preventDefault();
     document.getElementById("a1").remove();
     let send = { delClientName: this.state.delClientName };
+    this.rss()
     axios.post(`https:///post10`, send).then((res) => {
       res.data.e
         ? this.setState({
