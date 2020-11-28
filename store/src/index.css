@@ -29,7 +29,7 @@ main {
 
 .mid0 {
   width: 75%;
-
+  overflow-y: auto;
 }
 
 .left0,

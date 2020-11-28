@@ -481,12 +481,12 @@ class Tabs extends React.Component {
                   max="99999"
                   onChange={this.change}
                 ></Input>
-                <Modale onC={this.change} plh={this.state.descrip} />
+                <Modale onC={this.change}  />
                 <h4 className="text-white">↓ Select Container</h4>
                 <Input
                   required
                   type="select"
-                  value={this.state.cont}
+                 
                   name="cont"
                   onChange={this.change}
                 >
@@ -899,7 +899,7 @@ class Tabs extends React.Component {
                 <Input
                   required
                   type="select"
-                  value={this.state.cont}
+                 
                   name="cont"
                   onChange={this.change}
                 >
@@ -1033,6 +1033,11 @@ class Tabs extends React.Component {
   }
   rest1 = () => {
     window.event.preventDefault();
+    let send = {
+      insertJob: this.state.insertJob,
+      clientName: this.state.clientName,
+    };
+    this.rss();
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
@@ -1062,11 +1067,6 @@ class Tabs extends React.Component {
       </Form>,
       document.getElementById("a1")
     );
-    let send = {
-      insertJob: this.state.insertJob,
-      clientName: this.state.clientName,
-    };
-    this.rss();
     axios.post(`https:///post1`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1083,6 +1083,12 @@ class Tabs extends React.Component {
   };
   rest2 = () => {
     window.event.preventDefault();
+    let send = {
+      insertJob: this.state.insertJob,
+      cont: this.state.cont,
+      descrip: this.state.descrip,
+    };
+    this.rss();
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
@@ -1098,12 +1104,12 @@ class Tabs extends React.Component {
           max="99999"
           onChange={this.change}
         ></Input>
-        <Modale onC={this.change} plh={this.state.descrip} />
+        <Modale onC={this.change}  />
         <h4 className="text-white">↓ Select Container</h4>
         <Input
           required
           type="select"
-          value={this.state.cont}
+         
           name="cont"
           onChange={this.change}
         >
@@ -1119,12 +1125,6 @@ class Tabs extends React.Component {
       </Form>,
       document.getElementById("a1")
     );
-    let send = {
-      insertJob: this.state.insertJob,
-      cont: this.state.cont,
-      descrip: this.state.descrip,
-    };
-    this.rss();
     axios.post(`https:///post2`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1141,45 +1141,6 @@ class Tabs extends React.Component {
   };
   rest3 = () => {
     window.event.preventDefault();
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest3}>
-        <Button className="btn btn-light btn-block" onClick={this.bt0}>
-          View Position's
-        </Button>
-        <Input
-          required
-          type="number"
-          step="any"
-          name="insertJobID"
-          placeholder="Insert ID:"
-          onChange={this.change}
-        ></Input>
-        <Input
-          required
-          type="text"
-          onChange={this.change0}
-          maxLength="8"
-          placeholder="Positon:"
-        ></Input>
-        <Input
-          required
-          type="number"
-          name="weight"
-          placeholder="Weight Kg:"
-          min="0"
-          max="3000"
-          onChange={this.change}
-        ></Input>
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );
     if (this.state.posi.length === 8) {
       let send = {
         insertJobID: this.state.insertJobID,
@@ -1187,6 +1148,45 @@ class Tabs extends React.Component {
         weight: this.state.weight,
       };
       this.rss();
+      document.getElementById("a1").remove();
+      let div = document.createElement("div");
+      div.setAttribute("id", "a1");
+      document.getElementById("foot").appendChild(div);
+      ReactDOM.render(
+        <Form onSubmit={this.rest3}>
+          <Button className="btn btn-light btn-block" onClick={this.bt0}>
+            View Position's
+          </Button>
+          <Input
+            required
+            type="number"
+            step="any"
+            name="insertJobID"
+            placeholder="Insert ID:"
+            onChange={this.change}
+          ></Input>
+          <Input
+            required
+            type="text"
+            onChange={this.change0}
+            maxLength="8"
+            placeholder="Positon:"
+          ></Input>
+          <Input
+            required
+            type="number"
+            name="weight"
+            placeholder="Weight Kg:"
+            min="0"
+            max="3000"
+            onChange={this.change}
+          ></Input>
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>,
+        document.getElementById("a1")
+      );
       axios.post(`https:///post3`, send).then((res) => {
         res.data.e
           ? this.setState({
@@ -1206,6 +1206,8 @@ class Tabs extends React.Component {
   };
   rest4 = () => {
     window.event.preventDefault();
+    let send = { insertJobID: this.state.insertJobID };
+    this.rss();
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
@@ -1226,8 +1228,6 @@ class Tabs extends React.Component {
       </Form>,
       document.getElementById("a1")
     );
-    let send = { insertJobID: this.state.insertJobID };
-    this.rss();
     axios.post(`https:///post4`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1244,6 +1244,8 @@ class Tabs extends React.Component {
   };
   rest5 = () => {
     window.event.preventDefault();
+    let send = { clientName: this.state.clientName };
+    this.rss();
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
@@ -1263,8 +1265,6 @@ class Tabs extends React.Component {
       </Form>,
       document.getElementById("a1")
     );
-    let send = { clientName: this.state.clientName };
-    this.rss();
     axios.post(`https:///post5`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1281,50 +1281,6 @@ class Tabs extends React.Component {
   };
   rest6 = () => {
     window.event.preventDefault();
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest6}>
-        <Input
-          required
-          type="number"
-          name="insertJob"
-          placeholder="Job Number:"
-          min="0"
-          max="99999"
-          onChange={this.change}
-        ></Input>
-        <ButtonGroup>
-          <Button
-            onClick={() => this.chk(0)}
-            style={this.state.colorf}
-            className="btn btn-warning"
-          >
-            Cecked Out
-          </Button>
-          <Button
-            onClick={() => this.chk(1)}
-            style={this.state.color}
-            className="btn btn-warning"
-          >
-            In Position
-          </Button>
-          <Button
-            onClick={() => this.chk(2)}
-            style={this.state.colorff}
-            className="btn btn-warning"
-          >
-            Un Allocated
-          </Button>
-        </ButtonGroup>
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );
     if (this.state.insertJob) {
       if (this.state.cout) {
         let send = {
@@ -1332,21 +1288,63 @@ class Tabs extends React.Component {
           count: this.state.count,
         };
         this.rss();
-        axios
-          .post(`https:///post6`, send)
-          .then((res) => {
-            res.data.e
-              ? this.setState({
-                  jstb: res.data.e,
-                  disp1: { display: "block" },
-                  disp1p1: { display: "none" },
-                })
-              : this.setState({
-                  products: res.data.u,
-                  disp1p1: { display: "block" },
-                  disp1: { display: "none" },
-                });
-          });
+        document.getElementById("a1").remove();
+        let div = document.createElement("div");
+        div.setAttribute("id", "a1");
+        document.getElementById("foot").appendChild(div);
+        ReactDOM.render(
+          <Form onSubmit={this.rest6}>
+            <Input
+              required
+              type="number"
+              name="insertJob"
+              placeholder="Job Number:"
+              min="0"
+              max="99999"
+              onChange={this.change}
+            ></Input>
+            <ButtonGroup>
+              <Button
+                onClick={() => this.chk(0)}
+                style={this.state.colorf}
+                className="btn btn-warning"
+              >
+                Cecked Out
+              </Button>
+              <Button
+                onClick={() => this.chk(1)}
+                style={this.state.color}
+                className="btn btn-warning"
+              >
+                In Position
+              </Button>
+              <Button
+                onClick={() => this.chk(2)}
+                style={this.state.colorff}
+                className="btn btn-warning"
+              >
+                Un Allocated
+              </Button>
+            </ButtonGroup>
+            <Button className="btn btn-light btn-block" type="submit">
+              Submit
+            </Button>
+          </Form>,
+          document.getElementById("a1")
+        );
+        axios.post(`https:///post6`, send).then((res) => {
+          res.data.e
+            ? this.setState({
+                jstb: res.data.e,
+                disp1: { display: "block" },
+                disp1p1: { display: "none" },
+              })
+            : this.setState({
+                products: res.data.u,
+                disp1p1: { display: "block" },
+                disp1: { display: "none" },
+              });
+        });
       } else {
         this.setState({ disp: { display: "block" } });
       }
@@ -1354,6 +1352,11 @@ class Tabs extends React.Component {
   };
   rest7 = () => {
     window.event.preventDefault();
+    let send = {
+      insertJob: this.state.insertJob,
+      descrip: this.state.descrip,
+    };
+    this.rss();
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
@@ -1375,12 +1378,7 @@ class Tabs extends React.Component {
         </Button>
       </Form>,
       document.getElementById("a1")
-    );
-    let send = {
-      insertJob: this.state.insertJob,
-      descrip: this.state.descrip,
-    };
-    this.rss();
+    );   
     axios.post(`https:///post7`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1397,6 +1395,11 @@ class Tabs extends React.Component {
   };
   rest8 = () => {
     window.event.preventDefault();
+    let send = {
+      clientName: this.state.clientName,
+      cont: this.state.cont,
+    };
+    this.rss();
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
@@ -1414,7 +1417,7 @@ class Tabs extends React.Component {
         <Input
           required
           type="select"
-          value={this.state.cont}
+         
           name="cont"
           onChange={this.change}
         >
@@ -1430,12 +1433,7 @@ class Tabs extends React.Component {
         </Button>
       </Form>,
       document.getElementById("a1")
-    );
-    let send = {
-      clientName: this.state.clientName,
-      cont: this.state.cont,
-    };
-    this.rss();
+    );    
     axios.post(`https:///post8`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1452,6 +1450,8 @@ class Tabs extends React.Component {
   };
   rest9 = () => {
     window.event.preventDefault();
+    let send = { delJob: this.state.delJob };
+    this.rss();
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
@@ -1473,9 +1473,7 @@ class Tabs extends React.Component {
         </Button>
       </Form>,
       document.getElementById("a1")
-    );
-    let send = { delJob: this.state.delJob };
-    this.rss();
+    );  
     axios.post(`https:///post9`, send).then((res) => {
       res.data.e
         ? this.setState({
@@ -1492,6 +1490,8 @@ class Tabs extends React.Component {
   };
   rest10 = () => {
     window.event.preventDefault();
+    let send = { delClientName: this.state.delClientName };
+    this.rss();
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
@@ -1512,9 +1512,7 @@ class Tabs extends React.Component {
         </Button>
       </Form>,
       document.getElementById("a1")
-    );
-    let send = { delClientName: this.state.delClientName };
-    this.rss();
+    );  
     axios.post(`https:///post10`, send).then((res) => {
       res.data.e
         ? this.setState({
