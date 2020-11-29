@@ -43,36 +43,36 @@ class Nav extends React.Component {
           <nav style={this.state.disp}>
             <ul>
               <li>
-                <button onClick={() => this.show(6)}>Find</button>
+                <button onClick={() => this.show("Find")}>Find</button>
               </li>
               <li>
-                <button onClick={() => this.show(1)}>New Job</button>
+                <button onClick={() => this.show("New Job")}>New Job</button>
               </li>
               <li>
-                <button onClick={() => this.show(5)}>Find Client</button>
+                <button onClick={() => this.show("Find Client")}>Find Client</button>
               </li>
               <li>
-                <button onClick={() => this.show(2)}>New Detail </button>
+                <button onClick={() => this.show("New Detail")}>New Detail </button>
               </li>
               <li>
-                <button onClick={() => this.show(9)}>Remove Job</button>
+                <button onClick={() => this.show("Remove Job")}>Remove Job</button>
               </li>
               <li>
-                <button onClick={() => this.show(3)}>New Position</button>
+                <button onClick={() => this.show("New Position")}>New Position</button>
               </li>
               <li>
-                <button onClick={() => this.show(10)}>Remove Client</button>
+                <button onClick={() => this.show("Remove Client")}>Remove Client</button>
               </li>
               <li>
-                <button onClick={() => this.show(4)}>Checkout ID</button>
+                <button onClick={() => this.show("Checkout ID")}>Checkout ID</button>
               </li>
               <li>
-                <button onClick={() => this.show(7)}>
+                <button onClick={() => this.show("Find Positioned Details")}>
                   Find Positioned Details
                 </button>
               </li>
               <li>
-                <button onClick={() => this.show(8)}>
+                <button onClick={() => this.show("Find Positioned Client Container")}>
                   Find Positioned Client Container
                 </button>
               </li>

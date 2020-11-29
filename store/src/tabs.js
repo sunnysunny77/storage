@@ -332,12 +332,14 @@ class Tabs extends React.Component {
       delJob: null,
       delClientName: null,
       descrip: null,
+      sumc: null,
       cont: "Container = N/A",
       posi: null,
       weight: null,
       disp: { display: "none" },
       disp1: { display: "none" },
       disp1p1: { display: "none" },
+      displays: { display: "block" },
       color: { color: "black" },
       colorf: { color: "black" },
       colorff: { color: "black" },
@@ -349,7 +351,7 @@ class Tabs extends React.Component {
       products: [],
     };
   }
-  rss = () => {
+  rss = (h) => {
     this.setState({
       clientName: null,
       insertJob: null,
@@ -357,6 +359,7 @@ class Tabs extends React.Component {
       delJob: null,
       delClientName: null,
       descrip: null,
+      sumc: null,
       cont: "Container = N/A",
       posi: null,
       weight: null,
@@ -369,671 +372,429 @@ class Tabs extends React.Component {
       locs: null,
       cout: false,
       count: null,
-      h: this.props.page,
+      h: h,
       jstb: [],
       products: [],
     });
   };
   go = () => {
-    if (this.state.h === 1) {
+    if (this.state.h === "New Job") {
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">New Job</h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <BootstrapTable
-                  headerClasses="header-class"
-                  keyField="Updated"
-                  data={this.state.products}
-                  columns={columns1}
-                />
-              </div>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Job Number: {this.state.insertJob} <br />
+              Client Name: {this.state.clientName} <br />
+            </p>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
+            <div style={this.state.disp1p1}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns1}
+              />
             </div>
-          </main>
-          <footer id="foot" className="bg-dark">
-
-            <div id="a1">
-              <Form onSubmit={this.rest1}>
-                <Input
-                  required
-                  type="number"
-                  name="insertJob"
-                  placeholder="Job Number:"
-                  min="0"
-                  max="99999"
-                  onChange={this.change}
-                ></Input>
-                <Input
-                  required
-                  type="text"
-                  name="clientName"
-                  placeholder="Client Name:"
-                  maxLength="128"
-                  onChange={this.change}
-                ></Input>
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
-             
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
             </div>
-     
-          </footer>
-        </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 2) {
+    if (this.state.h === "New Detail") {
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">New Detail</h1>
-          </header>
-
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <BootstrapTable
-                  headerClasses="header-class"
-                  keyField="Updated"
-                  data={this.state.products}
-                  columns={columns2}
-                />
-              </div>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Job Number: {this.state.insertJob} <br />
+              Description: {this.state.descrip} <br />
+              Container: {this.state.cont} <br />
+            </p>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
+            <div style={this.state.disp1p1}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns2}
+              />
             </div>
-          </main>
-          <footer id="foot" className="bg-dark">   
-          <p className="text-center col-8 bg-light mx-auto mb-1 mt-1">{this.state.descrip}</p>
-            <div id="a1">
-              <Form onSubmit={this.rest2}>
-                <Input
-                  required
-                  type="number"
-                  name="insertJob"
-                  placeholder="Job Number:"
-                  min="0"
-                  max="99999"
-                  onChange={this.change}
-                ></Input>
-                <Modale onC={this.change}  />
-               
-                <h4 className="text-white">↓ Select Container</h4>
-                <Input
-                  required
-                  type="select"
-                 
-                  name="cont"
-                  onChange={this.change}
-                >
-                  <option value="Container = N/A">N/A:</option>
-                  <option value="200L Drum">200L Drum</option>
-                  <option value="Cage">Cage</option>
-                  <option value="Bag">Bag</option>
-                  <option value="Box">Box</option>
-                </Input>
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
             </div>
-           
-          </footer>
-        </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 3) {
+    if (this.state.h === "New Position") {
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">New Position</h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <BootstrapTable
-                  headerClasses="header-class"
-                  keyField="Updated"
-                  data={this.state.products}
-                  columns={columns3}
-                />
-              </div>
-            </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
-            </div>
-          </main>
-          <footer id="foot" className="bg-dark">
-            <div style={this.state.disp}>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Insert ID: {this.state.insertJobID} <br />
+              Position: {this.state.posi} <br />
+              Weight: {this.state.weight} <br />
+            </p>
+            <div className="text-center" style={this.state.disp}>
               <Alertb alert="Position Not Vaild" />
             </div>
-            <div id="a1">
-              <Form onSubmit={this.rest3}>
-                <Button className="btn btn-light btn-block" onClick={this.bt0}>
-                  View Position's
-                </Button>
-                <Input
-                  required
-                  type="number"
-                  step="any"
-                  name="insertJobID"
-                  placeholder="Insert ID:"
-                  onChange={this.change}
-                ></Input>
-                <Input
-                  required
-                  type="text"
-                  onChange={this.change0}
-                  maxLength="8"
-                  placeholder="Positon:"
-                ></Input>
-                <Input
-                  required
-                  type="number"
-                  name="weight"
-                  placeholder="Weight Kg:"
-                  min="0"
-                  max="3000"
-                  onChange={this.change}
-                ></Input>
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-          </footer>
-        </div>
+            <div style={this.state.disp1p1}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns3}
+              />
+            </div>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
+            </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 4) {
+    if (this.state.h === "Checkout ID") {
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">Checkout ID</h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <BootstrapTable
-                  headerClasses="header-class"
-                  keyField="Cked_Out"
-                  data={this.state.products}
-                  columns={columns4}
-                />
-              </div>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Insert ID: {this.state.insertJobID} <br />
+            </p>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
+            <div style={this.state.disp1p1}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Cked_Out"
+                data={this.state.products}
+                columns={columns4}
+              />
             </div>
-          </main>
-          <footer id="foot" className="bg-dark">
-            <div id="a1">
-              <Form onSubmit={this.rest4}>
-                <Input
-                  required
-                  type="number"
-                  step="any"
-                  name="insertJobID"
-                  placeholder="Insert ID:"
-                  onChange={this.change}
-                ></Input>
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
             </div>
-          </footer>
-        </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 5) {
+    if (this.state.h === "Find Client") {
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">Find Client</h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <BootstrapTable
-                  headerClasses="header-class"
-                  keyField="jobNum"
-                  data={this.state.products}
-                  columns={columns5}
-                />
-              </div>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Client Name: {this.state.clientName} <br />
+            </p>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
+            <div style={this.state.disp1p1}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="jobNum"
+                data={this.state.products}
+                columns={columns5}
+              />
             </div>
-          </main>
-          <footer id="foot" className="bg-dark">
-            <div id="a1">
-              <Form onSubmit={this.rest5}>
-                <Input
-                  required
-                  type="text"
-                  name="clientName"
-                  placeholder="Client Name:"
-                  onChange={this.change}
-                ></Input>
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
             </div>
-          </footer>
-        </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 6) {
+    if (this.state.h === "Find") {
       const { ToggleList } = ColumnToggle;
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">Find </h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <ToolkitProvider
-                  keyField="ID"
-                  data={this.state.products}
-                  columns={columns6}
-                  columnToggle
-                >
-                  {(props) => (
-                    <div>
-                      <ToggleList
-                        contextual="warning"
-                        className="list-custom-class btn-block"
-                        btnClassName="list-btn-custom-class"
-                        {...props.columnToggleProps}
-                      />
-                      <hr />
-                      <BootstrapTable
-                        headerClasses="header-class"
-                        filter={filterFactory()}
-                        {...props.baseProps}
-                      />
-                    </div>
-                  )}
-                </ToolkitProvider>
-              </div>
-            </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
-            </div>
-          </main>
-          <footer id="foot" className="bg-dark">
-            <div style={this.state.disp}>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Job Number: {this.state.insertJob} <br />
+              Option: {this.state.sumc} <br />
+            </p>
+            <div className="text-center" style={this.state.disp}>
               <Alertb alert="Select Checked IN or OUT" />
             </div>
-            <div id="a1">
-              <Form onSubmit={this.rest6}>
-                <Input
-                  required
-                  type="number"
-                  name="insertJob"
-                  placeholder="Job Number:"
-                  min="0"
-                  max="99999"
-                  onChange={this.change}
-                ></Input>
-                <ButtonGroup>
-                  <Button
-                    onClick={() => this.chk(0)}
-                    style={this.state.colorf}
-                    className="btn btn-warning"
-                  >
-                    Cecked Out
-                  </Button>
-                  <Button
-                    onClick={() => this.chk(1)}
-                    style={this.state.color}
-                    className="btn btn-warning"
-                  >
-                    In Position
-                  </Button>
-                  <Button
-                    onClick={() => this.chk(2)}
-                    style={this.state.colorff}
-                    className="btn btn-warning"
-                  >
-                    Un Allocated
-                  </Button>
-                </ButtonGroup>
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-          </footer>
-        </div>
+            <div style={this.state.disp1p1}>
+              <ToolkitProvider
+                keyField="ID"
+                data={this.state.products}
+                columns={columns6}
+                columnToggle
+              >
+                {(props) => (
+                  <div>
+                    <ToggleList
+                      contextual="warning"
+                      className="list-custom-class btn-block"
+                      btnClassName="list-btn-custom-class"
+                      {...props.columnToggleProps}
+                    />
+                    <hr />
+                    <BootstrapTable
+                      headerClasses="header-class"
+                      filter={filterFactory()}
+                      {...props.baseProps}
+                    />
+                  </div>
+                )}
+              </ToolkitProvider>
+            </div>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
+            </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 7) {
+    if (this.state.h === "Find Positioned Details") {
       const { ToggleList } = ColumnToggle;
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">Find Positioned Details</h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <ToolkitProvider
-                  keyField="ID"
-                  data={this.state.products}
-                  columns={columns7}
-                  columnToggle
-                >
-                  {(props) => (
-                    <div>
-                      <ToggleList
-                        contextual="warning"
-                        className="list-custom-class btn-block"
-                        btnClassName="list-btn-custom-class"
-                        {...props.columnToggleProps}
-                      />
-                      <hr />
-                      <BootstrapTable
-                        headerClasses="header-class"
-                        {...props.baseProps}
-                      />
-                    </div>
-                  )}
-                </ToolkitProvider>
-              </div>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Job Number: {this.state.insertJob} <br />
+              Description: {this.state.descrip} <br />
+            </p>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
+            <div style={this.state.disp1p1}>
+              <ToolkitProvider
+                keyField="ID"
+                data={this.state.products}
+                columns={columns7}
+                columnToggle
+              >
+                {(props) => (
+                  <div>
+                    <ToggleList
+                      contextual="warning"
+                      className="list-custom-class btn-block"
+                      btnClassName="list-btn-custom-class"
+                      {...props.columnToggleProps}
+                    />
+                    <hr />
+                    <BootstrapTable
+                      headerClasses="header-class"
+                      {...props.baseProps}
+                    />
+                  </div>
+                )}
+              </ToolkitProvider>
             </div>
-          </main>
-          <footer id="foot" className="bg-dark">
-             <p className="text-center col-8 bg-light mx-auto mb-1 mt-1">{this.state.descrip}</p>
-            <div id="a1">
-              <Form onSubmit={this.rest7}>
-                <Input
-                  required
-                  type="number"
-                  name="insertJob"
-                  placeholder="Job Number:"
-                  min="0"
-                  max="99999"
-                  onChange={this.change}
-                ></Input>
-                <Modale onC={this.change}  />
-
-               
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
             </div>
-           
-          </footer>
-        </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 8) {
+    if (this.state.h === "Find Positioned Client Container") {
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">
-              Find Positioned Client Container
-            </h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <BootstrapTable
-                  headerClasses="header-class"
-                  keyField="ID"
-                  data={this.state.products}
-                  columns={columns8}
-                />
-              </div>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Client Name: {this.state.clientName} <br />
+              Container: {this.state.cont} <br />
+            </p>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
+            <div style={this.state.disp1p1}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="ID"
+                data={this.state.products}
+                columns={columns8}
+              />
             </div>
-          </main>
-
-          <footer id="foot" className="bg-dark">
-            <div id="a1">
-              <Form onSubmit={this.rest8}>
-                <Input
-                  required
-                  type="text"
-                  name="clientName"
-                  placeholder="Client Name:"
-                  onChange={this.change}
-                ></Input>
-                <h4 className="text-white">↓ Select Container</h4>
-                <Input
-                  required
-                  type="select"
-                 
-                  name="cont"
-                  onChange={this.change}
-                >
-                  <option value="Container = N/A">N/A:</option>
-                  <option value="200L Drum">200L Drum</option>
-                  <option value="Cage">Cage</option>
-                  <option value="Bag">Bag</option>
-                  <option value="Box">Box</option>
-                </Input>
-
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
             </div>
-          </footer>
-        </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 9) {
+    if (this.state.h === "Remove Job") {
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">Remove Job</h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <BootstrapTable
-                  headerClasses="header-class"
-                  keyField="Updated"
-                  data={this.state.products}
-                  columns={columns9}
-                />
-              </div>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Job Number: {this.state.delJob} <br />
+            </p>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
+            <div style={this.state.disp1p1}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns9}
+              />
             </div>
-          </main>
-          <footer id="foot" className="bg-dark">
-            <div id="a1">
-              <Form onSubmit={this.rest9}>
-                <Input
-                  required
-                  type="number"
-                  name="delJob"
-                  placeholder="Job Number:"
-                  min="0"
-                  max="99999"
-                  onChange={this.change}
-                ></Input>
-
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
             </div>
-          </footer>
-        </div>
+          </div>
+        </main>
       );
     }
-    if (this.state.h === 10) {
+    if (this.state.h === "Remove Client") {
       return (
-        <div className="cont">
-          <header className="bg-dark">
-            <h1 className="text-white pr-5 mr-5">Remove Client</h1>
-          </header>
-          <main>
-            <div className="left0 bg-dark"></div>
-            <div
-              className="mid0 bg-light mx-auto"
-              style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-            >
-              <div style={this.state.disp1}>
-                <JsonToTable json={[this.state.jstb]} />
-              </div>
-              <div style={this.state.disp1p1}>
-                <BootstrapTable
-                  headerClasses="header-class"
-                  keyField="Updated"
-                  data={this.state.products}
-                  columns={columns10}
-                />
-              </div>
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div
+            className="mid0 bg-light mx-auto"
+            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+          >
+            <p style={this.state.displays} className="text-center text-warning">
+              <br />
+              <br />
+              <br />
+              Summery: <br />
+              Client Name: {this.state.delClientName} <br />
+            </p>
+            <div style={this.state.disp1}>
+              <JsonToTable json={[this.state.jstb]} />
             </div>
-            <div className="right0 bg-dark">
-              <div className="buu float-right" onClick={this.reload}>
-                <div className="bur"></div>
-                <div className="bur"></div>
-                <div className="bur"></div>
-              </div>
+            <div style={this.state.disp1p1}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns10}
+              />
             </div>
-          </main>
-          <footer id="foot" className="bg-dark">
-            <div id="a1">
-              <Form onSubmit={this.rest10}>
-                <Input
-                  required
-                  type="text"
-                  name="delClientName"
-                  placeholder="Client Name:"
-                  maxLength="128"
-                  onChange={this.change}
-                ></Input>
-
-                <Button className="btn btn-light btn-block" type="submit">
-                  Submit
-                </Button>
-              </Form>
+          </div>
+          <div className="right0 bg-dark">
+            <div className="buu float-right" onClick={this.reload}>
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
             </div>
-          </footer>
-        </div>
+          </div>
+        </main>
       );
     }
   };
@@ -1047,47 +808,25 @@ class Tabs extends React.Component {
       insertJob: this.state.insertJob,
       clientName: this.state.clientName,
     };
-    this.rss();
+    this.rss(this.state.h);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest1}>
-        <Input
-          required
-          type="number"
-          name="insertJob"
-          placeholder="Job Number:"
-          min="0"
-          max="99999"
-          onChange={this.change}
-        ></Input>
-        <Input
-          required
-          type="text"
-          name="clientName"
-          placeholder="Client Name:"
-          maxLength="128"
-          onChange={this.change}
-        ></Input>
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
     axios.post(`https:///post1`, send).then((res) => {
       res.data.e
         ? this.setState({
             jstb: res.data.e,
             disp1: { display: "block" },
             disp1p1: { display: "none" },
+            displays: { display: "none" },
           })
         : this.setState({
             products: res.data.u,
             disp1p1: { display: "block" },
             disp1: { display: "none" },
+            displays: { display: "none" },
           });
     });
   };
@@ -1098,55 +837,25 @@ class Tabs extends React.Component {
       cont: this.state.cont,
       descrip: this.state.descrip,
     };
-    this.rss();
+    this.rss(this.state.h);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest2}>
-        <Input
-          required
-          type="number"
-          name="insertJob"
-          placeholder="Job Number:"
-          min="0"
-          max="99999"
-          onChange={this.change}
-        ></Input>
-        <Modale onC={this.change}   />
-       
-        <h4 className="text-white">↓ Select Container</h4>
-        <Input
-          required
-          type="select"
-         
-          name="cont"
-          onChange={this.change}
-        >
-          <option value="Container = N/A">N/A:</option>
-          <option value="200L Drum">200L Drum</option>
-          <option value="Cage">Cage</option>
-          <option value="Bag">Bag</option>
-          <option value="Box">Box</option>
-        </Input>
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
     axios.post(`https:///post2`, send).then((res) => {
       res.data.e
         ? this.setState({
             jstb: res.data.e,
             disp1: { display: "block" },
             disp1p1: { display: "none" },
+            displays: { display: "none" },
           })
         : this.setState({
             products: res.data.u,
             disp1p1: { display: "block" },
             disp1: { display: "none" },
+            displays: { display: "none" },
           });
     });
   };
@@ -1158,12 +867,343 @@ class Tabs extends React.Component {
         posi: this.state.posi,
         weight: this.state.weight,
       };
-      this.rss();
+      this.rss(this.state.h);
       document.getElementById("a1").remove();
       let div = document.createElement("div");
       div.setAttribute("id", "a1");
       document.getElementById("foot").appendChild(div);
-      ReactDOM.render(
+      ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+      axios.post(`https:///post3`, send).then((res) => {
+        res.data.e
+          ? this.setState({
+              jstb: res.data.e,
+              disp1: { display: "block" },
+              disp1p1: { display: "none" },
+              displays: { display: "none" },
+            })
+          : this.setState({
+              products: res.data.u,
+              disp1p1: { display: "block" },
+              disp1: { display: "none" },
+              displays: { display: "none" },
+            });
+      });
+    } else {
+      this.setState({ disp: { display: "block" } });
+    }
+  };
+  rest4 = () => {
+    window.event.preventDefault();
+    let send = { insertJobID: this.state.insertJobID };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post4`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+            jstb: res.data.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.data.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  rest5 = () => {
+    window.event.preventDefault();
+    let send = { clientName: this.state.clientName };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post5`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+            jstb: res.data.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.data.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  rest6 = () => {
+    window.event.preventDefault();
+    if (this.state.insertJob) {
+      if (this.state.cout) {
+        let send = {
+          insertJob: this.state.insertJob,
+          count: this.state.count,
+        };
+        this.rss(this.state.h);
+        document.getElementById("a1").remove();
+        let div = document.createElement("div");
+        div.setAttribute("id", "a1");
+        document.getElementById("foot").appendChild(div);
+        ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+        axios
+          .post(`https:///post6`, send)
+          .then((res) => {
+            res.data.e
+              ? this.setState({
+                  jstb: res.data.e,
+                  disp1: { display: "block" },
+                  disp1p1: { display: "none" },
+                  displays: { display: "none" },
+                })
+              : this.setState({
+                  products: res.data.u,
+                  disp1p1: { display: "block" },
+                  disp1: { display: "none" },
+                  displays: { display: "none" },
+                });
+          });
+      } else {
+        this.setState({ disp: { display: "block" } });
+      }
+    }
+  };
+  rest7 = () => {
+    window.event.preventDefault();
+    let send = {
+      insertJob: this.state.insertJob,
+      descrip: this.state.descrip,
+    };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post7`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+            jstb: res.data.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.data.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  rest8 = () => {
+    window.event.preventDefault();
+    let send = {
+      clientName: this.state.clientName,
+      cont: this.state.cont,
+    };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post8`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+            jstb: res.data.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.data.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  rest9 = () => {
+    window.event.preventDefault();
+    let send = { delJob: this.state.delJob };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post9`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+            jstb: res.data.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.data.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  rest10 = () => {
+    window.event.preventDefault();
+    let send = { delClientName: this.state.delClientName };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post10`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+            jstb: res.data.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.data.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  change = (event) => {
+    this.setState({
+      disp1: { display: "none" },
+      disp1p1: { display: "none" },
+      displays: { display: "block" },
+    });
+    let nam = event.target.name;
+    let val = event.target.value;
+    this.setState({ [nam]: val });
+  };
+  change0 = (posi) => {
+    this.setState({ posi: posi.target.value, disp: { display: "none" } });
+    if (posi.target.value.length === 8) {
+      axios
+        .post(`https:///loc`, {
+          posi: posi.target.value,
+        })
+        .then((res) => {
+          if (res.data.posi === false) {
+            this.setState({ disp: { display: "block" } });
+          }
+          return this.setState({ posi: res.data.posi });
+        });
+    }
+  };
+  chk = (a) => {
+    this.setState({
+      cout: true,
+      disp1: { display: "none" },
+      disp1p1: { display: "none" },
+      displays: { display: "block" },
+    });
+    if (a === 0) {
+      this.setState({
+        count: a,
+        sumc: "Cecked Out",
+        color: { color: "black" },
+        colorf: { color: "#ffffff" },
+        colorff: { color: "black" },
+      });
+    }
+    if (a === 1) {
+      this.setState({
+        count: a,
+        sumc: "In Position",
+        color: { color: "#ffffff" },
+        colorf: { color: "black" },
+        colorff: { color: "black" },
+      });
+    }
+    if (a === 2) {
+      this.setState({
+        count: a,
+        sumc: "Un Allocated",
+        color: { color: "black" },
+        colorf: { color: "black" },
+        colorff: { color: "#ffffff" },
+      });
+    }
+  };
+  bt0 = () => {
+    window.open("https:///loc", "_blank");
+  };
+  form = (x) => {
+    if (x === "New Job") {
+      return (
+        <Form onSubmit={this.rest1}>
+          <Input
+            required
+            type="number"
+            name="insertJob"
+            placeholder="Job Number:"
+            min="0"
+            max="99999"
+            onChange={this.change}
+          ></Input>
+          <Input
+            required
+            type="text"
+            name="clientName"
+            placeholder="Client Name:"
+            maxLength="128"
+            onChange={this.change}
+          ></Input>
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
+    }
+    if (x === "New Detail") {
+      return (
+        <Form onSubmit={this.rest2}>
+          <Input
+            required
+            type="number"
+            name="insertJob"
+            placeholder="Job Number:"
+            min="0"
+            max="99999"
+            onChange={this.change}
+          ></Input>
+          <Modale onC={this.change} />
+
+          <h4 className="text-white">↓ Select Container</h4>
+          <Input required type="select" name="cont" onChange={this.change}>
+            <option value="Container = N/A">N/A:</option>
+            <option value="200L Drum">200L Drum</option>
+            <option value="Cage">Cage</option>
+            <option value="Bag">Bag</option>
+            <option value="Box">Box</option>
+          </Input>
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
+    }
+    if (x === "New Position") {
+      return (
         <Form onSubmit={this.rest3}>
           <Button className="btn btn-light btn-block" onClick={this.bt0}>
             View Position's
@@ -1195,408 +1235,180 @@ class Tabs extends React.Component {
           <Button className="btn btn-light btn-block" type="submit">
             Submit
           </Button>
-        </Form>,
-        document.getElementById("a1")
+        </Form>
       );
-      axios.post(`https:///post3`, send).then((res) => {
-        res.data.e
-          ? this.setState({
-              jstb: res.data.e,
-              disp1: { display: "block" },
-              disp1p1: { display: "none" },
-            })
-          : this.setState({
-              products: res.data.u,
-              disp1p1: { display: "block" },
-              disp1: { display: "none" },
-            });
-      });
-    } else {
-      this.setState({ disp: { display: "block" } });
     }
-  };
-  rest4 = () => {
-    window.event.preventDefault();
-    let send = { insertJobID: this.state.insertJobID };
-    this.rss();
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest4} id="a1">
-        <Input
-          required
-          type="number"
-          step="any"
-          name="insertJobID"
-          placeholder="Insert ID:"
-          onChange={this.change}
-        ></Input>
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );
-    axios.post(`https:///post4`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-          });
-    });
-  };
-  rest5 = () => {
-    window.event.preventDefault();
-    let send = { clientName: this.state.clientName };
-    this.rss();
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest5}>
-        <Input
-          required
-          type="text"
-          name="clientName"
-          placeholder="Client Name:"
-          onChange={this.change}
-        ></Input>
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );
-    axios.post(`https:///post5`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-          });
-    });
-  };
-  rest6 = () => {
-    window.event.preventDefault();
-    if (this.state.insertJob) {
-      if (this.state.cout) {
-        let send = {
-          insertJob: this.state.insertJob,
-          count: this.state.count,
-        };
-        this.rss();
-        document.getElementById("a1").remove();
-        let div = document.createElement("div");
-        div.setAttribute("id", "a1");
-        document.getElementById("foot").appendChild(div);
-        ReactDOM.render(
-          <Form onSubmit={this.rest6}>
-            <Input
-              required
-              type="number"
-              name="insertJob"
-              placeholder="Job Number:"
-              min="0"
-              max="99999"
-              onChange={this.change}
-            ></Input>
-            <ButtonGroup>
-              <Button
-                onClick={() => this.chk(0)}
-                style={this.state.colorf}
-                className="btn btn-warning"
-              >
-                Cecked Out
-              </Button>
-              <Button
-                onClick={() => this.chk(1)}
-                style={this.state.color}
-                className="btn btn-warning"
-              >
-                In Position
-              </Button>
-              <Button
-                onClick={() => this.chk(2)}
-                style={this.state.colorff}
-                className="btn btn-warning"
-              >
-                Un Allocated
-              </Button>
-            </ButtonGroup>
-            <Button className="btn btn-light btn-block" type="submit">
-              Submit
+    if (x === "Checkout ID") {
+      return (
+        <Form onSubmit={this.rest4}>
+          <Input
+            required
+            type="number"
+            step="any"
+            name="insertJobID"
+            placeholder="Insert ID:"
+            onChange={this.change}
+          ></Input>
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
+    }
+    if (x === "Find Client") {
+      return (
+        <Form onSubmit={this.rest5}>
+          <Input
+            required
+            type="text"
+            name="clientName"
+            placeholder="Client Name:"
+            onChange={this.change}
+          ></Input>
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
+    }
+    if (x === "Find") {
+      return (
+        <Form onSubmit={this.rest6}>
+          <Input
+            required
+            type="number"
+            name="insertJob"
+            placeholder="Job Number:"
+            min="0"
+            max="99999"
+            onChange={this.change}
+          ></Input>
+          <ButtonGroup>
+            <Button
+              onClick={() => this.chk(0)}
+              style={this.state.colorf}
+              className="btn btn-warning"
+            >
+              Cecked Out
             </Button>
-          </Form>,
-          document.getElementById("a1")
-        );
-        axios.post(`https:///post6`, send).then((res) => {
-          res.data.e
-            ? this.setState({
-                jstb: res.data.e,
-                disp1: { display: "block" },
-                disp1p1: { display: "none" },
-              })
-            : this.setState({
-                products: res.data.u,
-                disp1p1: { display: "block" },
-                disp1: { display: "none" },
-              });
-        });
-      } else {
-        this.setState({ disp: { display: "block" } });
-      }
+            <Button
+              onClick={() => this.chk(1)}
+              style={this.state.color}
+              className="btn btn-warning"
+            >
+              In Position
+            </Button>
+            <Button
+              onClick={() => this.chk(2)}
+              style={this.state.colorff}
+              className="btn btn-warning"
+            >
+              Un Allocated
+            </Button>
+          </ButtonGroup>
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
     }
-  };
-  rest7 = () => {
-    window.event.preventDefault();
-    let send = {
-      insertJob: this.state.insertJob,
-      descrip: this.state.descrip,
-    };
-    this.rss();
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest7}>
-        <Input
-          required
-          type="number"
-          name="insertJob"
-          placeholder="Job Number:"
-          min="0"
-          max="99999"
-          onChange={this.change}
-        ></Input>
-        <Modale onC={this.change}  />
-      
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );   
-    axios.post(`https:///post7`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-          });
-    });
-  };
-  rest8 = () => {
-    window.event.preventDefault();
-    let send = {
-      clientName: this.state.clientName,
-      cont: this.state.cont,
-    };
-    this.rss();
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest8}>
-        <Input
-          required
-          type="text"
-          name="clientName"
-          placeholder="Client Name:"
-          onChange={this.change}
-        ></Input>
-        <h4 className="text-white">↓ Select Container</h4>
-        <Input
-          required
-          type="select"
-         
-          name="cont"
-          onChange={this.change}
-        >
-          <option value="Container = N/A">N/A:</option>
-          <option value="200L Drum">200L Drum</option>
-          <option value="Cage">Cage</option>
-          <option value="Bag">Bag</option>
-          <option value="Box">Box</option>
-        </Input>
+    if (x === "Find Positioned Details") {
+      return (
+        <Form onSubmit={this.rest7}>
+          <Input
+            required
+            type="number"
+            name="insertJob"
+            placeholder="Job Number:"
+            min="0"
+            max="99999"
+            onChange={this.change}
+          ></Input>
+          <Modale onC={this.change} />
 
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );    
-    axios.post(`https:///post8`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-          });
-    });
-  };
-  rest9 = () => {
-    window.event.preventDefault();
-    let send = { delJob: this.state.delJob };
-    this.rss();
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest9}>
-        <Input
-          required
-          type="number"
-          name="delJob"
-          placeholder="Job Number:"
-          min="0"
-          max="99999"
-          onChange={this.change}
-        ></Input>
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
+    }
+    if (x === "Find Positioned Client Container") {
+      return (
+        <Form onSubmit={this.rest8}>
+          <Input
+            required
+            type="text"
+            name="clientName"
+            placeholder="Client Name:"
+            onChange={this.change}
+          ></Input>
+          <h4 className="text-white">↓ Select Container</h4>
+          <Input required type="select" name="cont" onChange={this.change}>
+            <option value="Container = N/A">N/A:</option>
+            <option value="200L Drum">200L Drum</option>
+            <option value="Cage">Cage</option>
+            <option value="Bag">Bag</option>
+            <option value="Box">Box</option>
+          </Input>
 
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );  
-    axios.post(`https:///post9`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-          });
-    });
-  };
-  rest10 = () => {
-    window.event.preventDefault();
-    let send = { delClientName: this.state.delClientName };
-    this.rss();
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(
-      <Form onSubmit={this.rest10}>
-        <Input
-          required
-          type="text"
-          name="delClientName"
-          placeholder="Client Name:"
-          maxLength="128"
-          onChange={this.change}
-        ></Input>
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
+    }
+    if (x === "Remove Job") {
+      return (
+        <Form onSubmit={this.rest9}>
+          <Input
+            required
+            type="number"
+            name="delJob"
+            placeholder="Job Number:"
+            min="0"
+            max="99999"
+            onChange={this.change}
+          ></Input>
 
-        <Button className="btn btn-light btn-block" type="submit">
-          Submit
-        </Button>
-      </Form>,
-      document.getElementById("a1")
-    );  
-    axios.post(`https:///post10`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-          });
-    });
-  };
-  change = (event) => {
-    this.setState({ disp1: { display: "none" }, disp1p1: { display: "none" } });
-    let nam = event.target.name;
-    let val = event.target.value;
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
+    }
+    if (x === "Remove Client") {
+      return (
+        <Form onSubmit={this.rest10}>
+          <Input
+            required
+            type="text"
+            name="delClientName"
+            placeholder="Client Name:"
+            maxLength="128"
+            onChange={this.change}
+          ></Input>
 
-    this.setState({ [nam]: val });
-  };
-  change0 = (posi) => {
-    this.setState({ posi: posi.target.value, disp: { display: "none" } });
-    if (posi.target.value.length === 8) {
-      axios
-        .post(`https:///loc`, {
-          posi: posi.target.value,
-        })
-        .then((res) => {
-          if (res.data.posi === false) {
-            this.setState({ disp: { display: "block" } });
-          }
-          return this.setState({ posi: res.data.posi });
-        });
+          <Button className="btn btn-light btn-block" type="submit">
+            Submit
+          </Button>
+        </Form>
+      );
     }
-  };
-  chk = (a) => {
-    this.setState({
-      cout: true,
-      disp1: { display: "none" },
-      disp1p1: { display: "none" },
-    });
-    if (a === 0) {
-      this.setState({
-        count: a,
-        color: { color: "black" },
-        colorf: { color: "#ffffff" },
-        colorff: { color: "black" },
-      });
-    }
-    if (a === 1) {
-      this.setState({
-        count: a,
-        color: { color: "#ffffff" },
-        colorf: { color: "black" },
-        colorff: { color: "black" },
-      });
-    }
-    if (a === 2) {
-      this.setState({
-        count: a,
-        color: { color: "black" },
-        colorf: { color: "black" },
-        colorff: { color: "#ffffff" },
-      });
-    }
-  };
-  bt0 = () => {
-    window.open("https:///loc", "_blank");
   };
   render() {
-    return <div>{this.go()}</div>;
+    return (
+      <div id="cont">
+        <header className="bg-dark">
+          <h1 className="text-white pr-5 mr-5">{this.state.h}</h1>
+        </header>
+
+        {this.go()}
+
+        <footer id="foot" className="bg-dark">
+          <div id="a1">{this.form(this.state.h)}</div>
+        </footer>
+      </div>
+    );
   }
 }
 
