@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap'
 
 import styles from './modals.module.css'
 
 const Modale = (props) => {
   const {    
     onChange = props.onC,    
-   
+  
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -19,12 +19,15 @@ const Modale = (props) => {
       <Modal className={styles.modals} isOpen={modal} toggle={toggle} >
         <ModalHeader >Details</ModalHeader>
         <ModalBody>
-          <textarea className={styles.txt}  required name="descrip" rows="8" onChange={onChange} ></textarea>
+        
+        <Input type="textarea" className={styles.txt}   name="descrip" rows="8" onChange={onChange} />
         </ModalBody>
         <ModalFooter>
           <Button className="btn btn-light btn-block" onClick={toggle}>Enter</Button>
+         
         </ModalFooter>
       </Modal>
+     
     </div>
   );
 }

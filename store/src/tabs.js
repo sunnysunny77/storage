@@ -408,6 +408,7 @@ class Tabs extends React.Component {
             </div>
           </main>
           <footer id="foot" className="bg-dark">
+
             <div id="a1">
               <Form onSubmit={this.rest1}>
                 <Input
@@ -431,7 +432,9 @@ class Tabs extends React.Component {
                   Submit
                 </Button>
               </Form>
+             
             </div>
+     
           </footer>
         </div>
       );
@@ -469,7 +472,8 @@ class Tabs extends React.Component {
               </div>
             </div>
           </main>
-          <footer id="foot" className="bg-dark">
+          <footer id="foot" className="bg-dark">   
+          <p className="text-center col-8 bg-light mx-auto mb-1 mt-1">{this.state.descrip}</p>
             <div id="a1">
               <Form onSubmit={this.rest2}>
                 <Input
@@ -482,6 +486,7 @@ class Tabs extends React.Component {
                   onChange={this.change}
                 ></Input>
                 <Modale onC={this.change}  />
+               
                 <h4 className="text-white">↓ Select Container</h4>
                 <Input
                   required
@@ -501,6 +506,7 @@ class Tabs extends React.Component {
                 </Button>
               </Form>
             </div>
+           
           </footer>
         </div>
       );
@@ -829,6 +835,7 @@ class Tabs extends React.Component {
             </div>
           </main>
           <footer id="foot" className="bg-dark">
+             <p className="text-center col-8 bg-light mx-auto mb-1 mt-1">{this.state.descrip}</p>
             <div id="a1">
               <Form onSubmit={this.rest7}>
                 <Input
@@ -840,12 +847,15 @@ class Tabs extends React.Component {
                   max="99999"
                   onChange={this.change}
                 ></Input>
-                <Modale onC={this.change} value={this.state.descrip} />
+                <Modale onC={this.change}  />
+
+               
                 <Button className="btn btn-light btn-block" type="submit">
                   Submit
                 </Button>
               </Form>
             </div>
+           
           </footer>
         </div>
       );
@@ -1104,7 +1114,8 @@ class Tabs extends React.Component {
           max="99999"
           onChange={this.change}
         ></Input>
-        <Modale onC={this.change}  />
+        <Modale onC={this.change}   />
+       
         <h4 className="text-white">↓ Select Container</h4>
         <Input
           required
@@ -1372,7 +1383,8 @@ class Tabs extends React.Component {
           max="99999"
           onChange={this.change}
         ></Input>
-        <Modale onC={this.change} value={this.state.descrip} />
+        <Modale onC={this.change}  />
+      
         <Button className="btn btn-light btn-block" type="submit">
           Submit
         </Button>
