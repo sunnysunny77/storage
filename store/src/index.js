@@ -1,13 +1,9 @@
 ﻿import ReactDOM from 'react-dom'
 import React from 'react'
-
 import axios from 'axios'
-
 import './index.css'
 import Nav from './nav.js'
-
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import Alertb from './boot.js'
 
 class Index extends React.Component {
@@ -23,7 +19,7 @@ class Index extends React.Component {
     log = () => {
         window.event.preventDefault()
         let s = { user: this.state.uname, psw: this.state.psw }
-        axios.post(`https://sunnytemp.theworkpc.com/post0`, s)
+        axios.post(`https:///post0`, s)
             .then(res => {
                 if (res.data) {
                     ReactDOM.render(<Nav />, document.getElementById('root'))
@@ -49,12 +45,12 @@ class Index extends React.Component {
                 </header>
                 <main>
                     <div className="left0 bg-dark"></div>
-                    <div className="mid0 bg-light mx-auto" style={{padding: "calc(50vh - 202px) 0"}}>
-                        <div className="text-center" style={this.state.disp }>
-                            <Alertb  alert="Incorrect Credentials" />
+                    <div className="mid0 bg-light mx-auto" style={{ padding: "calc(50vh - 202px) 0" }}>
+                        <div className="text-center" style={this.state.disp}>
+                            <Alertb alert="Incorrect Credentials" />
                         </div>
                         <div style={this.state.disp1}>
-                            <form  onSubmit={this.log}>
+                            <form id="f" onSubmit={this.log}>
                                 <input type="text" className="form-control text-center" placeholder="Enter Username" name="uname" required onChange={this.change}></input>
                                 <input type="password" className="form-control text-center" placeholder="Enter Password" name="psw" required onChange={this.change}></input>
                                 <button type="submit" className="btn btn-light btn-block">Login</button>

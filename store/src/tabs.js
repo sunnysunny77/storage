@@ -4,10 +4,8 @@ import Alertb from "./boot.js";
 import Nav from "./nav.js";
 import Modale from "./modals.js";
 import "./index.css";
-
 import axios from "axios";
 import { Button, ButtonGroup, Form, Input } from "reactstrap";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -340,12 +338,8 @@ class Tabs extends React.Component {
       disp1: { display: "none" },
       disp1p1: { display: "none" },
       displays: { display: "block" },
-      color: { color: "black" },
-      colorf: { color: "black" },
-      colorff: { color: "black" },
       locs: null,
       cout: false,
-      count: null,
       h: this.props.page,
       jstb: [],
       products: [],
@@ -366,12 +360,8 @@ class Tabs extends React.Component {
       disp: { display: "none" },
       disp1: { display: "none" },
       disp1p1: { display: "none" },
-      color: { color: "black" },
-      colorf: { color: "black" },
-      colorff: { color: "black" },
       locs: null,
       cout: false,
-      count: null,
       h: h,
       jstb: [],
       products: [],
@@ -390,7 +380,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Job Number: {this.state.insertJob} <br />
               Client Name: {this.state.clientName} <br />
             </p>
@@ -428,7 +418,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Job Number: {this.state.insertJob} <br />
               Description: {this.state.descrip} <br />
               Container: {this.state.cont} <br />
@@ -467,7 +457,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              F: <br />
               Insert ID: {this.state.insertJobID} <br />
               Position: {this.state.posi} <br />
               Weight: {this.state.weight} <br />
@@ -509,7 +499,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Insert ID: {this.state.insertJobID} <br />
             </p>
             <div style={this.state.disp1}>
@@ -546,7 +536,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Client Name: {this.state.clientName} <br />
             </p>
             <div style={this.state.disp1}>
@@ -584,7 +574,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Job Number: {this.state.insertJob} <br />
               Option: {this.state.sumc} <br />
             </p>
@@ -643,7 +633,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Job Number: {this.state.insertJob} <br />
               Description: {this.state.descrip} <br />
             </p>
@@ -697,7 +687,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Client Name: {this.state.clientName} <br />
               Container: {this.state.cont} <br />
             </p>
@@ -735,7 +725,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Job Number: {this.state.delJob} <br />
             </p>
             <div style={this.state.disp1}>
@@ -772,7 +762,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              Summery: <br />
+              Outline: <br />
               Client Name: {this.state.delClientName} <br />
             </p>
             <div style={this.state.disp1}>
@@ -797,355 +787,6 @@ class Tabs extends React.Component {
         </main>
       );
     }
-  };
-
-  reload() {
-    ReactDOM.render(<Nav />, document.getElementById("root"));
-  }
-  rest1 = () => {
-    window.event.preventDefault();
-    let send = {
-      insertJob: this.state.insertJob,
-      clientName: this.state.clientName,
-    };
-    this.rss(this.state.h);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post1`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
-    });
-  };
-  rest2 = () => {
-    window.event.preventDefault();
-    let send = {
-      insertJob: this.state.insertJob,
-      cont: this.state.cont,
-      descrip: this.state.descrip,
-    };
-    this.rss(this.state.h);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post2`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
-    });
-  };
-  rest3 = () => {
-    window.event.preventDefault();
-    if (this.state.posi.length === 8) {
-      let send = {
-        insertJobID: this.state.insertJobID,
-        posi: this.state.posi,
-        weight: this.state.weight,
-      };
-      this.rss(this.state.h);
-      document.getElementById("a1").remove();
-      let div = document.createElement("div");
-      div.setAttribute("id", "a1");
-      document.getElementById("foot").appendChild(div);
-      ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-      axios.post(`https:///post3`, send).then((res) => {
-        res.data.e
-          ? this.setState({
-              jstb: res.data.e,
-              disp1: { display: "block" },
-              disp1p1: { display: "none" },
-              displays: { display: "none" },
-            })
-          : this.setState({
-              products: res.data.u,
-              disp1p1: { display: "block" },
-              disp1: { display: "none" },
-              displays: { display: "none" },
-            });
-      });
-    } else {
-      this.setState({ disp: { display: "block" } });
-    }
-  };
-  rest4 = () => {
-    window.event.preventDefault();
-    let send = { insertJobID: this.state.insertJobID };
-    this.rss(this.state.h);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post4`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
-    });
-  };
-  rest5 = () => {
-    window.event.preventDefault();
-    let send = { clientName: this.state.clientName };
-    this.rss(this.state.h);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post5`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
-    });
-  };
-  rest6 = () => {
-    window.event.preventDefault();
-    if (this.state.insertJob) {
-      if (this.state.cout) {
-        let send = {
-          insertJob: this.state.insertJob,
-          count: this.state.count,
-        };
-        this.rss(this.state.h);
-        document.getElementById("a1").remove();
-        let div = document.createElement("div");
-        div.setAttribute("id", "a1");
-        document.getElementById("foot").appendChild(div);
-        ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-        axios
-          .post(`https:///post6`, send)
-          .then((res) => {
-            res.data.e
-              ? this.setState({
-                  jstb: res.data.e,
-                  disp1: { display: "block" },
-                  disp1p1: { display: "none" },
-                  displays: { display: "none" },
-                })
-              : this.setState({
-                  products: res.data.u,
-                  disp1p1: { display: "block" },
-                  disp1: { display: "none" },
-                  displays: { display: "none" },
-                });
-          });
-      } else {
-        this.setState({ disp: { display: "block" } });
-      }
-    }
-  };
-  rest7 = () => {
-    window.event.preventDefault();
-    let send = {
-      insertJob: this.state.insertJob,
-      descrip: this.state.descrip,
-    };
-    this.rss(this.state.h);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post7`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
-    });
-  };
-  rest8 = () => {
-    window.event.preventDefault();
-    let send = {
-      clientName: this.state.clientName,
-      cont: this.state.cont,
-    };
-    this.rss(this.state.h);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post8`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
-    });
-  };
-  rest9 = () => {
-    window.event.preventDefault();
-    let send = { delJob: this.state.delJob };
-    this.rss(this.state.h);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post9`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
-    });
-  };
-  rest10 = () => {
-    window.event.preventDefault();
-    let send = { delClientName: this.state.delClientName };
-    this.rss(this.state.h);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post10`, send).then((res) => {
-      res.data.e
-        ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
-        : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
-    });
-  };
-  change = (event) => {
-    this.setState({
-      disp1: { display: "none" },
-      disp1p1: { display: "none" },
-      displays: { display: "block" },
-    });
-    let nam = event.target.name;
-    let val = event.target.value;
-    this.setState({ [nam]: val });
-  };
-  change0 = (posi) => {
-    this.setState({ posi: posi.target.value, disp: { display: "none" } });
-    if (posi.target.value.length === 8) {
-      axios
-        .post(`https:///loc`, {
-          posi: posi.target.value,
-        })
-        .then((res) => {
-          if (res.data.posi === false) {
-            this.setState({ disp: { display: "block" } });
-          }
-          return this.setState({ posi: res.data.posi });
-        });
-    }
-  };
-  chk = (a) => {
-    this.setState({
-      cout: true,
-      disp1: { display: "none" },
-      disp1p1: { display: "none" },
-      displays: { display: "block" },
-    });
-    if (a === 0) {
-      this.setState({
-        count: a,
-        sumc: "Cecked Out",
-        color: { color: "black" },
-        colorf: { color: "#ffffff" },
-        colorff: { color: "black" },
-      });
-    }
-    if (a === 1) {
-      this.setState({
-        count: a,
-        sumc: "In Position",
-        color: { color: "#ffffff" },
-        colorf: { color: "black" },
-        colorff: { color: "black" },
-      });
-    }
-    if (a === 2) {
-      this.setState({
-        count: a,
-        sumc: "Un Allocated",
-        color: { color: "black" },
-        colorf: { color: "black" },
-        colorff: { color: "#ffffff" },
-      });
-    }
-  };
-  bt0 = () => {
-    window.open("https:///loc", "_blank");
   };
   form = (x) => {
     if (x === "New Job") {
@@ -1187,7 +828,6 @@ class Tabs extends React.Component {
             onChange={this.change}
           ></Input>
           <Modale onC={this.change} />
-
           <h4 className="text-white">↓ Select Container</h4>
           <Input required type="select" name="cont" onChange={this.change}>
             <option value="Container = N/A">N/A:</option>
@@ -1285,23 +925,23 @@ class Tabs extends React.Component {
           ></Input>
           <ButtonGroup>
             <Button
-              onClick={() => this.chk(0)}
-              style={this.state.colorf}
-              className="btn btn-warning"
+              onClick={() => this.chk("Cecked Out")}
+              className="btn btn-secondary"
+              id="ck"
             >
               Cecked Out
             </Button>
             <Button
-              onClick={() => this.chk(1)}
-              style={this.state.color}
-              className="btn btn-warning"
+              onClick={() => this.chk("In Position")}
+              className="btn btn-secondary"
+              id="ip"
             >
               In Position
             </Button>
             <Button
-              onClick={() => this.chk(2)}
-              style={this.state.colorff}
-              className="btn btn-warning"
+              onClick={() => this.chk("Un Allocated")}
+              className="btn btn-secondary"
+              id="ua"
             >
               Un Allocated
             </Button>
@@ -1325,7 +965,6 @@ class Tabs extends React.Component {
             onChange={this.change}
           ></Input>
           <Modale onC={this.change} />
-
           <Button className="btn btn-light btn-block" type="submit">
             Submit
           </Button>
@@ -1350,7 +989,6 @@ class Tabs extends React.Component {
             <option value="Bag">Bag</option>
             <option value="Box">Box</option>
           </Input>
-
           <Button className="btn btn-light btn-block" type="submit">
             Submit
           </Button>
@@ -1369,7 +1007,6 @@ class Tabs extends React.Component {
             max="99999"
             onChange={this.change}
           ></Input>
-
           <Button className="btn btn-light btn-block" type="submit">
             Submit
           </Button>
@@ -1387,23 +1024,381 @@ class Tabs extends React.Component {
             maxLength="128"
             onChange={this.change}
           ></Input>
-
           <Button className="btn btn-light btn-block" type="submit">
             Submit
           </Button>
         </Form>
       );
     }
+  };  
+  rest1 = () => {
+    window.event.preventDefault();
+    let send = {
+      insertJob: this.state.insertJob,
+      clientName: this.state.clientName,
+    };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post1`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+          jstb: res.data.e,
+          disp1: { display: "block" },
+          disp1p1: { display: "none" },
+          displays: { display: "none" },
+        })
+        : this.setState({
+          products: res.data.u,
+          disp1p1: { display: "block" },
+          disp1: { display: "none" },
+          displays: { display: "none" },
+        });
+    });
   };
+  rest2 = () => {
+    window.event.preventDefault();
+    let send = {
+      insertJob: this.state.insertJob,
+      cont: this.state.cont,
+      descrip: this.state.descrip,
+    };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post2`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+          jstb: res.data.e,
+          disp1: { display: "block" },
+          disp1p1: { display: "none" },
+          displays: { display: "none" },
+        })
+        : this.setState({
+          products: res.data.u,
+          disp1p1: { display: "block" },
+          disp1: { display: "none" },
+          displays: { display: "none" },
+        });
+    });
+  };
+  rest3 = () => {
+    window.event.preventDefault();
+    if (this.state.posi.length === 8) {
+      let send = {
+        insertJobID: this.state.insertJobID,
+        posi: this.state.posi,
+        weight: this.state.weight,
+      };
+      this.rss(this.state.h);
+      document.getElementById("a1").remove();
+      let div = document.createElement("div");
+      div.setAttribute("id", "a1");
+      document.getElementById("foot").appendChild(div);
+      ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+      axios.post(`https:///post3`, send).then((res) => {
+        res.data.e
+          ? this.setState({
+            jstb: res.data.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
+          : this.setState({
+            products: res.data.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+      });
+    } else {
+      this.setState({ disp: { display: "block" } });
+    }
+  };
+  rest4 = () => {
+    window.event.preventDefault();
+    let send = { insertJobID: this.state.insertJobID };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post4`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+          jstb: res.data.e,
+          disp1: { display: "block" },
+          disp1p1: { display: "none" },
+          displays: { display: "none" },
+        })
+        : this.setState({
+          products: res.data.u,
+          disp1p1: { display: "block" },
+          disp1: { display: "none" },
+          displays: { display: "none" },
+        });
+    });
+  };
+  rest5 = () => {
+    window.event.preventDefault();
+    let send = { clientName: this.state.clientName };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post5`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+          jstb: res.data.e,
+          disp1: { display: "block" },
+          disp1p1: { display: "none" },
+          displays: { display: "none" },
+        })
+        : this.setState({
+          products: res.data.u,
+          disp1p1: { display: "block" },
+          disp1: { display: "none" },
+          displays: { display: "none" },
+        });
+    });
+  };
+  rest6 = () => {
+    window.event.preventDefault();
+    if (this.state.insertJob) {
+      if (this.state.cout) {
+        let send = {
+          insertJob: this.state.insertJob,
+          sumc: this.state.sumc,
+        };
+        this.rss(this.state.h);
+        document.getElementById("a1").remove();
+        let div = document.createElement("div");
+        div.setAttribute("id", "a1");
+        document.getElementById("foot").appendChild(div);
+        ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+        axios
+          .post(`https:///post6`, send)
+          .then((res) => {
+            res.data.e
+              ? this.setState({
+                jstb: res.data.e,
+                disp1: { display: "block" },
+                disp1p1: { display: "none" },
+                displays: { display: "none" }
+              })
+              : this.setState({
+                products: res.data.u,
+                disp1p1: { display: "block" },
+                disp1: { display: "none" },
+                displays: { display: "none" }
+              });
+            document.getElementById("ck").classList.remove('btn-warning');
+            document.getElementById("ip").classList.remove('btn-warning');
+            document.getElementById("ua").classList.remove('btn-warning');
+            document.getElementById("ck").classList.add('btn-secondary');
+            document.getElementById("ip").classList.add('btn-secondary');
+            document.getElementById("ua").classList.add('btn-secondary');
+          });
+      } else {
+        this.setState({ disp: { display: "block" } });
+      }
+    }
+  };
+  rest7 = () => {
+    window.event.preventDefault();
+    let send = {
+      insertJob: this.state.insertJob,
+      descrip: this.state.descrip,
+    };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post7`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+          jstb: res.data.e,
+          disp1: { display: "block" },
+          disp1p1: { display: "none" },
+          displays: { display: "none" },
+        })
+        : this.setState({
+          products: res.data.u,
+          disp1p1: { display: "block" },
+          disp1: { display: "none" },
+          displays: { display: "none" },
+        });
+    });
+  };
+  rest8 = () => {
+    window.event.preventDefault();
+    let send = {
+      clientName: this.state.clientName,
+      cont: this.state.cont,
+    };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post8`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+          jstb: res.data.e,
+          disp1: { display: "block" },
+          disp1p1: { display: "none" },
+          displays: { display: "none" },
+        })
+        : this.setState({
+          products: res.data.u,
+          disp1p1: { display: "block" },
+          disp1: { display: "none" },
+          displays: { display: "none" },
+        });
+    });
+  };
+  rest9 = () => {
+    window.event.preventDefault();
+    let send = { delJob: this.state.delJob };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post9`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+          jstb: res.data.e,
+          disp1: { display: "block" },
+          disp1p1: { display: "none" },
+          displays: { display: "none" },
+        })
+        : this.setState({
+          products: res.data.u,
+          disp1p1: { display: "block" },
+          disp1: { display: "none" },
+          displays: { display: "none" },
+        });
+    });
+  };
+  rest10 = () => {
+    window.event.preventDefault();
+    let send = { delClientName: this.state.delClientName };
+    this.rss(this.state.h);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
+    axios.post(`https:///post10`, send).then((res) => {
+      res.data.e
+        ? this.setState({
+          jstb: res.data.e,
+          disp1: { display: "block" },
+          disp1p1: { display: "none" },
+          displays: { display: "none" },
+        })
+        : this.setState({
+          products: res.data.u,
+          disp1p1: { display: "block" },
+          disp1: { display: "none" },
+          displays: { display: "none" },
+        });
+    });
+  };
+  change = (event) => {
+    this.setState({
+      disp1: { display: "none" },
+      disp1p1: { display: "none" },
+      displays: { display: "block" },
+    });
+    let nam = event.target.name;
+    let val = event.target.value;
+    this.setState({ [nam]: val });
+  };
+  change0 = (posi) => {
+    this.setState({ posi: posi.target.value, disp: { display: "none" } });
+    if (posi.target.value.length === 8) {
+      axios
+        .post(`https:///loc`, {
+          posi: posi.target.value,
+        })
+        .then((res) => {
+          if (res.data.posi === false) {
+            this.setState({ disp: { display: "block" } });
+          }
+          return this.setState({ posi: res.data.posi });
+        });
+    }
+  };
+  chk = (a) => {
+    this.setState({
+      cout: true,
+      disp1: { display: "none" },
+      disp1p1: { display: "none" },
+      displays: { display: "block" },
+    });
+    if (a === "Cecked Out") {
+      document.getElementById("ck").classList.remove('btn-secondary');
+      document.getElementById("ck").classList.add('btn-warning');
+      document.getElementById("ip").classList.remove('btn-warning');
+      document.getElementById("ua").classList.remove('btn-warning');
+      document.getElementById("ip").classList.add('btn-secondary');
+      document.getElementById("ua").classList.add('btn-secondary');
+      this.setState({
+        sumc: "Cecked Out",
+      });
+
+    }
+    if (a === "In Position") {
+      document.getElementById("ip").classList.remove('btn-secondary');
+      document.getElementById("ip").classList.add('btn-warning');
+      document.getElementById("ck").classList.remove('btn-warning');
+      document.getElementById("ua").classList.remove('btn-warning');
+      document.getElementById("ck").classList.add('btn-secondary');
+      document.getElementById("ua").classList.add('btn-secondary');
+      this.setState({
+        sumc: "In Position",
+      });
+    }
+    if (a === "Un Allocated") {
+      document.getElementById("ua").classList.remove('btn-secondary');
+      document.getElementById("ua").classList.add('btn-warning');
+      document.getElementById("ck").classList.remove('btn-warning');
+      document.getElementById("ip").classList.remove('btn-warning');
+      document.getElementById("ck").classList.add('btn-secondary');
+      document.getElementById("ip").classList.add('btn-secondary');
+      this.setState({
+        sumc: "Un Allocated",
+      });
+    }
+  };
+  bt0 = () => {
+    window.open("https:///loc", "_blank");
+  };
+  reload() {
+    ReactDOM.render(<Nav />, document.getElementById("root"));
+  }
   render() {
     return (
       <div id="cont">
         <header className="bg-dark">
           <h1 className="text-white pr-5 mr-5">{this.state.h}</h1>
         </header>
-
         {this.go()}
-
         <footer id="foot" className="bg-dark">
           <div id="a1">{this.form(this.state.h)}</div>
         </footer>

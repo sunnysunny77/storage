@@ -8,7 +8,7 @@ let credentials = {
 
 let app = require("express")();
 let https = require("https").createServer(credentials, app);
-let httpsPort = 3001;
+let httpsPort = 3010;
 
 https.listen(httpsPort, () => {
   console.log("Https server listing on port : " + httpsPort);
@@ -23,8 +23,8 @@ app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
   let allowedOrigins = [
-    "https:///",
-    "https:///",
+    "https:////",
+    "https://www./",
   ];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
@@ -50,7 +50,7 @@ app.post("/post0", function (req, res) {
   let a = req.body.user;
   let b = req.body.psw;
   let c = false;
-  if (a === "" && b === "") {
+  if (a === "store" && b === "[S5gw/:^}-gbWSrK") {
     c = true;
   }
   res.json(c);
@@ -258,6 +258,28 @@ app.post("/post3", function (req, res) {
               }
             }
           );
+        }else if (results[0].Cked_Out === 1) {
+          pool.query(
+            "UPDATE posiInfo SET posiPosition = '" +
+            y +
+            "', posiWeight = " +
+            z +
+            " WHERE ID = " +
+              x +
+              "",
+            function (error, results) {
+              if (error) {
+                return res.json({ e: error });
+              } else if (!error && results) {
+                let t = Number(x);
+                let m = t.toFixed(5);
+                return res.json({
+                  u: [{ Updated: f, ID: m, Position: y, Weight: z }],
+                });
+              }
+            }
+          );
+        
         } else if (results[0].Cked_Out === 0) {
           pool.query(
             "INSERT INTO posiInfo (ID, posiPosition, posiWeight,jobNum, clientName  ) VALUES ('" +
@@ -409,8 +431,8 @@ app.post("/post5", function (req, res) {
 app.post("/post6", function (req, res) {
   let obj = req.body;
   let x = obj.insertJob;
-  let y = obj.count;
-  if (y === 0) {
+  let y = obj.sumc;
+  if (y === "Cecked Out") {
     pool.query(
       "SELECT * FROM store." + x + " WHERE Cked_Out = 0",
       function (error, results) {
@@ -447,7 +469,7 @@ app.post("/post6", function (req, res) {
         }
       }
     );
-  } else if (y === 1) {
+  } else if (y === "In Position") {
     pool.query(
       "SELECT * FROM store." +
         x +
@@ -489,7 +511,7 @@ app.post("/post6", function (req, res) {
         }
       }
     );
-  } else if (y === 2) {
+  } else if (y === "Un Allocated") {
     pool.query(
       "SELECT * FROM store." + x + " WHERE Cked_Out = 2",
       function (error, results) {
@@ -765,9 +787,8 @@ app.post("/post10", function (req, res) {
   );
 });
 
-
 app.post("/loc", function (req, res) {
-  let loc = fs.readFileSync("../files/positions/positions.json");
+  let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
   let loc1 = JSON.parse(loc);
 
   let f = req.body.posi.toUpperCase();
@@ -783,7 +804,7 @@ app.post("/loc", function (req, res) {
 });
 
 app.get("/loc", function (req, res) {
-  let loc = fs.readFileSync("../files/positions/positions.json");
+  let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
   let loc1 = JSON.parse(loc);
   res.json({ loc1 });
 });
