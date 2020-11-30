@@ -457,7 +457,7 @@ class Tabs extends React.Component {
               <br />
               <br />
               <br />
-              F: <br />
+              Outline: <br />
               Insert ID: {this.state.insertJobID} <br />
               Position: {this.state.posi} <br />
               Weight: {this.state.weight} <br />
