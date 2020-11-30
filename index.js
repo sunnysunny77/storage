@@ -222,7 +222,7 @@ app.post("/post3", function (req, res) {
       } else if (!error && results.length) {
         if (results[0].Cked_Out === 2) {
           pool.query(
-            "INSERT INTO posiInfo (ID, posiPosition, posiWeight,jobNum, clientName  ) VALUES ('" +
+            "INSERT INTO store.posiInfo (ID, posiPosition, posiWeight,jobNum, clientName  ) VALUES ('" +
               x +
               "', '" +
               y +
@@ -260,7 +260,7 @@ app.post("/post3", function (req, res) {
           );
         }else if (results[0].Cked_Out === 1) {
           pool.query(
-            "UPDATE posiInfo SET posiPosition = '" +
+            "UPDATE store.posiInfo SET posiPosition = '" +
             y +
             "', posiWeight = " +
             z +
@@ -282,7 +282,7 @@ app.post("/post3", function (req, res) {
         
         } else if (results[0].Cked_Out === 0) {
           pool.query(
-            "INSERT INTO posiInfo (ID, posiPosition, posiWeight,jobNum, clientName  ) VALUES ('" +
+            "INSERT INTO store.posiInfo (ID, posiPosition, posiWeight,jobNum, clientName  ) VALUES ('" +
               x +
               "', '" +
               y +
