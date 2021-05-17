@@ -757,24 +757,23 @@ app.post("/post10", function (req, res) {
             function (error, results, fields) {
               if (error) {
                 return res.json({ e: error });
-              } else if (!error && results) {
-                pool.query(
-                  "DELETE FROM store.jobBook WHERE clientName=  '" + x + "'",
-                  function (error, results, fields) {
-                    if (error) {
-                      return res.json({ e: error });
-                    } else if (!error && results) {
-                      console.log(results);
-                      let t = Number(x);
-                      let m = t.toFixed(5);
-                      return res.json({ u: [{ Updated: x }] });
-                    }
-                  }
-                );
               }
             }
           );
         }
+        pool.query(
+          "DELETE FROM store.jobBook WHERE clientName=  '" + x + "'",
+          function (error, results, fields) {
+            if (error) {
+              return res.json({ e: error });
+            } else if (!error && results) {
+              console.log(results);
+              let t = Number(x);
+              let m = t.toFixed(5);
+              return res.json({ u: [{ Updated: x }] });
+            }
+          }
+        );
       } else if (!error && !results.length) {
         return res.json({
           e: {
