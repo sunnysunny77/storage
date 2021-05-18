@@ -23,8 +23,8 @@ app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
   let allowedOrigins = [
-    "https:////",
-    "https://www./",
+    "https://storage.sunnyhome.site",
+    "https://www.storage.sunnyhome.site",
   ];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
