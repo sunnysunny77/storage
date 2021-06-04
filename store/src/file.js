@@ -23,7 +23,7 @@ class File extends React.Component {
             style={{ height: "calc(100vh - 288px)" }}
           >
             <Iframe
-              url="https://ßßß/fs"
+              url="https:///fs"
               width="100%"
               height="100%"
               display="initial"
