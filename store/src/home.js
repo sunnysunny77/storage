@@ -1,10 +1,9 @@
 ﻿import React from "react";
-import ReactDOM from "react-dom";
 import axios from "axios";
 import "./home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Alertb from "./boot.js";
-import App from "./App.js";
+import jwt from "jsonwebtoken";
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,10 +18,15 @@ class Home extends React.Component {
   log = () => {
     window.event.preventDefault();
     let s = { user: this.state.uname, psw: this.state.psw };
-    axios.post(`https://storage.sunnyhome.site/post0`, s).then((res) => {
+    axios.post(`https://storage.sunnyhome.site/post0`, s, {
+      withCredentials: true
+      }).then((res) => {
       if (res.data) {
-        this.props.setToken(res.data);
-        ReactDOM.render(<App />, document.getElementById("root"));
+        let use = jwt.verify(
+          res.data,
+          process.env.REACT_APP_JWT_SECRET
+        );
+      this.props.setToken(use.token);
       }
       if (!res.data) {
         this.setState({

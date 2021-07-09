@@ -2,8 +2,12 @@ let fs = require("fs");
 let bodyParser = require("body-parser");
 let mysql = require("mysql");
 let moment = require("moment");
-let express = require('express');
+let express = require("express");
+let jwt = require("jsonwebtoken");
+let cookieParser = require("cookie-parser");
+let jsonn = require("./key.json");
 let app = express();
+
 let key = fs.readFileSync(__dirname + "/certsFiles/selfsigned.key");
 let cert = fs.readFileSync(__dirname + "/certsFiles/selfsigned.crt");
 let credentials = {
@@ -17,17 +21,16 @@ https.listen(httpsPort, () => {
 });
 let io = require("socket.io")(https, {
   cors: {
-    origin: ["https://localhost:3000","https://www.localhost:3000"],
-    methods: ["GET", "POST"]
-  }
+    origin: ["https://storage.sunnyhome.site", "https://www.storage.sunnyhome.site"],
+    methods: ["GET", "POST"],
+  },
 });
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(function (req, res, next) {
-  let allowedOrigins = [
-    "https://localhost:3000",
-    "",
-  ];
+  let allowedOrigins = ["https://storage.sunnyhome.site", "https://www.storage.sunnyhome.site"];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader("Access-Control-Allow-Origin", origin);
@@ -37,6 +40,7 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Credentials", true);
   return next();
 });
+
 let pool = mysql.createPool({
   connectionLimit: 10,
   host: "localhost",
@@ -46,14 +50,24 @@ let pool = mysql.createPool({
   multipleStatements: true,
 });
 
-app.post("/post0", function (req, res, next) {
+let token = jwt.sign({ token: jsonn.token }, jsonn.key);
+
+app.post("/tok", function (req, res) {
+  if (req.cookies.token) {
+    return res.send(token);
+  }
+  res.send(false);
+});
+
+app.post("/post0", function (req, res) {
   let a = req.body.user;
   let b = req.body.psw;
   let c = false;
-  if (a === "store" && b === "[S5gw/:^}-gbWSrK") {
-    c = true;
+  if (a === "store" && b === jsonn.pass) {
+    c = token;
+    res.cookie("token", token, { secure: true, httpOnly: true });
   }
-  res.json(c);
+  res.send(c);
 });
 
 io.on("connection", (socket) => {
