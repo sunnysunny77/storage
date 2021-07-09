@@ -1445,7 +1445,7 @@ class Store extends React.Component {
     window.open("https://storage.sunnyhome.site/loc", "_blank");
   };
   bt1 = () => {
-    window.open("https://storage.sunnyhome.site/locJ", "_blank");
+    window.open("https://storage.sunnyhome.site/locj", "_blank");
   };
   render() {
     if (this.state.redirect) {
