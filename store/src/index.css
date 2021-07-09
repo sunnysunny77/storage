@@ -1,0 +1,9 @@
+.midy {
+ height: calc(100vh - 288px);
+} 
+
+@media only Screen and (max-device-width: 1024px) and (orientation: landscape) {
+  .midy {
+    height: calc(200vh - 288px);
+   } 
+}

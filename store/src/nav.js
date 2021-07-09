@@ -98,8 +98,8 @@ class Nav extends React.Component {
           <div className="left0 bg-dark"></div>
           <div
             id="pic"
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
+            className="mid0 midy bg-light mx-auto"
+            style={this.state.disp1}
           ></div>
           <div className="right0 bg-dark">
             <div

@@ -362,6 +362,7 @@ class Store extends React.Component {
       disp: { display: "none" },
       disp1: { display: "none" },
       disp1p1: { display: "none" },
+      displays: { display: "block" },
       locs: null,
       cout: false,
       jstb: [],
@@ -381,10 +382,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -422,10 +420,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -464,10 +459,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -509,10 +501,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -549,10 +538,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -590,10 +576,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -652,10 +635,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -709,10 +689,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -750,10 +727,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />
@@ -790,10 +764,7 @@ class Store extends React.Component {
       return (
         <main>
           <div className="left0 bg-dark"></div>
-          <div
-            className="mid0 bg-light mx-auto"
-            style={(this.state.disp1, { height: "calc(100vh - 288px)" })}
-          >
+          <div className="mid0 midy bg-light mx-auto">
             <p style={this.state.displays} className="text-center text-warning">
               <br />
               <br />

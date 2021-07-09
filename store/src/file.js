@@ -29,8 +29,7 @@ class File extends React.Component {
         <main>
           <div className="left0 bg-dark"></div>
           <div
-            className="mid0 bg-light mx-auto"
-            style={{ height: "calc(100vh - 288px)" }}
+            className="mid0 midy bg-light mx-auto"
           >
             <Iframe
               url="https://storage.sunnyhome.site/fs"
