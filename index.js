@@ -14,14 +14,17 @@ let credentials = {
   key: key,
   cert: cert,
 };
-let https = require("https").createServer(credentials,app);
+let https = require("https").createServer(credentials, app);
 let httpsPort = 3010;
 https.listen(httpsPort, () => {
   console.log("Https server listing on port : " + httpsPort);
 });
 let io = require("socket.io")(https, {
   cors: {
-    origin: ["https://storage.sunnyhome.site", "https://www.storage.sunnyhome.site"],
+    origin: [
+      "https://storage.sunnyhome.site",
+      "https://www.storage.sunnyhome.site",
+    ],
     methods: ["GET", "POST"],
   },
 });
@@ -30,7 +33,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(function (req, res, next) {
-  let allowedOrigins = ["https://storage.sunnyhome.site", "https://www.storage.sunnyhome.site"];
+  let allowedOrigins = [
+    "https://storage.sunnyhome.site",
+    "https://www.storage.sunnyhome.site",
+  ];
   let origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader("Access-Control-Allow-Origin", origin);
@@ -826,4 +832,14 @@ app.get("/loc", function (req, res) {
   let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
   let loc1 = JSON.parse(loc);
   res.json({ loc1 });
+});
+
+app.get("/locj", function (req, res) {
+  pool.query("SELECT * FROM store.jobBook", function (error, results) {
+    if (error) {
+      return res.JSON({ e: "error" })
+    } else if (!error && results.length) {
+      return res.json({JobList: results});
+    }
+  });
 });

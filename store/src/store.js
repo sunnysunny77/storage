@@ -545,7 +545,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Find Client") {
+    if (this.state.page === "Find Client or List Job") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -934,9 +934,12 @@ class Store extends React.Component {
         </Form>
       );
     }
-    if (x === "Find Client") {
+    if (x === "Find Client or List Job") {
       return (
         <Form onSubmit={this.rest5}>
+          <Button className="btn btn-light btn-block" onClick={this.bt1}>
+            List Job
+          </Button>
           <Input
             required
             type="text"
@@ -1440,6 +1443,9 @@ class Store extends React.Component {
   };
   bt0 = () => {
     window.open("https://storage.sunnyhome.site/loc", "_blank");
+  };
+  bt1 = () => {
+    window.open("https://storage.sunnyhome.site/locJ", "_blank");
   };
   render() {
     if (this.state.redirect) {
