@@ -15,11 +15,10 @@ function getToken() {
 
 function App() {
   const token = getToken();
-  const socket = io();
   if (!token) {
     return <Home setToken={setToken} />;
   }
-
+  const socket = io();
   return (
     <BrowserRouter>
       <Switch>
