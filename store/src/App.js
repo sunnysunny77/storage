@@ -3,6 +3,7 @@ import Home from "./home";
 import Nav from "./nav";
 import Files from "./file";
 import Store from "./store";
+import { io } from "socket.io-client";
 
 function setToken(userToken) {
   sessionStorage.setItem("token", JSON.stringify(userToken));
@@ -14,7 +15,7 @@ function getToken() {
 
 function App() {
   const token = getToken();
-
+  const socket = io();
   if (!token) {
     return <Home setToken={setToken} />;
   }
@@ -22,11 +23,13 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+
         <Route exact path="/" component={Nav} />
 
         <Route exact path="/files" component={Files} />
 
-        <Route exact path="/Store" component={Store} />
+        <Route exact path="/store" render={(props) => <Store {...props} socket={socket} />}/>
+        
       </Switch>
     </BrowserRouter>
   );

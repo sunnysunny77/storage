@@ -12,7 +12,7 @@ import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import ToolkitProvider, { ColumnToggle } from "react-bootstrap-table2-toolkit";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import { JsonToTable } from "react-json-to-table";
-import { io } from "socket.io-client";
+
 
 const columns1 = [
   {
@@ -343,7 +343,7 @@ class Store extends React.Component {
       jstb: [],
       products: [],
       redirect: false,
-      socket: io(),
+      socket: this.props.socket,
       page: "New Job",
     };
   }
@@ -367,7 +367,7 @@ class Store extends React.Component {
       jstb: [],
       products: [],
       redirect: false,
-      socket: io(),
+      socket: this.props.socket,
       page: p,
     });
   };
