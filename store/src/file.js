@@ -1,16 +1,26 @@
-import ReactDOM from "react-dom";
 import React from "react";
-import "./index.css";
-
-import Nav from "./nav.js";
 import Iframe from "react-iframe";
+import { Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class File extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false,
+    };
+  }
   open = () => {
-    ReactDOM.render(<Nav />, document.getElementById("root"));
+    this.setState({
+      redirect: {
+        pathname: "/",
+      },
+    });
   };
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div className="cont">
         <header className="bg-dark">
@@ -23,7 +33,7 @@ class File extends React.Component {
             style={{ height: "calc(100vh - 288px)" }}
           >
             <Iframe
-              url="https:///fs"
+              url="https://storage.sunnyhome.site/fs"
               width="100%"
               height="100%"
               display="initial"

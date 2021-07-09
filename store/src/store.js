@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Alertb from "./boot.js";
-import Nav from "./nav.js";
+import { Redirect } from "react-router-dom";
 import Modale from "./modals.js";
-import "./index.css";
 import axios from "axios";
 import { Button, ButtonGroup, Form, Input } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,6 +12,7 @@ import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import ToolkitProvider, { ColumnToggle } from "react-bootstrap-table2-toolkit";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import { JsonToTable } from "react-json-to-table";
+import { io } from "socket.io-client";
 
 const columns1 = [
   {
@@ -320,7 +320,7 @@ const columns10 = [
   },
 ];
 
-class Tabs extends React.Component {
+class Store extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -340,12 +340,14 @@ class Tabs extends React.Component {
       displays: { display: "block" },
       locs: null,
       cout: false,
-      h: this.props.page,
       jstb: [],
       products: [],
+      redirect: false,
+      socket: io(),
+      page: "New Job",
     };
   }
-  rss = (h) => {
+  rss = (p) => {
     this.setState({
       clientName: null,
       insertJob: null,
@@ -362,13 +364,20 @@ class Tabs extends React.Component {
       disp1p1: { display: "none" },
       locs: null,
       cout: false,
-      h: h,
       jstb: [],
       products: [],
+      redirect: false,
+      socket: io(),
+      page: p,
     });
   };
+  componentDidMount() {
+    if (this.props.location.state?.page) {
+      this.setState({ page: this.props.location.state.page });
+    }
+  }
   go = () => {
-    if (this.state.h === "New Job") {
+    if (this.state.page === "New Job") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -397,7 +406,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -406,7 +418,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "New Detail") {
+    if (this.state.page === "New Detail") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -436,7 +448,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -445,7 +460,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "New Position") {
+    if (this.state.page === "New Position") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -478,7 +493,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -487,7 +505,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "Checkout ID") {
+    if (this.state.page === "Checkout ID") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -515,7 +533,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -524,7 +545,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "Find Client") {
+    if (this.state.page === "Find Client") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -552,7 +573,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -561,7 +585,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "Find") {
+    if (this.state.page === "Find") {
       const { ToggleList } = ColumnToggle;
       return (
         <main>
@@ -611,7 +635,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -620,7 +647,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "Find Positioned Details") {
+    if (this.state.page === "Find Positioned Details") {
       const { ToggleList } = ColumnToggle;
       return (
         <main>
@@ -666,7 +693,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -675,7 +705,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "Find Positioned Client Container") {
+    if (this.state.page === "Find Positioned Client Container") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -704,7 +734,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -713,7 +746,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "Remove Job") {
+    if (this.state.page === "Remove Job") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -741,7 +774,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -750,7 +786,7 @@ class Tabs extends React.Component {
         </main>
       );
     }
-    if (this.state.h === "Remove Client") {
+    if (this.state.page === "Remove Client") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -778,7 +814,10 @@ class Tabs extends React.Component {
             </div>
           </div>
           <div className="right0 bg-dark">
-            <div className="buu float-right" onClick={this.reload}>
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
               <div className="bur"></div>
               <div className="bur"></div>
               <div className="bur"></div>
@@ -1030,33 +1069,34 @@ class Tabs extends React.Component {
         </Form>
       );
     }
-  };  
+  };
   rest1 = () => {
     window.event.preventDefault();
     let send = {
       insertJob: this.state.insertJob,
       clientName: this.state.clientName,
     };
-    this.rss(this.state.h);
+    this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post1`, send).then((res) => {
-      res.data.e
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post1", send);
+    this.state.socket.on("post1", (res) => {
+      res.e
         ? this.setState({
-          jstb: res.data.e,
-          disp1: { display: "block" },
-          disp1p1: { display: "none" },
-          displays: { display: "none" },
-        })
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
         : this.setState({
-          products: res.data.u,
-          disp1p1: { display: "block" },
-          disp1: { display: "none" },
-          displays: { display: "none" },
-        });
+            products: res.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
   };
   rest2 = () => {
@@ -1066,26 +1106,27 @@ class Tabs extends React.Component {
       cont: this.state.cont,
       descrip: this.state.descrip,
     };
-    this.rss(this.state.h);
+    this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post2`, send).then((res) => {
-      res.data.e
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post2", send);
+    this.state.socket.on("post2", (res) => {
+      res.e
         ? this.setState({
-          jstb: res.data.e,
-          disp1: { display: "block" },
-          disp1p1: { display: "none" },
-          displays: { display: "none" },
-        })
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
         : this.setState({
-          products: res.data.u,
-          disp1p1: { display: "block" },
-          disp1: { display: "none" },
-          displays: { display: "none" },
-        });
+            products: res.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
   };
   rest3 = () => {
@@ -1096,26 +1137,30 @@ class Tabs extends React.Component {
         posi: this.state.posi,
         weight: this.state.weight,
       };
-      this.rss(this.state.h);
+      this.rss(this.state.page);
       document.getElementById("a1").remove();
       let div = document.createElement("div");
       div.setAttribute("id", "a1");
       document.getElementById("foot").appendChild(div);
-      ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-      axios.post(`https:///post3`, send).then((res) => {
-        res.data.e
+      ReactDOM.render(
+        this.form(this.state.page),
+        document.getElementById("a1")
+      );
+      this.state.socket.emit("post3", send);
+      this.state.socket.on("post3", (res) => {
+        res.e
           ? this.setState({
-            jstb: res.data.e,
-            disp1: { display: "block" },
-            disp1p1: { display: "none" },
-            displays: { display: "none" },
-          })
+              jstb: res.e,
+              disp1: { display: "block" },
+              disp1p1: { display: "none" },
+              displays: { display: "none" },
+            })
           : this.setState({
-            products: res.data.u,
-            disp1p1: { display: "block" },
-            disp1: { display: "none" },
-            displays: { display: "none" },
-          });
+              products: res.u,
+              disp1p1: { display: "block" },
+              disp1: { display: "none" },
+              displays: { display: "none" },
+            });
       });
     } else {
       this.setState({ disp: { display: "block" } });
@@ -1124,51 +1169,53 @@ class Tabs extends React.Component {
   rest4 = () => {
     window.event.preventDefault();
     let send = { insertJobID: this.state.insertJobID };
-    this.rss(this.state.h);
+    this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post4`, send).then((res) => {
-      res.data.e
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post4", send);
+    this.state.socket.on("post4", (res) => {
+      res.e
         ? this.setState({
-          jstb: res.data.e,
-          disp1: { display: "block" },
-          disp1p1: { display: "none" },
-          displays: { display: "none" },
-        })
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
         : this.setState({
-          products: res.data.u,
-          disp1p1: { display: "block" },
-          disp1: { display: "none" },
-          displays: { display: "none" },
-        });
+            products: res.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
   };
   rest5 = () => {
     window.event.preventDefault();
     let send = { clientName: this.state.clientName };
-    this.rss(this.state.h);
+    this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post5`, send).then((res) => {
-      res.data.e
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post5", send);
+    this.state.socket.on("post5", (res) => {
+      res.e
         ? this.setState({
-          jstb: res.data.e,
-          disp1: { display: "block" },
-          disp1p1: { display: "none" },
-          displays: { display: "none" },
-        })
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
         : this.setState({
-          products: res.data.u,
-          disp1p1: { display: "block" },
-          disp1: { display: "none" },
-          displays: { display: "none" },
-        });
+            products: res.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
   };
   rest6 = () => {
@@ -1179,35 +1226,37 @@ class Tabs extends React.Component {
           insertJob: this.state.insertJob,
           sumc: this.state.sumc,
         };
-        this.rss(this.state.h);
+        this.rss(this.state.page);
         document.getElementById("a1").remove();
         let div = document.createElement("div");
         div.setAttribute("id", "a1");
         document.getElementById("foot").appendChild(div);
-        ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-        axios
-          .post(`https:///post6`, send)
-          .then((res) => {
-            res.data.e
-              ? this.setState({
-                jstb: res.data.e,
+        ReactDOM.render(
+          this.form(this.state.page),
+          document.getElementById("a1")
+        );
+        this.state.socket.emit("post6", send);
+        this.state.socket.on("post6", (res) => {
+          res.e
+            ? this.setState({
+                jstb: res.e,
                 disp1: { display: "block" },
                 disp1p1: { display: "none" },
-                displays: { display: "none" }
+                displays: { display: "none" },
               })
-              : this.setState({
-                products: res.data.u,
+            : this.setState({
+                products: res.u,
                 disp1p1: { display: "block" },
                 disp1: { display: "none" },
-                displays: { display: "none" }
+                displays: { display: "none" },
               });
-            document.getElementById("ck").classList.remove('btn-warning');
-            document.getElementById("ip").classList.remove('btn-warning');
-            document.getElementById("ua").classList.remove('btn-warning');
-            document.getElementById("ck").classList.add('btn-secondary');
-            document.getElementById("ip").classList.add('btn-secondary');
-            document.getElementById("ua").classList.add('btn-secondary');
-          });
+          document.getElementById("ck").classList.remove("btn-warning");
+          document.getElementById("ip").classList.remove("btn-warning");
+          document.getElementById("ua").classList.remove("btn-warning");
+          document.getElementById("ck").classList.add("btn-secondary");
+          document.getElementById("ip").classList.add("btn-secondary");
+          document.getElementById("ua").classList.add("btn-secondary");
+        });
       } else {
         this.setState({ disp: { display: "block" } });
       }
@@ -1219,26 +1268,27 @@ class Tabs extends React.Component {
       insertJob: this.state.insertJob,
       descrip: this.state.descrip,
     };
-    this.rss(this.state.h);
+    this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post7`, send).then((res) => {
-      res.data.e
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post7", send);
+    this.state.socket.on("post7", (res) => {
+      res.e
         ? this.setState({
-          jstb: res.data.e,
-          disp1: { display: "block" },
-          disp1p1: { display: "none" },
-          displays: { display: "none" },
-        })
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
         : this.setState({
-          products: res.data.u,
-          disp1p1: { display: "block" },
-          disp1: { display: "none" },
-          displays: { display: "none" },
-        });
+            products: res.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
   };
   rest8 = () => {
@@ -1247,76 +1297,79 @@ class Tabs extends React.Component {
       clientName: this.state.clientName,
       cont: this.state.cont,
     };
-    this.rss(this.state.h);
+    this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post8`, send).then((res) => {
-      res.data.e
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post8", send);
+    this.state.socket.on("post8", (res) => {
+      res.e
         ? this.setState({
-          jstb: res.data.e,
-          disp1: { display: "block" },
-          disp1p1: { display: "none" },
-          displays: { display: "none" },
-        })
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
         : this.setState({
-          products: res.data.u,
-          disp1p1: { display: "block" },
-          disp1: { display: "none" },
-          displays: { display: "none" },
-        });
+            products: res.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
   };
   rest9 = () => {
     window.event.preventDefault();
     let send = { delJob: this.state.delJob };
-    this.rss(this.state.h);
+    this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post9`, send).then((res) => {
-      res.data.e
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post9", send);
+    this.state.socket.on("post9", (res) => {
+      res.e
         ? this.setState({
-          jstb: res.data.e,
-          disp1: { display: "block" },
-          disp1p1: { display: "none" },
-          displays: { display: "none" },
-        })
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
         : this.setState({
-          products: res.data.u,
-          disp1p1: { display: "block" },
-          disp1: { display: "none" },
-          displays: { display: "none" },
-        });
+            products: res.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
   };
   rest10 = () => {
     window.event.preventDefault();
     let send = { delClientName: this.state.delClientName };
-    this.rss(this.state.h);
+    this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.h), document.getElementById("a1"));
-    axios.post(`https:///post10`, send).then((res) => {
-      res.data.e
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post10", send);
+    this.state.socket.on("post10", (res) => {
+      res.e
         ? this.setState({
-          jstb: res.data.e,
-          disp1: { display: "block" },
-          disp1p1: { display: "none" },
-          displays: { display: "none" },
-        })
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            displays: { display: "none" },
+          })
         : this.setState({
-          products: res.data.u,
-          disp1p1: { display: "block" },
-          disp1: { display: "none" },
-          displays: { display: "none" },
-        });
+            products: res.u,
+            disp1p1: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
   };
   change = (event) => {
@@ -1333,7 +1386,7 @@ class Tabs extends React.Component {
     this.setState({ posi: posi.target.value, disp: { display: "none" } });
     if (posi.target.value.length === 8) {
       axios
-        .post(`https:///loc`, {
+        .post(`https://storage.sunnyhome.site/loc`, {
           posi: posi.target.value,
         })
         .then((res) => {
@@ -1352,59 +1405,58 @@ class Tabs extends React.Component {
       displays: { display: "block" },
     });
     if (a === "Cecked Out") {
-      document.getElementById("ck").classList.remove('btn-secondary');
-      document.getElementById("ck").classList.add('btn-warning');
-      document.getElementById("ip").classList.remove('btn-warning');
-      document.getElementById("ua").classList.remove('btn-warning');
-      document.getElementById("ip").classList.add('btn-secondary');
-      document.getElementById("ua").classList.add('btn-secondary');
+      document.getElementById("ck").classList.remove("btn-secondary");
+      document.getElementById("ck").classList.add("btn-warning");
+      document.getElementById("ip").classList.remove("btn-warning");
+      document.getElementById("ua").classList.remove("btn-warning");
+      document.getElementById("ip").classList.add("btn-secondary");
+      document.getElementById("ua").classList.add("btn-secondary");
       this.setState({
         sumc: "Cecked Out",
       });
-
     }
     if (a === "In Position") {
-      document.getElementById("ip").classList.remove('btn-secondary');
-      document.getElementById("ip").classList.add('btn-warning');
-      document.getElementById("ck").classList.remove('btn-warning');
-      document.getElementById("ua").classList.remove('btn-warning');
-      document.getElementById("ck").classList.add('btn-secondary');
-      document.getElementById("ua").classList.add('btn-secondary');
+      document.getElementById("ip").classList.remove("btn-secondary");
+      document.getElementById("ip").classList.add("btn-warning");
+      document.getElementById("ck").classList.remove("btn-warning");
+      document.getElementById("ua").classList.remove("btn-warning");
+      document.getElementById("ck").classList.add("btn-secondary");
+      document.getElementById("ua").classList.add("btn-secondary");
       this.setState({
         sumc: "In Position",
       });
     }
     if (a === "Un Allocated") {
-      document.getElementById("ua").classList.remove('btn-secondary');
-      document.getElementById("ua").classList.add('btn-warning');
-      document.getElementById("ck").classList.remove('btn-warning');
-      document.getElementById("ip").classList.remove('btn-warning');
-      document.getElementById("ck").classList.add('btn-secondary');
-      document.getElementById("ip").classList.add('btn-secondary');
+      document.getElementById("ua").classList.remove("btn-secondary");
+      document.getElementById("ua").classList.add("btn-warning");
+      document.getElementById("ck").classList.remove("btn-warning");
+      document.getElementById("ip").classList.remove("btn-warning");
+      document.getElementById("ck").classList.add("btn-secondary");
+      document.getElementById("ip").classList.add("btn-secondary");
       this.setState({
         sumc: "Un Allocated",
       });
     }
   };
   bt0 = () => {
-    window.open("https:///loc", "_blank");
+    window.open("https://storage.sunnyhome.site/loc", "_blank");
   };
-  reload() {
-    ReactDOM.render(<Nav />, document.getElementById("root"));
-  }
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div id="cont">
         <header className="bg-dark">
-          <h1 className="text-white pr-5 mr-5">{this.state.h}</h1>
+          <h1 className="text-white pr-5 mr-5">{this.state.page}</h1>
         </header>
         {this.go()}
         <footer id="foot" className="bg-dark">
-          <div id="a1">{this.form(this.state.h)}</div>
+          <div id="a1">{this.form(this.state.page)}</div>
         </footer>
       </div>
     );
   }
 }
 
-export default Tabs;
+export default Store;
