@@ -12,7 +12,7 @@ import "./index.css"
 
 function Index() {
   const [token, setToken] = useState(false);
-  axios("https://storage.sunnyhome.site/tok", {
+  axios("/tok", {
     method: "post",
     withCredentials: true,
   }).then((res) => {

@@ -344,7 +344,7 @@ class Store extends React.Component {
       products: [],
       redirect: false,
       socket: this.props.socket,
-      page: "New Job",
+      page: "Find Client or List Job",
     };
   }
   rss = (p) => {
@@ -1413,10 +1413,10 @@ class Store extends React.Component {
     }
   };
   bt0 = () => {
-    window.open("https://storage.sunnyhome.site/loc", "_blank");
+    window.open("/loc", "_blank");
   };
   bt1 = () => {
-    window.open("https://storage.sunnyhome.site/locj", "_blank");
+    window.open("/locj", "_blank");
   };
   render() {
     if (this.state.redirect) {

@@ -18,7 +18,7 @@ class Home extends React.Component {
   log = () => {
     window.event.preventDefault();
     let s = { user: this.state.uname, psw: this.state.psw };
-    axios.post(`https://storage.sunnyhome.site/post0`, s, {
+    axios.post(`/post0`, s, {
       withCredentials: true
       }).then((res) => {
       if (res.data) {

@@ -32,7 +32,7 @@ class File extends React.Component {
             className="mid0 midy bg-light mx-auto"
           >
             <Iframe
-              url="https://storage.sunnyhome.site/fs"
+              url="/fs"
               width="100%"
               height="100%"
               display="initial"
