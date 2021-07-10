@@ -3,9 +3,11 @@ let bodyParser = require("body-parser");
 let mysql = require("mysql");
 let moment = require("moment");
 let express = require("express");
+const { jsonToTableHtmlString } = require('json-table-converter')
 let jwt = require("jsonwebtoken");
 let cookieParser = require("cookie-parser");
 let jsonn = require("./key.json");
+const { Console } = require("console");
 let app = express();
 
 let key = fs.readFileSync(__dirname + "/certsFiles/selfsigned.key");
@@ -656,7 +658,7 @@ io.on("connection", (socket) => {
           pool.query("" + r + "", function (error, results) {
             if (error) {
               return io.emit("post8", { e: error });
-            } else if (!error && results.length) {
+            } else if (!error && results[0].length) {
               let k = Object.keys(results[0]);
               let resul = [];
               if (
@@ -709,7 +711,12 @@ io.on("connection", (socket) => {
                 }
                 return io.emit("post8", { u: resul });
               }
-            }
+            } return io.emit("post8", {
+              e: {
+                code: " IS_NOT_VALID",
+                sqlMessage: "entryContainer '" + h + "' doesn't exist",
+              },
+            });
           });
         } else {
           return io.emit("post8", {
@@ -831,7 +838,8 @@ app.post("/loc", function (req, res) {
 app.get("/loc", function (req, res) {
   let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
   let loc1 = JSON.parse(loc);
-  res.json({ loc1 });
+  let html = jsonToTableHtmlString(loc1);
+  return res.send(html);
 });
 
 app.get("/locj", function (req, res) {
@@ -839,7 +847,8 @@ app.get("/locj", function (req, res) {
     if (error) {
       return res.JSON({ e: "error" })
     } else if (!error && results.length) {
-      return res.json({JobList: results});
+      let html = jsonToTableHtmlString(results);
+      return res.send(html);
     }
   });
 });
