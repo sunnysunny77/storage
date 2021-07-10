@@ -1,5 +1,4 @@
 let fs = require("fs");
-let bodyParser = require("body-parser");
 let mysql = require("mysql");
 let moment = require("moment");
 let express = require("express");
@@ -29,9 +28,8 @@ let io = require("socket.io")(https, {
     methods: ["GET", "POST"],
   },
 });
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
 app.use(cookieParser());
 app.use(function (req, res, next) {
   let allowedOrigins = [
