@@ -790,7 +790,7 @@ io.on("connection", (socket) => {
                 "' AND jobNum= '" +
                 results[op].jobNum +
                 "'",
-              function (error, results, fields) {
+              function (error, results) {
                 if (error) {
                   return io.emit("post10", { e: error });
                 } else if (!error && results) {
