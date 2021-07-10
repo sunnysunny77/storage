@@ -751,7 +751,7 @@ io.on("connection", (socket) => {
                   } else if (!error && results) {
                     let t = Number(x);
                     let m = t.toFixed(5);
-                    return io.emit("post9", { u: [{ Updated: x }] });
+                    return io.emit("post9", { u: [{ Updated: m }] });
                   }
                 }
               );
@@ -796,7 +796,7 @@ io.on("connection", (socket) => {
                 } else if (!error && results) {
                   let t = Number(x);
                   let m = t.toFixed(5);
-                  return io.emit("post10", { u: [{ Updated: x }] });
+                  return io.emit("post10", { u: [{ Updated: m }] });
                 }
               }
             );
