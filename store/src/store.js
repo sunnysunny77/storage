@@ -1423,7 +1423,7 @@ class Store extends React.Component {
       return <Redirect to={this.state.redirect} />;
     }
     return (
-      <div id="cont">
+      <div className="cont">
         <header className="bg-dark">
           <h1 className="text-white pr-5 mr-5">{this.state.page}</h1>
         </header>

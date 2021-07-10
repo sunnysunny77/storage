@@ -1,6 +1,5 @@
 ﻿import React from "react";
 import axios from "axios";
-import "./home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Alertb from "./boot.js";
 import jwt from "jsonwebtoken";

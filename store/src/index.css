@@ -1,9 +1,66 @@
+body {
+  overflow-y: scroll;
+}
+.cont {
+  width: 100%;
+  max-width: 1920px;
+  min-width: 992px;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+h1 {
+  align-self: center;
+}
+
+header,
+footer {
+  width: 100%;
+  min-height: 144px;
+}
+
+main {
+  display: flex;
+}
+
+.mid0 {
+  width: 75%;
+  overflow-y: auto;
+}
+
+.left0,
+.right0 {
+  width: 12.5%;
+}
+
+footer {
+  padding-top: 2.5px;
+  padding: 2.5px 12.5% 2.5px 12.5%;
+}
+
+.form-control,
+.btn {
+  border: 2.5px solid #343a40 !important;
+  border-radius: 0 !important;
+}
+
+.alert {
+  border-radius: 0;
+  border: 2.5px solid #343a40;
+  margin-bottom: 0;
+}
+
 .midy {
- height: calc(100vh - 288px);
-} 
+  height: calc(100vh - 288px);
+}
 
 @media only Screen and (max-device-width: 1024px) and (orientation: landscape) {
   .midy {
     height: calc(200vh - 288px);
-   } 
+  }
 }
