@@ -788,27 +788,22 @@ io.on("connection", (socket) => {
                 results[op].jobNum +
                 "; DELETE FROM store.posiInfo WHERE jobNum=  '" +
                 results[op].jobNum +
+                "';DELETE FROM store.jobBook WHERE clientName=  '" +
+                x +
+                "' AND jobNum= '" +
+                results[op].jobNum +
                 "'",
               function (error, results, fields) {
                 if (error) {
                   return io.emit("post10", { e: error });
+                } else if (!error && results) {
+                  let t = Number(x);
+                  let m = t.toFixed(5);
+                  return io.emit("post10", { u: [{ Updated: x }] });
                 }
               }
             );
           }
-          pool.query(
-            "DELETE FROM store.jobBook WHERE clientName=  '" + x + "'",
-            function (error, results, fields) {
-              if (error) {
-                return io.emit("post10", { e: error });
-              } else if (!error && results) {
-                console.log(results);
-                let t = Number(x);
-                let m = t.toFixed(5);
-                return io.emit("post10", { u: [{ Updated: x }] });
-              }
-            }
-          );
         } else if (!error && !results.length) {
           return io.emit("post10", {
             e: {
