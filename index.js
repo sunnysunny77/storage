@@ -3,11 +3,10 @@ let bodyParser = require("body-parser");
 let mysql = require("mysql");
 let moment = require("moment");
 let express = require("express");
-const { jsonToTableHtmlString } = require("json-table-converter");
+let { jsonToTableHtmlString } = require("json-table-converter");
 let jwt = require("jsonwebtoken");
 let cookieParser = require("cookie-parser");
 let jsonn = require("./key.json");
-const { Console } = require("console");
 let app = express();
 
 let key = fs.readFileSync(__dirname + "/certsFiles/selfsigned.key");
