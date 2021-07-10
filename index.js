@@ -3,7 +3,7 @@ let bodyParser = require("body-parser");
 let mysql = require("mysql");
 let moment = require("moment");
 let express = require("express");
-const { jsonToTableHtmlString } = require('json-table-converter')
+const { jsonToTableHtmlString } = require("json-table-converter");
 let jwt = require("jsonwebtoken");
 let cookieParser = require("cookie-parser");
 let jsonn = require("./key.json");
@@ -658,65 +658,68 @@ io.on("connection", (socket) => {
           pool.query("" + r + "", function (error, results) {
             if (error) {
               return io.emit("post8", { e: error });
-            } else if (!error && results[0].length) {
-              let k = Object.keys(results[0]);
-              let resul = [];
-              if (
-                k.includes(
-                  "ID",
-                  "jobNum",
-                  "clientName",
-                  "entryDesc",
-                  "entryDate",
-                  "entryContainer",
-                  "Cked_Out",
-                  "checkedOutDate",
-                  "posiPosition",
-                  "posiWeight"
-                )
-              ) {
-                for (let op in results) {
-                  let ed = moment(results[op]["entryDate"]).format(
-                    "YYYY-MM-DD HH:mm:ss"
-                  );
-                  resul.push({
-                    ID: results[op].ID,
-                    jobNum: results[op].jobNum,
-                    clientName: results[op].clientName,
-                    entryDesc: results[op].entryDesc,
-                    entryContainer: results[op].entryContainer,
-                    entryDate: ed,
-                    posiPosition: results[op].posiPosition,
-                    posiWeight: results[op].posiWeight,
-                  });
+            } else if (!error && results.length) {
+              let check = false;
+              for (let x in results) {
+                if (results[x].length) {
+                  check = true;
                 }
-                return io.emit("post8", { u: resul });
-              } else {
-                for (let op in results) {
-                  for (let i in results[op]) {
-                    let ed = moment(results[op][i]["entryDate"]).format(
+              }
+              if (check) {
+                let resul = [];
+                if (results.length < 2) {
+                  for (let op in results) {
+                    let ed = moment(results[op]["entryDate"]).format(
                       "YYYY-MM-DD HH:mm:ss"
                     );
                     resul.push({
-                      ID: results[op][i].ID,
-                      jobNum: results[op][i].jobNum,
-                      clientName: results[op][i].clientName,
-                      entryDesc: results[op][i].entryDesc,
-                      entryContainer: results[op][i].entryContainer,
+                      ID: results[op].ID,
+                      jobNum: results[op].jobNum,
+                      clientName: results[op].clientName,
+                      entryDesc: results[op].entryDesc,
+                      entryContainer: results[op].entryContainer,
                       entryDate: ed,
-                      posiPosition: results[op][i].posiPosition,
-                      posiWeight: results[op][i].posiWeight,
+                      posiPosition: results[op].posiPosition,
+                      posiWeight: results[op].posiWeight,
                     });
                   }
+                  return io.emit("post8", { u: resul });
+                } else if (results.length >= 2) {
+                  for (let op in results) {
+                    for (let i in results[op]) {
+                      let ed = moment(results[op][i]["entryDate"]).format(
+                        "YYYY-MM-DD HH:mm:ss"
+                      );
+                      resul.push({
+                        ID: results[op][i].ID,
+                        jobNum: results[op][i].jobNum,
+                        clientName: results[op][i].clientName,
+                        entryDesc: results[op][i].entryDesc,
+                        entryContainer: results[op][i].entryContainer,
+                        entryDate: ed,
+                        posiPosition: results[op][i].posiPosition,
+                        posiWeight: results[op][i].posiWeight,
+                      });
+                    }
+                  }
+                  return io.emit("post8", { u: resul });
                 }
-                return io.emit("post8", { u: resul });
+              } else if (!check) {
+                return io.emit("post8", {
+                  e: {
+                    code: " IS_NOT_VALID",
+                    sqlMessage: "entryContainer '" + h + "' doesn't exist",
+                  },
+                });
               }
-            } return io.emit("post8", {
-              e: {
-                code: " IS_NOT_VALID",
-                sqlMessage: "entryContainer '" + h + "' doesn't exist",
-              },
-            });
+            } else {
+              return io.emit("post8", {
+                e: {
+                  code: " IS_NOT_VALID",
+                  sqlMessage: "entryContainer '" + h + "' doesn't exist",
+                },
+              });
+            }
           });
         } else {
           return io.emit("post8", {
@@ -845,7 +848,7 @@ app.get("/loc", function (req, res) {
 app.get("/locj", function (req, res) {
   pool.query("SELECT * FROM store.jobBook", function (error, results) {
     if (error) {
-      return res.JSON({ e: "error" })
+      return res.JSON({ e: "error" });
     } else if (!error && results.length) {
       let html = jsonToTableHtmlString(results);
       return res.send(html);
