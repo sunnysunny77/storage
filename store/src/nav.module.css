@@ -1,0 +1,32 @@
+nav {
+  text-align: center;
+  width: 100%;
+  align-self: center;
+  font-size: 1.1em;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 0 !important;
+}
+
+li {
+  display: inline;
+}
+
+header button {
+  outline: none;
+  border: none;
+  width: 50%;
+  background-color: transparent;
+  color: white;
+  padding: 0;
+}
+
+#pic {
+  background-image: url(splash.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+}

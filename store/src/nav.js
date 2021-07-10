@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import "./nav.css";
+import styles from "./nav.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class Nav extends React.Component {
@@ -97,7 +98,7 @@ class Nav extends React.Component {
         <main>
           <div className="left0 bg-dark"></div>
           <div
-            id="pic"
+            id={styles.pic}
             className="mid0 midy bg-light mx-auto"
             style={this.state.disp1}
           ></div>

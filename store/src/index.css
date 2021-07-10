@@ -49,12 +49,6 @@ footer {
   border-radius: 0 !important;
 }
 
-.alert {
-  border-radius: 0;
-  border: 2.5px solid #343a40;
-  margin-bottom: 0;
-}
-
 .midy {
   height: calc(100vh - 288px);
 }
