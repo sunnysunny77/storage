@@ -674,7 +674,7 @@ io.on("connection", (socket) => {
                   });
                 }
                 return io.emit("post8", { u: resul });
-              } else if (results.length >= 2) {
+              } else if (results.length >= 2 && results[0][0]) {
                 for (let op in results) {
                   for (let i in results[op]) {
                     let ed = moment(results[op][i]["entryDate"]).format(
@@ -693,6 +693,13 @@ io.on("connection", (socket) => {
                   }
                 }
                 return io.emit("post8", { u: resul });
+              } else {
+                return io.emit("post8", {
+                  e: {
+                    code: " IS_NOT_VALID",
+                    sqlMessage: "entryContainer '" + h + "' doesn't exist",
+                  },
+                });
               }
             } else {
               return io.emit("post8", {
