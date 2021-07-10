@@ -817,9 +817,7 @@ io.on("connection", (socket) => {
 app.post("/loc", function (req, res) {
   let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
   let loc1 = JSON.parse(loc);
-
   let f = req.body.posi.toUpperCase();
-
   let c = loc1.positions.filter((match) => match.includes(f));
   let g = [];
   g.push(f);
