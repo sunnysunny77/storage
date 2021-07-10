@@ -28,7 +28,7 @@ let io = require("socket.io")(https, {
     methods: ["GET", "POST"],
   },
 });
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(function (req, res, next) {
@@ -656,58 +656,43 @@ io.on("connection", (socket) => {
             if (error) {
               return io.emit("post8", { e: error });
             } else if (!error && results.length) {
-              let check = false;
-              for (let x in results) {
-                if (results[x].length) {
-                  check = true;
+              let resul = [];
+              if (results.length < 2) {
+                for (let op in results) {
+                  let ed = moment(results[op]["entryDate"]).format(
+                    "YYYY-MM-DD HH:mm:ss"
+                  );
+                  resul.push({
+                    ID: results[op].ID,
+                    jobNum: results[op].jobNum,
+                    clientName: results[op].clientName,
+                    entryDesc: results[op].entryDesc,
+                    entryContainer: results[op].entryContainer,
+                    entryDate: ed,
+                    posiPosition: results[op].posiPosition,
+                    posiWeight: results[op].posiWeight,
+                  });
                 }
-              }
-              if (check) {
-                let resul = [];
-                if (results.length < 2) {
-                  for (let op in results) {
-                    let ed = moment(results[op]["entryDate"]).format(
+                return io.emit("post8", { u: resul });
+              } else if (results.length >= 2) {
+                for (let op in results) {
+                  for (let i in results[op]) {
+                    let ed = moment(results[op][i]["entryDate"]).format(
                       "YYYY-MM-DD HH:mm:ss"
                     );
                     resul.push({
-                      ID: results[op].ID,
-                      jobNum: results[op].jobNum,
-                      clientName: results[op].clientName,
-                      entryDesc: results[op].entryDesc,
-                      entryContainer: results[op].entryContainer,
+                      ID: results[op][i].ID,
+                      jobNum: results[op][i].jobNum,
+                      clientName: results[op][i].clientName,
+                      entryDesc: results[op][i].entryDesc,
+                      entryContainer: results[op][i].entryContainer,
                       entryDate: ed,
-                      posiPosition: results[op].posiPosition,
-                      posiWeight: results[op].posiWeight,
+                      posiPosition: results[op][i].posiPosition,
+                      posiWeight: results[op][i].posiWeight,
                     });
                   }
-                  return io.emit("post8", { u: resul });
-                } else if (results.length >= 2) {
-                  for (let op in results) {
-                    for (let i in results[op]) {
-                      let ed = moment(results[op][i]["entryDate"]).format(
-                        "YYYY-MM-DD HH:mm:ss"
-                      );
-                      resul.push({
-                        ID: results[op][i].ID,
-                        jobNum: results[op][i].jobNum,
-                        clientName: results[op][i].clientName,
-                        entryDesc: results[op][i].entryDesc,
-                        entryContainer: results[op][i].entryContainer,
-                        entryDate: ed,
-                        posiPosition: results[op][i].posiPosition,
-                        posiWeight: results[op][i].posiWeight,
-                      });
-                    }
-                  }
-                  return io.emit("post8", { u: resul });
                 }
-              } else if (!check) {
-                return io.emit("post8", {
-                  e: {
-                    code: " IS_NOT_VALID",
-                    sqlMessage: "entryContainer '" + h + "' doesn't exist",
-                  },
-                });
+                return io.emit("post8", { u: resul });
               }
             } else {
               return io.emit("post8", {
@@ -794,9 +779,7 @@ io.on("connection", (socket) => {
                 if (error) {
                   return io.emit("post10", { e: error });
                 } else if (!error && results) {
-                  let t = Number(x);
-                  let m = t.toFixed(5);
-                  return io.emit("post10", { u: [{ Updated: m }] });
+                  return io.emit("post10", { u: [{ Updated: x }] });
                 }
               }
             );
