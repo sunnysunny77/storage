@@ -13,7 +13,6 @@ import ToolkitProvider, { ColumnToggle } from "react-bootstrap-table2-toolkit";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import { JsonToTable } from "react-json-to-table";
 
-
 const columns1 = [
   {
     dataField: "Updated",
@@ -333,8 +332,10 @@ class Store extends React.Component {
       sumc: null,
       cont: "Container = N/A",
       posi: null,
+      posi1: null,
       weight: null,
       disp: { display: "none" },
+      disp0: { display: "none" },
       disp1: { display: "none" },
       disp1p1: { display: "none" },
       displays: { display: "block" },
@@ -358,8 +359,10 @@ class Store extends React.Component {
       sumc: null,
       cont: "Container = N/A",
       posi: null,
+      posi1: null,
       weight: null,
       disp: { display: "none" },
+      disp0: { display: "none" },
       disp1: { display: "none" },
       disp1p1: { display: "none" },
       displays: { display: "block" },
@@ -470,6 +473,9 @@ class Store extends React.Component {
               Weight: {this.state.weight} <br />
             </p>
             <div className="text-center" style={this.state.disp}>
+              <Alertb alert="Position Not Vaild" />
+            </div>
+            <div className="text-center" style={this.state.disp0}>
               <Alertb alert="Position Not Vaild" />
             </div>
             <div style={this.state.disp1}>
@@ -586,7 +592,7 @@ class Store extends React.Component {
               Option: {this.state.sumc} <br />
             </p>
             <div className="text-center" style={this.state.disp}>
-              <Alertb alert="Select Checked IN or OUT" />
+              <Alertb alert="Select Checked In or Out or Un Allocated" />
             </div>
             <div style={this.state.disp1}>
               <JsonToTable json={[this.state.jstb]} />
@@ -854,44 +860,68 @@ class Store extends React.Component {
     }
     if (x === "New Position") {
       return (
-        <Form onSubmit={this.rest3}>
-          <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt0}>
+        <React.Fragment>
+          <Form onSubmit={this.rest3}>
+            <Input
+              required
+              type="number"
+              step="any"
+              name="insertJobID"
+              placeholder="Insert ID:"
+              onChange={this.change}
+            ></Input>
+            <Input
+              required
+              type="text"
+              onChange={this.change0}
+              maxLength="8"
+              placeholder="Positon:"
+            ></Input>
+            <Input
+              required
+              type="number"
+              name="weight"
+              placeholder="Weight Kg:"
+              min="0"
+              max="3000"
+              onChange={this.change}
+            ></Input>
+            <Button className="btn btn-light btn-block" type="submit">
+              Submit
+            </Button>
+          </Form>
+          <Form onSubmit={this.posiId}>
+            <h4 className="text-white">↓ View Single Position</h4>
+            <Input
+              required
+              type="text"
+              onChange={this.change1}
+              maxLength="8"
+              placeholder="Positon:"
+            ></Input>
+            <Button className="btn btn-light btn-block" type="submit">
+              Submit
+            </Button>
+          </Form>
+          <Button
+            className="btn btn-light btn-block mt-1 mb-1"
+            onClick={this.bt0}
+          >
             View All Position's
           </Button>
-          <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt2}>
+          <Button
+            className="btn btn-light btn-block mt-1 mb-1"
+            onClick={this.bt2}
+          >
             View Free Position's
           </Button>
-          <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt3}>
-            View Position Data
+          <Button
+            className="btn btn-light btn-block mt-1 mb-1"
+            onClick={this.bt3}
+          >
+            View all Positioned Data
           </Button>
-          <Input
-            required
-            type="number"
-            step="any"
-            name="insertJobID"
-            placeholder="Insert ID:"
-            onChange={this.change}
-          ></Input>
-          <Input
-            required
-            type="text"
-            onChange={this.change0}
-            maxLength="8"
-            placeholder="Positon:"
-          ></Input>
-          <Input
-            required
-            type="number"
-            name="weight"
-            placeholder="Weight Kg:"
-            min="0"
-            max="3000"
-            onChange={this.change}
-          ></Input>
-          <Button className="btn btn-light btn-block" type="submit">
-            Submit
-          </Button>
-        </Form>
+        </React.Fragment>
       );
     }
     if (x === "Checkout ID") {
@@ -913,21 +943,26 @@ class Store extends React.Component {
     }
     if (x === "Find Client") {
       return (
-        <Form onSubmit={this.rest5}>
-          <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt1}>
-            List Job
+        <React.Fragment>
+          <Form onSubmit={this.rest5}>
+            <Input
+              required
+              type="text"
+              name="clientName"
+              placeholder="Client Name:"
+              onChange={this.change}
+            ></Input>
+            <Button className="btn btn-light btn-block" type="submit">
+              Submit
+            </Button>
+          </Form>
+          <Button
+            className="btn btn-light btn-block mt-1 mb-1"
+            onClick={this.bt1}
+          >
+            List all Job by Client
           </Button>
-          <Input
-            required
-            type="text"
-            name="clientName"
-            placeholder="Client Name:"
-            onChange={this.change}
-          ></Input>
-          <Button className="btn btn-light btn-block" type="submit">
-            Submit
-          </Button>
-        </Form>
+        </React.Fragment>
       );
     }
     if (x === "Find") {
@@ -1377,6 +1412,21 @@ class Store extends React.Component {
         });
     }
   };
+  change1 = (posi) => {
+    this.setState({ posi1: posi.target.value, disp0: { display: "none" } });
+    if (posi.target.value.length === 8) {
+      axios
+        .post(`https://storage.sunnyhome.site/loc`, {
+          posi: posi.target.value,
+        })
+        .then((res) => {
+          if (res.data.posi === false) {
+            this.setState({ disp0: { display: "block" } });
+          }
+          return this.setState({ posi1: res.data.posi });
+        });
+    }
+  };
   chk = (a) => {
     this.setState({
       cout: true,
@@ -1429,6 +1479,23 @@ class Store extends React.Component {
   };
   bt3 = () => {
     window.open("/locp", "_blank");
+  };
+  posiId = () => {
+    window.event.preventDefault();
+    if (this.state.posi1.length === 8) {
+      this.rss(this.state.page);
+      document.getElementById("a1").remove();
+      let div = document.createElement("div");
+      div.setAttribute("id", "a1");
+      document.getElementById("foot").appendChild(div);
+      ReactDOM.render(
+        this.form(this.state.page),
+        document.getElementById("a1")
+      );
+      window.open("/locp/" + this.state.posi1, "_blank");
+    } else {
+      this.setState({ disp0: { display: "block" } });
+    }
   };
   render() {
     if (this.state.redirect) {

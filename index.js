@@ -270,10 +270,8 @@ io.on("connection", (socket) => {
                       if (error) {
                         return io.emit("post3", { e: error });
                       } else if (!error && results) {
-                        let t = Number(x);
-                        let m = t.toFixed(5);
                         return io.emit("post3", {
-                          u: [{ Updated: f, ID: m, Position: y, Weight: z }],
+                          u: [{ Updated: f, ID: x, Position: y, Weight: z }],
                         });
                       }
                     }
@@ -294,10 +292,8 @@ io.on("connection", (socket) => {
                 if (error) {
                   return io.emit("post3", { e: error });
                 } else if (!error && results) {
-                  let t = Number(x);
-                  let m = t.toFixed(5);
                   return io.emit("post3", {
-                    u: [{ Updated: f, ID: m, Position: y, Weight: z }],
+                    u: [{ Updated: f, ID: x, Position: y, Weight: z }],
                   });
                 }
               }
@@ -329,10 +325,8 @@ io.on("connection", (socket) => {
                       if (error) {
                         return io.emit("post3", { e: error });
                       } else if (!error && results) {
-                        let t = Number(x);
-                        let m = t.toFixed(5);
                         return io.emit("post3", {
-                          u: [{ Updated: f, ID: m, Position: y, Weight: z }],
+                          u: [{ Updated: f, ID: x, Position: y, Weight: z }],
                         });
                       }
                     }
@@ -342,12 +336,10 @@ io.on("connection", (socket) => {
             );
           }
         } else {
-          let t = Number(x);
-          let m = t.toFixed(5);
           return io.emit("post3", {
             e: {
               code: "IS_NOT_VALID",
-              sqlMessage: "ID  '" + m + "' doesn't exist",
+              sqlMessage: "ID  '" + x + "' doesn't exist",
             },
           });
         }
@@ -386,10 +378,8 @@ io.on("connection", (socket) => {
                     if (error) {
                       return io.emit("post4", { e: error });
                     } else if (!error && results) {
-                      let t = Number(x);
-                      let m = t.toFixed(5);
                       return io.emit("post4", {
-                        u: [{ Cked_Out: m, Out_D: date }],
+                        u: [{ Cked_Out: x, Out_D: date }],
                       });
                     }
                   }
@@ -398,12 +388,10 @@ io.on("connection", (socket) => {
             }
           );
         } else {
-          let t = Number(x);
-          let m = t.toFixed(5);
           return io.emit("post4", {
             e: {
               code: " IS_NOT_VALID",
-              sqlMessage: "ID  '" + m + "' doesn't exist",
+              sqlMessage: "ID  '" + x + "' doesn't exist",
             },
           });
         }
@@ -741,9 +729,7 @@ io.on("connection", (socket) => {
                   if (error) {
                     return io.emit("post9", { e: error });
                   } else if (!error && results) {
-                    let t = Number(x);
-                    let m = t.toFixed(5);
-                    return io.emit("post9", { u: [{ Updated: m }] });
+                    return io.emit("post9", { u: [{ Updated: x }] });
                   }
                 }
               );
@@ -830,6 +816,8 @@ app.get("/locf", function (req, res) {
       )}
       let html = jsonToTableHtmlString(filtered);
       return res.send(html);
+    } else {
+      return res.send("No results");
     }
   });
 });
@@ -848,6 +836,8 @@ app.get("/locj", function (req, res) {
     } else if (!error && results.length) {
       let html = jsonToTableHtmlString(results);
       return res.send(html);
+    } else {
+      return res.send("No results");
     }
   });
 });
@@ -859,6 +849,21 @@ app.get("/locp", function (req, res) {
     } else if (!error && results.length) {
       let html = jsonToTableHtmlString(results);
       return res.send(html);
+    } else {
+      return res.send("No results");
     }
   });
 });
+
+app.get('/locp/:id', function (req, res) {
+  pool.query("SELECT * FROM store.posiInfo WHERE posiPosition= '" + req.params.id + "'", function (error, results) {
+    if (error) {
+      return res.JSON({ e: "error" });
+    } else if (!error && results.length) {
+      let html = jsonToTableHtmlString(results);
+      return res.send(html);
+    } else {
+      return res.send("No results");
+    }
+  });
+})
