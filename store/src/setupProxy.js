@@ -37,4 +37,18 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/locf',
+    createProxyMiddleware({
+      target: target,
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    '/locp',
+    createProxyMiddleware({
+      target: target,
+      changeOrigin: true,
+    })
+  );
 };

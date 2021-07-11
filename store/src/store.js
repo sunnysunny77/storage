@@ -855,8 +855,14 @@ class Store extends React.Component {
     if (x === "New Position") {
       return (
         <Form onSubmit={this.rest3}>
-          <Button className="btn btn-light btn-block" onClick={this.bt0}>
-            View Position's
+          <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt0}>
+            View All Position's
+          </Button>
+          <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt2}>
+            View Free Position's
+          </Button>
+          <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt3}>
+            View Position Data
           </Button>
           <Input
             required
@@ -908,7 +914,7 @@ class Store extends React.Component {
     if (x === "Find Client or List Job") {
       return (
         <Form onSubmit={this.rest5}>
-          <Button className="btn btn-light btn-block" onClick={this.bt1}>
+          <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt1}>
             List Job
           </Button>
           <Input
@@ -1417,6 +1423,12 @@ class Store extends React.Component {
   };
   bt1 = () => {
     window.open("/locj", "_blank");
+  };
+  bt2 = () => {
+    window.open("/locf", "_blank");
+  };
+  bt3 = () => {
+    window.open("/locp", "_blank");
   };
   render() {
     if (this.state.redirect) {

@@ -818,6 +818,22 @@ app.post("/loc", function (req, res) {
   }
 });
 
+app.get("/locf", function (req, res) {
+  pool.query("SELECT * FROM store.posiInfo", function (error, results) {
+    if (error) {
+      return res.JSON({ e: "error" });
+    } else if (!error && results.length) {
+      let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
+      let loc1 = JSON.parse(loc);
+      let filtered  = { positions: loc1.positions.filter(
+        (item) => !results.map((x) => x.posiPosition).includes(item)
+      )}
+      let html = jsonToTableHtmlString(filtered);
+      return res.send(html);
+    }
+  });
+});
+
 app.get("/loc", function (req, res) {
   let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
   let loc1 = JSON.parse(loc);
@@ -826,7 +842,18 @@ app.get("/loc", function (req, res) {
 });
 
 app.get("/locj", function (req, res) {
-  pool.query("SELECT * FROM store.jobBook", function (error, results) {
+  pool.query("SELECT * FROM store.jobBook ORDER BY clientName", function (error, results) {
+    if (error) {
+      return res.JSON({ e: "error" });
+    } else if (!error && results.length) {
+      let html = jsonToTableHtmlString(results);
+      return res.send(html);
+    }
+  });
+});
+
+app.get("/locp", function (req, res) {
+  pool.query("SELECT * FROM store.posiInfo ORDER BY posiPosition", function (error, results) {
     if (error) {
       return res.JSON({ e: "error" });
     } else if (!error && results.length) {
