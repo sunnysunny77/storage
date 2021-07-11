@@ -355,7 +355,7 @@ class Store extends React.Component {
       insertJobID: null,
       delJob: null,
       delClientName: null,
-      descrip: this.state.descrip,
+      descrip: null,
       sumc: null,
       cont: "Container = N/A",
       posi: null,
@@ -843,7 +843,7 @@ class Store extends React.Component {
             max="99999"
             onChange={this.change}
           ></Input>
-          <Modale desc={this.state.descrip} onC={this.change} />
+          <Modale onC={this.change} />
           <h4 className="text-white">↓ Select Container</h4>
           <Input required type="select" name="cont" onChange={this.change}>
             <option value="Container = N/A">N/A:</option>
@@ -1018,7 +1018,7 @@ class Store extends React.Component {
             max="99999"
             onChange={this.change}
           ></Input>
-          <Modale desc={this.state.descrip} onC={this.change} />
+          <Modale onC={this.change} />
           <Button className="btn btn-light btn-block" type="submit">
             Submit
           </Button>

@@ -4,11 +4,14 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import styles from "./modals.module.css";
 
 const Modale = (props) => {
-  const { onC, desc } = props;
+  const { onC } = props;
 
   const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
+  const [des, setDes] = useState("");
+  const toggle = () => {
+    setModal(!modal);
+    setDes(document.getElementById("txt").value);
+  }
 
   return (
     <div className={styles.modal}>
@@ -23,8 +26,9 @@ const Modale = (props) => {
             name="descrip"
             rows="8"
             onChange={onC}
+            id="txt"
           >
-            {desc}
+           {des}
           </textarea>
         </ModalBody>
         <ModalFooter>
