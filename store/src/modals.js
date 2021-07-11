@@ -1,17 +1,10 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input,
-} from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 import styles from "./modals.module.css";
 
 const Modale = (props) => {
-  const { onChange = props.onC } = props;
+  const { onC, desc } = props;
 
   const [modal, setModal] = useState(false);
 
@@ -25,13 +18,14 @@ const Modale = (props) => {
       <Modal className={styles.modals} isOpen={modal} toggle={toggle}>
         <ModalHeader>Details</ModalHeader>
         <ModalBody>
-          <Input
-            type="textarea"
+          <textarea
             className={styles.txt}
             name="descrip"
             rows="8"
-            onChange={onChange}
-          />
+            onChange={onC}
+          >
+            {desc}
+          </textarea>
         </ModalBody>
         <ModalFooter>
           <Button className="btn btn-light btn-block" onClick={toggle}>
