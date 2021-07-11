@@ -381,7 +381,7 @@ class Store extends React.Component {
     }
   }
   go = () => {
-    if (this.state.page === "New Job") {
+    if (this.state.page === "New Job & Client") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -458,7 +458,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "New Position") {
+    if (this.state.page === "Positions") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -577,7 +577,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Find") {
+    if (this.state.page === "Find Job") {
       const { ToggleList } = ColumnToggle;
       return (
         <main>
@@ -805,7 +805,7 @@ class Store extends React.Component {
     }
   };
   form = (x) => {
-    if (x === "New Job") {
+    if (x === "New Job & Client") {
       return (
         <Form onSubmit={this.rest1}>
           <Input
@@ -858,7 +858,7 @@ class Store extends React.Component {
         </Form>
       );
     }
-    if (x === "New Position") {
+    if (x === "Positions") {
       return (
         <React.Fragment>
           <Form onSubmit={this.rest3}>
@@ -965,7 +965,7 @@ class Store extends React.Component {
         </React.Fragment>
       );
     }
-    if (x === "Find") {
+    if (x === "Find Job") {
       return (
         <Form onSubmit={this.rest6}>
           <Input

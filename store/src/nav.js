@@ -45,10 +45,10 @@ class Nav extends React.Component {
           <nav style={this.state.disp}>
             <ul>
               <li>
-                <button onClick={() => this.show("Find")}>Find</button>
+                <button onClick={() => this.show("Find Job")}>Find Job</button>
               </li>
               <li>
-                <button onClick={() => this.show("New Job")}>New Job</button>
+                <button onClick={() => this.show("New Job & Client")}>New Job &amp; Client</button>
               </li>
               <li>
                 <button onClick={() => this.show("Find Client")}>
@@ -66,8 +66,8 @@ class Nav extends React.Component {
                 </button>
               </li>
               <li>
-                <button onClick={() => this.show("New Position")}>
-                  New Position
+                <button onClick={() => this.show("Positions")}>
+                  Positions
                 </button>
               </li>
               <li>
