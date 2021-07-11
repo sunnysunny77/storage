@@ -344,7 +344,7 @@ class Store extends React.Component {
       products: [],
       redirect: false,
       socket: this.props.socket,
-      page: "Find Client or List Job",
+      page: "Find Client",
     };
   }
   rss = (p) => {
@@ -534,7 +534,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Find Client or List Job") {
+    if (this.state.page === "Find Client") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -911,7 +911,7 @@ class Store extends React.Component {
         </Form>
       );
     }
-    if (x === "Find Client or List Job") {
+    if (x === "Find Client") {
       return (
         <Form onSubmit={this.rest5}>
           <Button className="btn btn-light btn-block mt-1 mb-1" onClick={this.bt1}>

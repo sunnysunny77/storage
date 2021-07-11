@@ -51,8 +51,8 @@ class Nav extends React.Component {
                 <button onClick={() => this.show("New Job")}>New Job</button>
               </li>
               <li>
-                <button onClick={() => this.show("Find Client or List Job")}>
-                  Find Client or List Job
+                <button onClick={() => this.show("Find Client")}>
+                  Find Client
                 </button>
               </li>
               <li>
