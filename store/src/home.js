@@ -65,6 +65,7 @@ class Home extends React.Component {
               <form id="f" onSubmit={this.log}>
                 <input
                   type="text"
+                  id="form1"
                   className="form-control text-center"
                   placeholder="Enter Username"
                   name="uname"
@@ -73,13 +74,14 @@ class Home extends React.Component {
                 ></input>
                 <input
                   type="password"
+                  id="form2"
                   className="form-control text-center"
                   placeholder="Enter Password"
                   name="psw"
                   required
                   onChange={this.change}
                 ></input>
-                <button type="submit" className="btn btn-light btn-block">
+                <button id="form3" type="submit" className="btn btn-light btn-block">
                   Login
                 </button>
               </form>

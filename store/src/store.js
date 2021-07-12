@@ -512,19 +512,19 @@ class Store extends React.Component {
             </Button>
           </Form>
           <Button
-            className="btn btn-light btn-block mt-1 mb-1"
+            className="btn btn-light btn-block m-0"
             onClick={this.rest13}
           >
             View All Position's
           </Button>
           <Button
-            className="btn btn-light btn-block mt-1 mb-1"
+            className="btn btn-light btn-block m-0"
             onClick={this.rest14}
           >
             View Free Position's
           </Button>
           <Button
-            className="btn btn-light btn-block mt-1 mb-1"
+            className="btn btn-light btn-block m-0"
             onClick={this.rest15}
           >
             View all Positioned Data
@@ -565,7 +565,7 @@ class Store extends React.Component {
             </Button>
           </Form>
           <Button
-            className="btn btn-light btn-block mt-1 mb-1"
+            className="btn btn-light btn-block m-0"
             onClick={this.rest11}
           >
             List all Job by Client

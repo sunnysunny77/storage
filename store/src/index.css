@@ -45,7 +45,17 @@ footer {
 
 .form-control,
 .btn {
-  border: 2.5px solid #343a40 !important;
+  border: 4px solid #343a40 !important;
+  border-radius: 0 !important;
+}
+
+#form1,
+#form2,
+#form3{
+  border-top: 2.5px solid #343a40 !important;
+  border-bottom: 2.5px solid #343a40 !important;
+  border-left: none !important;
+  border-right: none !important;
   border-radius: 0 !important;
 }
 
