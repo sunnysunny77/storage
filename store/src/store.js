@@ -319,6 +319,89 @@ const columns10 = [
   },
 ];
 
+const columns11 = [
+  {
+    dataField: "jobNum",
+    text: "Job#",
+    sort: true,
+  },
+  {
+    dataField: "clientName",
+    text: "Client",
+    sort: true,
+  },
+];
+
+const columns12 = [
+  {
+    dataField: "ID",
+    text: "ID",
+    sort: true,
+  },
+  {
+    dataField: "posiPosition",
+    text: "Position",
+    sort: true,
+  },
+  {
+    dataField: "posiWeight",
+    text: "Weight",
+    sort: true,
+  },
+  {
+    dataField: "jobNum",
+    text: "Job#",
+    sort: true,
+  },
+  {
+    dataField: "clientName",
+    text: "Client",
+    sort: true,
+  },
+];
+
+const columns13 = [
+  {
+    dataField: "Positions",
+    text: "All Positions",
+  },
+];
+
+const columns14 = [
+  {
+    dataField: "Positions",
+    text: "Free Positions",
+  },
+];
+
+const columns15 = [
+  {
+    dataField: "ID",
+    text: "ID",
+    sort: true,
+  },
+  {
+    dataField: "posiPosition",
+    text: "Position",
+    sort: true,
+  },
+  {
+    dataField: "posiWeight",
+    text: "Weight",
+    sort: true,
+  },
+  {
+    dataField: "jobNum",
+    text: "Job#",
+    sort: true,
+  },
+  {
+    dataField: "clientName",
+    text: "Client",
+    sort: true,
+  },
+];
+
 class Store extends React.Component {
   constructor(props) {
     super(props);
@@ -331,13 +414,19 @@ class Store extends React.Component {
       descrip: null,
       sumc: null,
       cont: "Container = N/A",
-      posi: null,
-      posi1: null,
+      posi: "",
+      posii: "",
       weight: null,
       disp: { display: "none" },
       disp0: { display: "none" },
       disp1: { display: "none" },
+      disp2: { display: "none" },
       disp1p1: { display: "none" },
+      disp1p11: { display: "none" },
+      disp1p111: { display: "none" },
+      disp1p1111: { display: "none" },
+      disp1p11111: { display: "none" },
+      disp1p111111: { display: "none" },
       displays: { display: "block" },
       locs: null,
       cout: false,
@@ -358,13 +447,19 @@ class Store extends React.Component {
       descrip: null,
       sumc: null,
       cont: "Container = N/A",
-      posi: null,
-      posi1: null,
+      posi: "",
+      posii: "",
       weight: null,
       disp: { display: "none" },
       disp0: { display: "none" },
       disp1: { display: "none" },
+      disp2: { display: "none" },
       disp1p1: { display: "none" },
+      disp1p11: { display: "none" },
+      disp1p111: { display: "none" },
+      disp1p1111: { display: "none" },
+      disp1p11111: { display: "none" },
+      disp1p111111: { display: "none" },
       displays: { display: "block" },
       locs: null,
       cout: false,
@@ -472,12 +567,6 @@ class Store extends React.Component {
               Position: {this.state.posi} <br />
               Weight: {this.state.weight} <br />
             </p>
-            <div className="text-center" style={this.state.disp}>
-              <Alertb alert="Position Not Vaild" />
-            </div>
-            <div className="text-center" style={this.state.disp0}>
-              <Alertb alert="Position Not Vaild" />
-            </div>
             <div style={this.state.disp1}>
               <JsonToTable json={[this.state.jstb]} />
             </div>
@@ -487,6 +576,38 @@ class Store extends React.Component {
                 keyField="Updated"
                 data={this.state.products}
                 columns={columns3}
+              />
+            </div>
+            <div style={this.state.disp1p111}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns12}
+              />
+            </div>
+            <div style={this.state.disp1p1111}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns13}
+              />
+            </div>
+            <div style={this.state.disp1p11111}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns14}
+              />
+            </div>
+            <div style={this.state.disp1p111111}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="Updated"
+                data={this.state.products}
+                columns={columns15}
               />
             </div>
           </div>
@@ -563,6 +684,14 @@ class Store extends React.Component {
                 columns={columns5}
               />
             </div>
+            <div style={this.state.disp1p11}>
+              <BootstrapTable
+                headerClasses="header-class"
+                keyField="jobNum"
+                data={this.state.products}
+                columns={columns11}
+              />
+            </div>
           </div>
           <div className="right0 bg-dark">
             <div
@@ -591,9 +720,6 @@ class Store extends React.Component {
               Job Number: {this.state.insertJob} <br />
               Option: {this.state.sumc} <br />
             </p>
-            <div className="text-center" style={this.state.disp}>
-              <Alertb alert="Select Checked In or Out or Un Allocated" />
-            </div>
             <div style={this.state.disp1}>
               <JsonToTable json={[this.state.jstb]} />
             </div>
@@ -873,6 +999,7 @@ class Store extends React.Component {
             <Input
               required
               type="text"
+              name="posizero"
               onChange={this.change0}
               maxLength="8"
               placeholder="Positon:"
@@ -890,12 +1017,13 @@ class Store extends React.Component {
               Submit
             </Button>
           </Form>
-          <Form onSubmit={this.posiId}>
+          <Form onSubmit={this.rest12}>
             <h4 className="text-white">↓ View Single Position</h4>
             <Input
               required
               type="text"
-              onChange={this.change1}
+              name="posione"
+              onChange={this.change0}
               maxLength="8"
               placeholder="Positon:"
             ></Input>
@@ -905,19 +1033,19 @@ class Store extends React.Component {
           </Form>
           <Button
             className="btn btn-light btn-block mt-1 mb-1"
-            onClick={this.bt0}
+            onClick={this.rest13}
           >
             View All Position's
           </Button>
           <Button
             className="btn btn-light btn-block mt-1 mb-1"
-            onClick={this.bt2}
+            onClick={this.rest14}
           >
             View Free Position's
           </Button>
           <Button
             className="btn btn-light btn-block mt-1 mb-1"
-            onClick={this.bt3}
+            onClick={this.rest15}
           >
             View all Positioned Data
           </Button>
@@ -958,7 +1086,7 @@ class Store extends React.Component {
           </Form>
           <Button
             className="btn btn-light btn-block mt-1 mb-1"
-            onClick={this.bt1}
+            onClick={this.rest11}
           >
             List all Job by Client
           </Button>
@@ -967,43 +1095,45 @@ class Store extends React.Component {
     }
     if (x === "Find Job") {
       return (
-        <Form onSubmit={this.rest6}>
-          <Input
-            required
-            type="number"
-            name="insertJob"
-            placeholder="Job Number:"
-            min="0"
-            max="99999"
-            onChange={this.change}
-          ></Input>
-          <ButtonGroup>
-            <Button
-              onClick={() => this.chk("Cecked Out")}
-              className="btn btn-secondary"
-              id="ck"
-            >
-              Cecked Out
+        <React.Fragment>
+          <Form onSubmit={this.rest6}>
+            <Input
+              required
+              type="number"
+              name="insertJob"
+              placeholder="Job Number:"
+              min="0"
+              max="99999"
+              onChange={this.change}
+            ></Input>
+            <ButtonGroup>
+              <Button
+                onClick={() => this.chk("Cecked Out")}
+                className="btn btn-secondary"
+                id="ck"
+              >
+                Cecked Out
+              </Button>
+              <Button
+                onClick={() => this.chk("In Position")}
+                className="btn btn-secondary"
+                id="ip"
+              >
+                In Position
+              </Button>
+              <Button
+                onClick={() => this.chk("Un Allocated")}
+                className="btn btn-secondary"
+                id="ua"
+              >
+                Un Allocated
+              </Button>
+            </ButtonGroup>
+            <Button className="btn btn-light btn-block" type="submit">
+              Submit
             </Button>
-            <Button
-              onClick={() => this.chk("In Position")}
-              className="btn btn-secondary"
-              id="ip"
-            >
-              In Position
-            </Button>
-            <Button
-              onClick={() => this.chk("Un Allocated")}
-              className="btn btn-secondary"
-              id="ua"
-            >
-              Un Allocated
-            </Button>
-          </ButtonGroup>
-          <Button className="btn btn-light btn-block" type="submit">
-            Submit
-          </Button>
-        </Form>
+          </Form>
+        </React.Fragment>
       );
     }
     if (x === "Find Positioned Details") {
@@ -1272,8 +1402,8 @@ class Store extends React.Component {
           document.getElementById("ip").classList.add("btn-secondary");
           document.getElementById("ua").classList.add("btn-secondary");
         });
-      } else {
-        this.setState({ disp: { display: "block" } });
+      } else if (!this.state.cout) {
+        this.setState({ disp2: { display: "block" } });
       }
     }
   };
@@ -1387,102 +1517,36 @@ class Store extends React.Component {
           });
     });
   };
-  change = (event) => {
-    this.setState({
-      disp1: { display: "none" },
-      disp1p1: { display: "none" },
-      displays: { display: "block" },
+  rest11 = () => {
+    this.rss(this.state.page);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post11");
+    this.state.socket.on("post11", (res) => {
+      res.e
+        ? this.setState({
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            disp1p11: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.u,
+            disp1p1: { display: "none" },
+            disp1p11: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
     });
-    let nam = event.target.name;
-    let val = event.target.value;
-    this.setState({ [nam]: val });
   };
-  change0 = (posi) => {
-    this.setState({ posi: posi.target.value, disp: { display: "none" } });
-    if (posi.target.value.length === 8) {
-      axios
-        .post(`https://storage.sunnyhome.site/loc`, {
-          posi: posi.target.value,
-        })
-        .then((res) => {
-          if (res.data.posi === false) {
-            this.setState({ disp: { display: "block" } });
-          }
-          return this.setState({ posi: res.data.posi });
-        });
-    }
-  };
-  change1 = (posi) => {
-    this.setState({ posi1: posi.target.value, disp0: { display: "none" } });
-    if (posi.target.value.length === 8) {
-      axios
-        .post(`https://storage.sunnyhome.site/loc`, {
-          posi: posi.target.value,
-        })
-        .then((res) => {
-          if (res.data.posi === false) {
-            this.setState({ disp0: { display: "block" } });
-          }
-          return this.setState({ posi1: res.data.posi });
-        });
-    }
-  };
-  chk = (a) => {
-    this.setState({
-      cout: true,
-      disp1: { display: "none" },
-      disp1p1: { display: "none" },
-      displays: { display: "block" },
-    });
-    if (a === "Cecked Out") {
-      document.getElementById("ck").classList.remove("btn-secondary");
-      document.getElementById("ck").classList.add("btn-warning");
-      document.getElementById("ip").classList.remove("btn-warning");
-      document.getElementById("ua").classList.remove("btn-warning");
-      document.getElementById("ip").classList.add("btn-secondary");
-      document.getElementById("ua").classList.add("btn-secondary");
-      this.setState({
-        sumc: "Cecked Out",
-      });
-    }
-    if (a === "In Position") {
-      document.getElementById("ip").classList.remove("btn-secondary");
-      document.getElementById("ip").classList.add("btn-warning");
-      document.getElementById("ck").classList.remove("btn-warning");
-      document.getElementById("ua").classList.remove("btn-warning");
-      document.getElementById("ck").classList.add("btn-secondary");
-      document.getElementById("ua").classList.add("btn-secondary");
-      this.setState({
-        sumc: "In Position",
-      });
-    }
-    if (a === "Un Allocated") {
-      document.getElementById("ua").classList.remove("btn-secondary");
-      document.getElementById("ua").classList.add("btn-warning");
-      document.getElementById("ck").classList.remove("btn-warning");
-      document.getElementById("ip").classList.remove("btn-warning");
-      document.getElementById("ck").classList.add("btn-secondary");
-      document.getElementById("ip").classList.add("btn-secondary");
-      this.setState({
-        sumc: "Un Allocated",
-      });
-    }
-  };
-  bt0 = () => {
-    window.open("/loc", "_blank");
-  };
-  bt1 = () => {
-    window.open("/locj", "_blank");
-  };
-  bt2 = () => {
-    window.open("/locf", "_blank");
-  };
-  bt3 = () => {
-    window.open("/locp", "_blank");
-  };
-  posiId = () => {
+  rest12 = () => {
     window.event.preventDefault();
-    if (this.state.posi1.length === 8) {
+    if (this.state.posii.length === 8) {
+      let send = { posii: this.state.posii };
       this.rss(this.state.page);
       document.getElementById("a1").remove();
       let div = document.createElement("div");
@@ -1492,9 +1556,212 @@ class Store extends React.Component {
         this.form(this.state.page),
         document.getElementById("a1")
       );
-      window.open("/locp/" + this.state.posi1, "_blank");
+      this.state.socket.emit("post12", send);
+      this.state.socket.on("post12", (res) => {
+        res.e
+          ? this.setState({
+              jstb: res.e,
+              disp1: { display: "block" },
+              disp1p1: { display: "none" },
+              disp1p11: { display: "none" },
+              disp1p111: { display: "none" },
+              disp1p1111: { display: "none" },
+              disp1p11111: { display: "none" },
+              disp1p111111: { display: "none" },
+              displays: { display: "none" },
+            })
+          : this.setState({
+              products: res.u,
+              disp1p1: { display: "none" },
+              disp1p11: { display: "none" },
+              disp1p111: { display: "block" },
+              disp1p1111: { display: "none" },
+              disp1p11111: { display: "none" },
+              disp1p111111: { display: "none" },
+              disp1: { display: "none" },
+              displays: { display: "none" },
+            });
+      });
     } else {
       this.setState({ disp0: { display: "block" } });
+    }
+  };
+  rest13 = () => {
+    this.rss(this.state.page);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post13");
+    this.state.socket.on("post13", (res) => {
+      res.e
+        ? this.setState({
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            disp1p11: { display: "none" },
+            disp1p111: { display: "none" },
+            disp1p1111: { display: "none" },
+            disp1p11111: { display: "none" },
+            disp1p111111: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.u,
+            disp1p1: { display: "none" },
+            disp1p11: { display: "none" },
+            disp1p111: { display: "none" },
+            disp1p1111: { display: "block" },
+            disp1p11111: { display: "none" },
+            disp1p111111: { display: "none" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  rest14 = () => {
+    this.rss(this.state.page);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post14");
+    this.state.socket.on("post14", (res) => {
+      res.e
+        ? this.setState({
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            disp1p11: { display: "none" },
+            disp1p111: { display: "none" },
+            disp1p1111: { display: "none" },
+            disp1p11111: { display: "none" },
+            disp1p111111: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.u,
+            disp1p1: { display: "none" },
+            disp1p11: { display: "none" },
+            disp1p111: { display: "none" },
+            disp1p1111: { display: "none" },
+            disp1p11111: { display: "block" },
+            disp1p111111: { display: "none" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  rest15 = () => {
+    this.rss(this.state.page);
+    document.getElementById("a1").remove();
+    let div = document.createElement("div");
+    div.setAttribute("id", "a1");
+    document.getElementById("foot").appendChild(div);
+    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.state.socket.emit("post15");
+    this.state.socket.on("post15", (res) => {
+      res.e
+        ? this.setState({
+            jstb: res.e,
+            disp1: { display: "block" },
+            disp1p1: { display: "none" },
+            disp1p11: { display: "none" },
+            disp1p111: { display: "none" },
+            disp1p1111: { display: "none" },
+            disp1p11111: { display: "none" },
+            disp1p111111: { display: "none" },
+            displays: { display: "none" },
+          })
+        : this.setState({
+            products: res.u,
+            disp1p1: { display: "none" },
+            disp1p11: { display: "none" },
+            disp1p111: { display: "none" },
+            disp1p1111: { display: "none" },
+            disp1p11111: { display: "none" },
+            disp1p111111: { display: "block" },
+            disp1: { display: "none" },
+            displays: { display: "none" },
+          });
+    });
+  };
+  change = (event) => {
+    this.setState({
+      disp1: { display: "none" },
+      disp1p1: { display: "none" },
+      disp1p11: { display: "none" },
+      disp1p111: { display: "none" },
+      disp1p1111: { display: "none" },
+      disp1p11111: { display: "none" },
+      disp1p111111: { display: "none" },
+      displays: { display: "block" },
+    });
+    let nam = event.target.name;
+    let val = event.target.value;
+    this.setState({ [nam]: val });
+  };
+  posi = (event, obj) => {
+    this.state.socket.emit("post16", {
+      [obj]: event,
+    });
+    this.state.socket.on("post16", (res) => {
+      if (res.zero) {
+        this.setState({ posi: res.zero });
+      } else if (res.zero === false) {
+        this.setState({ posi: "", disp: { display: "block" } });
+      }
+      if (res.one) {
+        this.setState({ posii: res.one });
+      } else if (res.one === false) {
+        this.setState({ posii: "", disp0: { display: "block" } });
+      }
+    });
+  };
+  change0 = (event) => {
+    if (event.target.name === "posizero") {
+      this.setState({ disp: { display: "none" } });
+      if (event.target.value.length === 8) {
+        this.posi(event.target.value, event.target.name);
+      }
+    }
+    if (event.target.name === "posione") {
+      this.setState({ disp0: { display: "none" } });
+      if (event.target.value.length === 8) {
+        this.posi(event.target.value, event.target.name);
+      }
+    }
+  };
+  chk = (a) => {
+    this.setState({ cout: true, disp2: { display: "none" } });
+    if (a === "Cecked Out") {
+      document.getElementById("ck").classList.remove("btn-secondary");
+      document.getElementById("ck").classList.add("btn-warning");
+      document.getElementById("ip").classList.remove("btn-warning");
+      document.getElementById("ua").classList.remove("btn-warning");
+      document.getElementById("ip").classList.add("btn-secondary");
+      document.getElementById("ua").classList.add("btn-secondary");
+      this.setState({ sumc: "Cecked Out" });
+    }
+    if (a === "In Position") {
+      document.getElementById("ip").classList.remove("btn-secondary");
+      document.getElementById("ip").classList.add("btn-warning");
+      document.getElementById("ck").classList.remove("btn-warning");
+      document.getElementById("ua").classList.remove("btn-warning");
+      document.getElementById("ck").classList.add("btn-secondary");
+      document.getElementById("ua").classList.add("btn-secondary");
+      this.setState({ sumc: "In Position" });
+    }
+    if (a === "Un Allocated") {
+      document.getElementById("ua").classList.remove("btn-secondary");
+      document.getElementById("ua").classList.add("btn-warning");
+      document.getElementById("ck").classList.remove("btn-warning");
+      document.getElementById("ip").classList.remove("btn-warning");
+      document.getElementById("ck").classList.add("btn-secondary");
+      document.getElementById("ip").classList.add("btn-secondary");
+      this.setState({ sumc: "Un Allocated" });
     }
   };
   render() {
@@ -1508,6 +1775,15 @@ class Store extends React.Component {
         </header>
         {this.go()}
         <footer id="foot" className="bg-dark">
+          <div className="text-center" style={this.state.disp2}>
+            <Alertb alert="Select Checked In or Out or Un Allocated" />
+          </div>
+          <div className="text-center" style={this.state.disp}>
+            <Alertb alert="Insert ID Position Not Vaild" />
+          </div>
+          <div className="text-center" style={this.state.disp0}>
+            <Alertb alert="Single Position Not Vaild" />
+          </div>
           <div id="a1">{this.form(this.state.page)}</div>
         </footer>
       </div>

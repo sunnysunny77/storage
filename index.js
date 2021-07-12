@@ -2,7 +2,6 @@ let fs = require("fs");
 let mysql = require("mysql");
 let moment = require("moment");
 let express = require("express");
-let { jsonToTableHtmlString } = require("json-table-converter");
 let jwt = require("jsonwebtoken");
 let cookieParser = require("cookie-parser");
 let jsonn = require("./key.json");
@@ -89,7 +88,7 @@ io.on("connection", (socket) => {
       "SELECT jobNum From store.jobBook WHERE jobNum = '" + x + "'",
       function (error, results) {
         if (error) {
-          return io.emit("post1", { e: error });
+          return io.to(socket.id).emit("post1", { e: error });
         } else if (!error && !results.length) {
           pool.query(
             "INSERT INTO store.jobBook (jobNum, clientName) VALUES ( '" +
@@ -99,7 +98,7 @@ io.on("connection", (socket) => {
               "' )",
             function (error, results) {
               if (error) {
-                return io.emit("post1", { e: error });
+                return io.to(socket.id).emit("post1", { e: error });
               } else if (!error && results) {
                 pool.query(
                   "CREATE TABLE store." +
@@ -107,7 +106,7 @@ io.on("connection", (socket) => {
                     " ( ID DECIMAL(10, 5), jobNum INT UNSIGNED, clientName CHAR(128), entryDesc varchar(2500), entryDate DATETIME, entryContainer CHAR(25), Cked_Out TINYINT UNSIGNED DEFAULT 2, checkedOutDate DATETIME, PRIMARY KEY (ID, jobNum, clientName), FOREIGN KEY (jobNum, clientName) REFERENCES store.jobBook(jobNum, clientName))",
                   function (error, results) {
                     if (error) {
-                      return io.emit("post1", { e: error });
+                      return io.to(socket.id).emit("post1", { e: error });
                     } else if (!error && results) {
                       pool.query(
                         "INSERT INTO store." +
@@ -123,9 +122,9 @@ io.on("connection", (socket) => {
                           "', 'Container = N/A', 3)",
                         function (error, results) {
                           if (error) {
-                            return io.emit("post1", { e: error });
+                            return io.to(socket.id).emit("post1", { e: error });
                           } else if (!error && results) {
-                            return io.emit("post1", {
+                            return io.to(socket.id).emit("post1", {
                               u: [{ Updated: x, Client: y, In_D: date }],
                             });
                           }
@@ -138,7 +137,7 @@ io.on("connection", (socket) => {
             }
           );
         } else {
-          return io.emit("post1", {
+          return io.to(socket.id).emit("post1", {
             e: {
               code: "IS_NOT_VALID",
               sqlMessage: "jobNum  '" + x + "' duplicate_entry",
@@ -161,7 +160,7 @@ io.on("connection", (socket) => {
       "SELECT MAX(ID) FROM store." + x + "",
       function (error, results) {
         if (error) {
-          return io.emit("post2", { e: error });
+          return io.to(socket.id).emit("post2", { e: error });
         } else if (!error && results.length) {
           let n = results[0]["MAX(ID)"];
           let t = Number(n);
@@ -173,7 +172,7 @@ io.on("connection", (socket) => {
               "SELECT clientName From store.jobBook WHERE jobNum = '" + x + "'",
               function (error, results) {
                 if (error) {
-                  return io.emit("post2", { e: error });
+                  return io.to(socket.id).emit("post2", { e: error });
                 } else if (!error && results.length) {
                   let h = results[0].clientName;
                   pool.query(
@@ -194,10 +193,10 @@ io.on("connection", (socket) => {
                       "')",
                     function (error, results) {
                       if (error) {
-                        return io.emit("post2", { e: error });
+                        return io.to(socket.id).emit("post2", { e: error });
                       } else if (!error && results) {
                         let k = e.toFixed(5);
-                        return io.emit("post2", {
+                        return io.to(socket.id).emit("post2", {
                           u: [
                             {
                               Updated: x,
@@ -215,7 +214,7 @@ io.on("connection", (socket) => {
               }
             );
           } else {
-            return io.emit("post2", {
+            return io.to(socket.id).emit("post2", {
               e: {
                 code: "IS_NOT_VALID",
                 sqlMessage: "ID  '" + e + "' has reach MAX(ID)",
@@ -241,7 +240,7 @@ io.on("connection", (socket) => {
         "",
       function (error, results) {
         if (error) {
-          return io.emit("post3", { e: error });
+          return io.to(socket.id).emit("post3", { e: error });
         } else if (!error && results.length) {
           if (results[0].Cked_Out === 2) {
             pool.query(
@@ -258,7 +257,7 @@ io.on("connection", (socket) => {
                 "')",
               function (error, results) {
                 if (error) {
-                  return io.emit("post3", { e: error });
+                  return io.to(socket.id).emit("post3", { e: error });
                 } else if (!error && results) {
                   pool.query(
                     "UPDATE store." +
@@ -268,9 +267,9 @@ io.on("connection", (socket) => {
                       "",
                     function (error, results) {
                       if (error) {
-                        return io.emit("post3", { e: error });
+                        return io.to(socket.id).emit("post3", { e: error });
                       } else if (!error && results) {
-                        return io.emit("post3", {
+                        return io.to(socket.id).emit("post3", {
                           u: [{ Updated: f, ID: x, Position: y, Weight: z }],
                         });
                       }
@@ -290,9 +289,9 @@ io.on("connection", (socket) => {
                 "",
               function (error, results) {
                 if (error) {
-                  return io.emit("post3", { e: error });
+                  return io.to(socket.id).emit("post3", { e: error });
                 } else if (!error && results) {
-                  return io.emit("post3", {
+                  return io.to(socket.id).emit("post3", {
                     u: [{ Updated: f, ID: x, Position: y, Weight: z }],
                   });
                 }
@@ -313,7 +312,7 @@ io.on("connection", (socket) => {
                 "' )",
               function (error, results) {
                 if (error) {
-                  return io.emit("post3", { e: error });
+                  return io.to(socket.id).emit("post3", { e: error });
                 } else if (!error && results) {
                   pool.query(
                     "UPDATE store." +
@@ -323,9 +322,9 @@ io.on("connection", (socket) => {
                       "",
                     function (error, results) {
                       if (error) {
-                        return io.emit("post3", { e: error });
+                        return io.to(socket.id).emit("post3", { e: error });
                       } else if (!error && results) {
-                        return io.emit("post3", {
+                        return io.to(socket.id).emit("post3", {
                           u: [{ Updated: f, ID: x, Position: y, Weight: z }],
                         });
                       }
@@ -336,7 +335,7 @@ io.on("connection", (socket) => {
             );
           }
         } else {
-          return io.emit("post3", {
+          return io.to(socket.id).emit("post3", {
             e: {
               code: "IS_NOT_VALID",
               sqlMessage: "ID  '" + x + "' doesn't exist",
@@ -358,7 +357,7 @@ io.on("connection", (socket) => {
       "SELECT ID FROM store." + y + " WHERE ID = " + x + "",
       function (error, results) {
         if (error) {
-          return io.emit("post4", { e: error });
+          return io.to(socket.id).emit("post4", { e: error });
         } else if (!error && results.length) {
           pool.query(
             "UPDATE store." +
@@ -370,15 +369,15 @@ io.on("connection", (socket) => {
               "'",
             function (error, results) {
               if (error) {
-                return io.emit("post4", { e: error });
+                return io.to(socket.id).emit("post4", { e: error });
               } else if (!error && results) {
                 pool.query(
                   "DELETE FROM store.posiInfo WHERE ID = " + x + "",
                   function (error, results) {
                     if (error) {
-                      return io.emit("post4", { e: error });
+                      return io.to(socket.id).emit("post4", { e: error });
                     } else if (!error && results) {
-                      return io.emit("post4", {
+                      return io.to(socket.id).emit("post4", {
                         u: [{ Cked_Out: x, Out_D: date }],
                       });
                     }
@@ -388,7 +387,7 @@ io.on("connection", (socket) => {
             }
           );
         } else {
-          return io.emit("post4", {
+          return io.to(socket.id).emit("post4", {
             e: {
               code: " IS_NOT_VALID",
               sqlMessage: "ID  '" + x + "' doesn't exist",
@@ -406,7 +405,7 @@ io.on("connection", (socket) => {
       "SELECT clientName FROM store.jobBook WHERE clientName = '" + x + "'",
       function (error, results) {
         if (error) {
-          return io.emit("post5", { e: error });
+          return io.to(socket.id).emit("post5", { e: error });
         } else if (!error && results.length) {
           pool.query(
             "SELECT jobNum, clientName FROM store.jobBook WHERE clientName = '" +
@@ -414,7 +413,7 @@ io.on("connection", (socket) => {
               "'",
             function (error, results) {
               if (error) {
-                return io.emit("post5", { e: error });
+                return io.to(socket.id).emit("post5", { e: error });
               } else if (!error && results.length) {
                 let resul = [];
                 let w = results.length;
@@ -424,12 +423,12 @@ io.on("connection", (socket) => {
                     clientName: results[op].clientName,
                   });
                 }
-                return io.emit("post5", { u: resul });
+                return io.to(socket.id).emit("post5", { u: resul });
               }
             }
           );
         } else {
-          return io.emit("post5", {
+          return io.to(socket.id).emit("post5", {
             e: {
               code: " IS_NOT_VALID",
               sqlMessage: "clientName  '" + x + "' doesn't exist",
@@ -449,7 +448,7 @@ io.on("connection", (socket) => {
         "SELECT * FROM store." + x + " WHERE Cked_Out = 0",
         function (error, results) {
           if (error) {
-            return io.emit("post6", { e: error });
+            return io.to(socket.id).emit("post6", { e: error });
           } else if (!error && results.length) {
             let resul = [];
             let w = results.length;
@@ -470,9 +469,9 @@ io.on("connection", (socket) => {
                 checkedOutDate: cod,
               });
             }
-            return io.emit("post6", { u: resul });
+            return io.to(socket.id).emit("post6", { u: resul });
           } else if (!error && !results.length) {
-            return io.emit("post6", {
+            return io.to(socket.id).emit("post6", {
               e: {
                 code: " IS_NOT_VALID",
                 sqlMessage: "Cked_Out  '" + x + "' doesn't exist",
@@ -490,7 +489,7 @@ io.on("connection", (socket) => {
           ".ID = store.posiInfo.ID",
         function (error, results) {
           if (error) {
-            return io.emit("post6", { e: error });
+            return io.to(socket.id).emit("post6", { e: error });
           } else if (!error && results.length) {
             let resul = [];
             let w = results.length;
@@ -512,9 +511,9 @@ io.on("connection", (socket) => {
                 posiWeight: results[op].posiWeight,
               });
             }
-            return io.emit("post6", { u: resul });
+            return io.to(socket.id).emit("post6", { u: resul });
           } else if (!error && !results.length) {
-            return io.emit("post6", {
+            return io.to(socket.id).emit("post6", {
               e: {
                 code: " IS_NOT_VALID",
                 sqlMessage: "Cked_IN  '" + x + "' doesn't exist",
@@ -528,7 +527,7 @@ io.on("connection", (socket) => {
         "SELECT * FROM store." + x + " WHERE Cked_Out = 2",
         function (error, results) {
           if (error) {
-            return io.emit("post6", { e: error });
+            return io.to(socket.id).emit("post6", { e: error });
           } else if (!error && results.length) {
             let resul = [];
             let w = results.length;
@@ -548,9 +547,9 @@ io.on("connection", (socket) => {
                 entryDate: ed,
               });
             }
-            return io.emit("post6", { u: resul });
+            return io.to(socket.id).emit("post6", { u: resul });
           } else if (!error && !results.length) {
-            return io.emit("post6", {
+            return io.to(socket.id).emit("post6", {
               e: {
                 code: " IS_NOT_VALID",
                 sqlMessage: "Un_Allocated  '" + x + "' doesn't exist",
@@ -578,7 +577,7 @@ io.on("connection", (socket) => {
         "%'",
       function (error, results) {
         if (error) {
-          return io.emit("post7", { e: error });
+          return io.to(socket.id).emit("post7", { e: error });
         } else if (!error && results.length) {
           let resul = [];
           let w = results.length;
@@ -597,9 +596,9 @@ io.on("connection", (socket) => {
               posiWeight: results[op].posiWeight,
             });
           }
-          return io.emit("post7", { u: resul });
+          return io.to(socket.id).emit("post7", { u: resul });
         } else {
-          return io.emit("post7", {
+          return io.to(socket.id).emit("post7", {
             e: {
               code: " IS_NOT_VALID",
               sqlMessage: "details  '" + x + "' doesn't exist",
@@ -620,7 +619,7 @@ io.on("connection", (socket) => {
         "'",
       function (error, results) {
         if (error) {
-          return io.emit("post8", { e: error });
+          return io.to(socket.id).emit("post8", { e: error });
         } else if (!error && results.length) {
           let w = results.length;
           let t;
@@ -642,7 +641,7 @@ io.on("connection", (socket) => {
           let r = s.substr(0, n);
           pool.query("" + r + "", function (error, results) {
             if (error) {
-              return io.emit("post8", { e: error });
+              return io.to(socket.id).emit("post8", { e: error });
             } else if (!error && results.length) {
               let resul = [];
               if (results.length < 2) {
@@ -661,7 +660,7 @@ io.on("connection", (socket) => {
                     posiWeight: results[op].posiWeight,
                   });
                 }
-                return io.emit("post8", { u: resul });
+                return io.to(socket.id).emit("post8", { u: resul });
               } else if (results.length >= 2 && results[0][0]) {
                 for (let op in results) {
                   for (let i in results[op]) {
@@ -680,9 +679,9 @@ io.on("connection", (socket) => {
                     });
                   }
                 }
-                return io.emit("post8", { u: resul });
+                return io.to(socket.id).emit("post8", { u: resul });
               } else {
-                return io.emit("post8", {
+                return io.to(socket.id).emit("post8", {
                   e: {
                     code: " IS_NOT_VALID",
                     sqlMessage: "entryContainer '" + h + "' doesn't exist",
@@ -690,7 +689,7 @@ io.on("connection", (socket) => {
                 });
               }
             } else {
-              return io.emit("post8", {
+              return io.to(socket.id).emit("post8", {
                 e: {
                   code: " IS_NOT_VALID",
                   sqlMessage: "entryContainer '" + h + "' doesn't exist",
@@ -699,7 +698,7 @@ io.on("connection", (socket) => {
             }
           });
         } else {
-          return io.emit("post8", {
+          return io.to(socket.id).emit("post8", {
             e: {
               code: " IS_NOT_VALID",
               sqlMessage: "clientName  '" + x + "' doesn't exist",
@@ -715,21 +714,23 @@ io.on("connection", (socket) => {
     let x = obj.delJob;
     pool.query("DROP TABLE store." + x + "", function (error, results) {
       if (error) {
-        return io.emit("post9", { e: error });
+        return io.to(socket.id).emit("post9", { e: error });
       } else if (!error && results) {
         pool.query(
           "DELETE FROM store.posiInfo WHERE jobNum=  " + x + "",
           function (error, results) {
             if (error) {
-              return io.emit("post9", { e: error });
+              return io.to(socket.id).emit("post9", { e: error });
             } else if (!error && results) {
               pool.query(
                 "DELETE FROM store.jobBook WHERE jobNum= " + x + "",
                 function (error, results) {
                   if (error) {
-                    return io.emit("post9", { e: error });
+                    return io.to(socket.id).emit("post9", { e: error });
                   } else if (!error && results) {
-                    return io.emit("post9", { u: [{ Updated: x }] });
+                    return io
+                      .to(socket.id)
+                      .emit("post9", { u: [{ Updated: x }] });
                   }
                 }
               );
@@ -737,7 +738,7 @@ io.on("connection", (socket) => {
           }
         );
       } else if (!error && !results) {
-        return io.emit("post9", {
+        return io.to(socket.id).emit("post9", {
           e: {
             code: " IS_NOT_VALID",
             sqlMessage: "Job_Num  '" + x + "' doesn't exist",
@@ -754,7 +755,7 @@ io.on("connection", (socket) => {
       "SELECT * FROM store.jobBook WHERE clientName=  '" + x + "'",
       function (error, results) {
         if (error) {
-          return io.emit("post10", { e: error });
+          return io.to(socket.id).emit("post10", { e: error });
         } else if (!error && results.length) {
           let w = results.length;
           for (let op = 0; op < w; op++) {
@@ -770,15 +771,17 @@ io.on("connection", (socket) => {
                 "'",
               function (error, results) {
                 if (error) {
-                  return io.emit("post10", { e: error });
+                  return io.to(socket.id).emit("post10", { e: error });
                 } else if (!error && results) {
-                  return io.emit("post10", { u: [{ Updated: x }] });
+                  return io
+                    .to(socket.id)
+                    .emit("post10", { u: [{ Updated: x }] });
                 }
               }
             );
           }
         } else if (!error && !results.length) {
-          return io.emit("post10", {
+          return io.to(socket.id).emit("post10", {
             e: {
               code: " IS_NOT_VALID",
               sqlMessage: "client_Name  '" + x + "' doesn't exist",
@@ -788,82 +791,169 @@ io.on("connection", (socket) => {
       }
     );
   });
-});
 
-app.post("/loc", function (req, res) {
-  let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
-  let loc1 = JSON.parse(loc);
-  let f = req.body.posi.toUpperCase();
-  let c = loc1.positions.filter((match) => match.includes(f));
-  let g = [];
-  g.push(f);
-  if (c[0] === g[0]) {
-    res.json({ posi: g[0] });
-  } else {
-    res.json({ posi: false });
-  }
-});
+  socket.on("post11", () => {
+    pool.query(
+      "SELECT * FROM store.jobBook ORDER BY clientName",
+      function (error, results) {
+        if (error) {
+          return io.to(socket.id).emit("post11", { e: error });
+        } else if (!error && results.length) {
+          let resul = [];
+          let w = results.length;
+          for (let op = 0; op < w; op++) {
+            resul.push({
+              jobNum: results[op].jobNum,
+              clientName: results[op].clientName,
+            });
+          }
+          return io.to(socket.id).emit("post11", { u: resul });
+        } else {
+          return io.to(socket.id).emit("post11", {
+            e: {
+              code: "IS_NOT_VALID",
+              sqlMessage: "No Data",
+            },
+          });
+        }
+      }
+    );
+  });
 
-app.get("/locf", function (req, res) {
-  pool.query("SELECT * FROM store.posiInfo", function (error, results) {
-    if (error) {
-      return res.JSON({ e: "error" });
-    } else if (!error && results.length) {
+  socket.on("post12", (req) => {
+    let obj = req;
+    let x = obj.posii;
+    pool.query(
+      "SELECT * FROM store.posiInfo WHERE posiPosition= '" + x + "'",
+      function (error, results) {
+        if (error) {
+          return res.JSON({ e: "error" });
+        } else if (!error && results.length) {
+          let resul = [];
+          let w = results.length;
+          for (let op = 0; op < w; op++) {
+            resul.push({
+              ID: results[op].ID,
+              posiPosition: results[op].posiPosition,
+              posiWeight: results[op].posiWeight,
+              jobNum: results[op].jobNum,
+              clientName: results[op].clientName,
+            });
+          }
+          return io.to(socket.id).emit("post12", { u: resul });
+        } else {
+          return io.to(socket.id).emit("post12", {
+            e: {
+              code: "IS_NOT_VALID",
+              sqlMessage: "No Data",
+            },
+          });
+        }
+      }
+    );
+  });
+
+  socket.on("post13", (req) => {
+    let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
+    let a = JSON.parse(loc);
+    a = a.positions;
+    let resul = [];
+    let w = a.length;
+    if (w) {
+      for (let op = 0; op < w; op++) {
+        resul.push({
+          Positions: a[op],
+        });
+      }
+      return io.to(socket.id).emit("post13", { u: resul });
+    } else {
+      return io.to(socket.id).emit("post13", {
+        e: {
+          code: "IS_NOT_VALID",
+          sqlMessage: "No Data",
+        },
+      });
+    }
+  });
+
+  socket.on("post14", (req) => {
+    pool.query("SELECT * FROM store.posiInfo", function (error, results) {
+      if (error) {
+        return res.JSON({ e: "error" });
+      } else if (!error && results.length) {
+        let loc = fs.readFileSync(
+          "/home/ubuntu/files/positions/positions.json"
+        );
+        let loc1 = JSON.parse(loc);
+        let filtered = loc1.positions.filter(
+          (item) => !results.map((item) => item.posiPosition).includes(item)
+        );
+        filtered = filtered.map((item) => {
+          return { Positions: item };
+        });
+        return io.to(socket.id).emit("post14", { u: filtered });
+      } else {
+        return io.to(socket.id).emit("post14", {
+          e: {
+            code: "IS_NOT_VALID",
+            sqlMessage: "No Data",
+          },
+        });
+      }
+    });
+  });
+
+  socket.on("post15", (req) => {
+    pool.query(
+      "SELECT * FROM store.posiInfo ORDER BY posiPosition",
+      function (error, results) {
+        if (error) {
+          return res.JSON({ e: "error" });
+        } else if (!error && results.length) {
+          let resul = [];
+          let w = results.length;
+          for (let op = 0; op < w; op++) {
+            resul.push({
+              ID: results[op].ID,
+              posiPosition: results[op].posiPosition,
+              posiWeight: results[op].posiWeight,
+              jobNum: results[op].jobNum,
+              clientName: results[op].clientName,
+            });
+          }
+          return io.to(socket.id).emit("post15", { u: resul });
+        } else {
+          return io.to(socket.id).emit("post15", {
+            e: {
+              code: "IS_NOT_VALID",
+              sqlMessage: "No Data",
+            },
+          });
+        }
+      }
+    );
+  });
+
+  socket.on("post16", (req) => {
+    let obj = req;
+    let x = obj.posizero || obj.posione;
+    function res() {
       let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
       let loc1 = JSON.parse(loc);
-      let filtered  = { positions: loc1.positions.filter(
-        (item) => !results.map((x) => x.posiPosition).includes(item)
-      )}
-      let html = jsonToTableHtmlString(filtered);
-      return res.send(html);
-    } else {
-      return res.send("No results");
+      let f = x.toUpperCase();
+      let c = loc1.positions.filter((match) => match.includes(f));
+      let g = [f];
+      if (c[0] === g[0]) {
+        return g[0];
+      } else {
+        return false;
+      }
+    }
+    if (obj.posizero) {
+      return io.to(socket.id).emit("post16", { zero: res() });
+    }
+    if (obj.posione) {
+      return io.to(socket.id).emit("post16", { one: res() });
     }
   });
 });
-
-app.get("/loc", function (req, res) {
-  let loc = fs.readFileSync("/home/ubuntu/files/positions/positions.json");
-  let loc1 = JSON.parse(loc);
-  let html = jsonToTableHtmlString(loc1);
-  return res.send(html);
-});
-
-app.get("/locj", function (req, res) {
-  pool.query("SELECT * FROM store.jobBook ORDER BY clientName", function (error, results) {
-    if (error) {
-      return res.JSON({ e: "error" });
-    } else if (!error && results.length) {
-      let html = jsonToTableHtmlString(results);
-      return res.send(html);
-    } else {
-      return res.send("No results");
-    }
-  });
-});
-
-app.get("/locp", function (req, res) {
-  pool.query("SELECT * FROM store.posiInfo ORDER BY posiPosition", function (error, results) {
-    if (error) {
-      return res.JSON({ e: "error" });
-    } else if (!error && results.length) {
-      let html = jsonToTableHtmlString(results);
-      return res.send(html);
-    } else {
-      return res.send("No results");
-    }
-  });
-});
-
-app.get('/locp/:id', function (req, res) {
-  pool.query("SELECT * FROM store.posiInfo WHERE posiPosition= '" + req.params.id + "'", function (error, results) {
-    if (error) {
-      return res.JSON({ e: "error" });
-    } else if (!error && results.length) {
-      let html = jsonToTableHtmlString(results);
-      return res.send(html);
-    } else {
-      return res.send("No results");
-    }
-  });
-})
