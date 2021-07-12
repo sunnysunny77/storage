@@ -475,8 +475,8 @@ class Store extends React.Component {
       this.setState({ page: this.props.location.state.page });
     }
   }
-  go = () => {
-    if (this.state.page === "New Job & Client") {
+  go = (x) => {
+    if (x === "New Job & Client") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -514,7 +514,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "New Detail") {
+    if (x === "New Detail") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -553,7 +553,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Positions") {
+    if (x === "Positions") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -624,7 +624,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Checkout ID") {
+    if (x === "Checkout ID") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -661,7 +661,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Find Client") {
+    if (x === "Find Client") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -706,7 +706,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Find Job") {
+    if (x === "Find Job") {
       const { ToggleList } = ColumnToggle;
       return (
         <main>
@@ -762,7 +762,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Find Positioned Details") {
+    if (x === "Find Positioned Details") {
       const { ToggleList } = ColumnToggle;
       return (
         <main>
@@ -817,7 +817,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Find Positioned Client Container") {
+    if (x === "Find Positioned Client Container") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -855,7 +855,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Remove Job") {
+    if (x === "Remove Job") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -892,7 +892,7 @@ class Store extends React.Component {
         </main>
       );
     }
-    if (this.state.page === "Remove Client") {
+    if (x === "Remove Client") {
       return (
         <main>
           <div className="left0 bg-dark"></div>
@@ -1773,7 +1773,7 @@ class Store extends React.Component {
         <header className="bg-dark">
           <h1 className="text-white pr-5 mr-5">{this.state.page}</h1>
         </header>
-        {this.go()}
+        {this.go(this.state.page)}
         <footer id="foot" className="bg-dark">
           <div className="text-center" style={this.state.disp2}>
             <Alertb alert="Select Checked In or Out or Un Allocated" />

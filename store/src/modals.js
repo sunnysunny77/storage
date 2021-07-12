@@ -17,13 +17,16 @@ const Modale = (props) => {
     setModal(!modal);
     setDes(document.getElementById("txt").value);
   };
+  const toggle0 = () => {
+    setModal(!modal);
+  };
   const ch = (event) => {
     onC(event);
     setDes(event.target.value);
   };
   return (
     <div className={styles.modal}>
-      <Button className="btn btn-light btn-block" onClick={toggle}>
+      <Button className="btn btn-light btn-block" onClick={toggle0}>
         Enter Details
       </Button>
       <Modal className={styles.modals} isOpen={modal} toggle={toggle}>
