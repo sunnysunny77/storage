@@ -1,4 +1,4 @@
-import textFilter from "react-bootstrap-table2-filter";
+import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 
 const columns1 = [
   {
@@ -388,7 +388,9 @@ const columns15 = [
     sort: true,
   },
 ];
+
 const column = {
+  filterFactory,
   columns1,
   columns2,
   columns3,
@@ -405,4 +407,5 @@ const column = {
   columns14,
   columns15,
 };
+
 export default column;
