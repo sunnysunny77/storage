@@ -10,397 +10,9 @@ import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css";
 import ToolkitProvider, { ColumnToggle } from "react-bootstrap-table2-toolkit";
-import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
+import filterFactory from "react-bootstrap-table2-filter";
 import { JsonToTable } from "react-json-to-table";
-
-const columns1 = [
-  {
-    dataField: "Updated",
-    text: "Updated",
-  },
-  {
-    dataField: "Client",
-    text: "Client",
-  },
-  {
-    dataField: "In_D",
-    text: "In_D",
-  },
-];
-
-const columns2 = [
-  {
-    dataField: "Updated",
-    text: "Updated",
-  },
-  {
-    dataField: "ID",
-    text: "ID",
-  },
-  {
-    dataField: "Details",
-    text: "Details",
-  },
-  {
-    dataField: "In_D",
-    text: "In_D",
-  },
-  {
-    dataField: "Container",
-    text: "Container",
-  },
-];
-
-const columns3 = [
-  {
-    dataField: "Updated",
-    text: "Updated",
-  },
-  {
-    dataField: "ID",
-    text: "ID",
-  },
-  {
-    dataField: "Position",
-    text: "Position",
-  },
-  {
-    dataField: "Weight",
-    text: "Weight",
-  },
-];
-
-const columns4 = [
-  {
-    dataField: "Cked_Out",
-    text: "Cked_Out",
-  },
-  {
-    dataField: "Out_D",
-    text: "Out_D",
-  },
-];
-
-const columns5 = [
-  {
-    dataField: "jobNum",
-    text: "Job#",
-  },
-  {
-    dataField: "clientName",
-    text: "Client",
-  },
-];
-
-const columns6 = [
-  {
-    dataField: "ID",
-    text: "ID",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "jobNum",
-    text: "Job#",
-    hidden: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "clientName",
-    text: "Client",
-    hidden: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "entryDesc",
-    text: "Details",
-    sort: true,
-    filter: textFilter({ placeholder: "Find Details" }),
-    headerStyle: {
-      width: "auto",
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "entryContainer",
-    text: "Container",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "entryDate",
-    text: "In_D",
-    hidden: true,
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "checkedOutDate",
-    text: "Out_D",
-    hidden: true,
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "posiPosition",
-    text: "Position",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "posiWeight",
-    text: "Weight",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-];
-
-const columns7 = [
-  {
-    dataField: "ID",
-    text: "ID",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "jobNum",
-    text: "Job#",
-    hidden: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "clientName",
-    text: "Client",
-    hidden: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "entryDesc",
-    text: "Details",
-    sort: true,
-    headerStyle: {
-      width: "auto",
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "entryContainer",
-    text: "Container",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "entryDate",
-    text: "In_D",
-    sort: true,
-    hidden: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "posiPosition",
-    text: "Position",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "posiWeight",
-    text: "Weight",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-];
-
-const columns8 = [
-  {
-    dataField: "ID",
-    text: "ID",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "jobNum",
-    text: "Job#",
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "clientName",
-    text: "Client",
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "entryDesc",
-    text: "Details",
-    sort: true,
-    headerStyle: {
-      width: "auto",
-      overflow: "auto",
-    },
-  },
-  {
-    dataField: "entryContainer",
-    text: "Container",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "entryDate",
-    text: "In_D",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "posiPosition",
-    text: "Position",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-  {
-    dataField: "posiWeight",
-    text: "Weight",
-    sort: true,
-    headerStyle: {
-      overflow: "hidden",
-    },
-  },
-];
-
-const columns9 = [
-  {
-    dataField: "Updated",
-    text: "Updated",
-  },
-];
-const columns10 = [
-  {
-    dataField: "Updated",
-    text: "Updated",
-  },
-];
-
-const columns11 = [
-  {
-    dataField: "jobNum",
-    text: "Job#",
-    sort: true,
-  },
-  {
-    dataField: "clientName",
-    text: "Client",
-    sort: true,
-  },
-];
-
-const columns12 = [
-  {
-    dataField: "ID",
-    text: "ID",
-    sort: true,
-  },
-  {
-    dataField: "posiPosition",
-    text: "Position",
-    sort: true,
-  },
-  {
-    dataField: "posiWeight",
-    text: "Weight",
-    sort: true,
-  },
-  {
-    dataField: "jobNum",
-    text: "Job#",
-    sort: true,
-  },
-  {
-    dataField: "clientName",
-    text: "Client",
-    sort: true,
-  },
-];
-
-const columns13 = [
-  {
-    dataField: "Positions",
-    text: "All Positions",
-  },
-];
-
-const columns14 = [
-  {
-    dataField: "Positions",
-    text: "Free Positions",
-  },
-];
-
-const columns15 = [
-  {
-    dataField: "ID",
-    text: "ID",
-    sort: true,
-  },
-  {
-    dataField: "posiPosition",
-    text: "Position",
-    sort: true,
-  },
-  {
-    dataField: "posiWeight",
-    text: "Weight",
-    sort: true,
-  },
-  {
-    dataField: "jobNum",
-    text: "Job#",
-    sort: true,
-  },
-  {
-    dataField: "clientName",
-    text: "Client",
-    sort: true,
-  },
-];
+import column from "./columns.js";
 
 class Store extends React.Component {
   constructor(props) {
@@ -478,455 +90,325 @@ class Store extends React.Component {
   go = (x) => {
     if (x === "New Job & Client") {
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Job Number: {this.state.insertJob} <br />
-              Client Name: {this.state.clientName} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns1}
-              />
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Job Number: {this.state.insertJob} <br />
+            Client Name: {this.state.clientName} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
-            >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+          <div style={this.state.disp1p1}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns1}
+            />
           </div>
-        </main>
+        </React.Fragment>
       );
     }
     if (x === "New Detail") {
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Job Number: {this.state.insertJob} <br />
-              Description: {this.state.descrip} <br />
-              Container: {this.state.cont} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns2}
-              />
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Job Number: {this.state.insertJob} <br />
+            Description: {this.state.descrip} <br />
+            Container: {this.state.cont} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
-            >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+          <div style={this.state.disp1p1}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns2}
+            />
           </div>
-        </main>
+        </React.Fragment>
       );
     }
     if (x === "Positions") {
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Insert ID: {this.state.insertJobID} <br />
-              Position: {this.state.posi} <br />
-              Weight: {this.state.weight} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns3}
-              />
-            </div>
-            <div style={this.state.disp1p111}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns12}
-              />
-            </div>
-            <div style={this.state.disp1p1111}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns13}
-              />
-            </div>
-            <div style={this.state.disp1p11111}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns14}
-              />
-            </div>
-            <div style={this.state.disp1p111111}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns15}
-              />
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Insert ID: {this.state.insertJobID} <br />
+            Position: {this.state.posi} <br />
+            Weight: {this.state.weight} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
-            >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+          <div style={this.state.disp1p1}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns3}
+            />
           </div>
-        </main>
+          <div style={this.state.disp1p111}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns12}
+            />
+          </div>
+          <div style={this.state.disp1p1111}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns13}
+            />
+          </div>
+          <div style={this.state.disp1p11111}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns14}
+            />
+          </div>
+          <div style={this.state.disp1p111111}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns15}
+            />
+          </div>
+        </React.Fragment>
       );
     }
     if (x === "Checkout ID") {
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Insert ID: {this.state.insertJobID} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Cked_Out"
-                data={this.state.products}
-                columns={columns4}
-              />
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Insert ID: {this.state.insertJobID} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
-            >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+          <div style={this.state.disp1p1}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Cked_Out"
+              data={this.state.products}
+              columns={column.columns4}
+            />
           </div>
-        </main>
+        </React.Fragment>
       );
     }
     if (x === "Find Client") {
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Client Name: {this.state.clientName} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="jobNum"
-                data={this.state.products}
-                columns={columns5}
-              />
-            </div>
-            <div style={this.state.disp1p11}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="jobNum"
-                data={this.state.products}
-                columns={columns11}
-              />
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Client Name: {this.state.clientName} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
-            >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+          <div style={this.state.disp1p1}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="jobNum"
+              data={this.state.products}
+              columns={column.columns5}
+            />
           </div>
-        </main>
+          <div style={this.state.disp1p11}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="jobNum"
+              data={this.state.products}
+              columns={column.columns11}
+            />
+          </div>
+        </React.Fragment>
       );
     }
     if (x === "Find Job") {
       const { ToggleList } = ColumnToggle;
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Job Number: {this.state.insertJob} <br />
-              Option: {this.state.sumc} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <ToolkitProvider
-                keyField="ID"
-                data={this.state.products}
-                columns={columns6}
-                columnToggle
-              >
-                {(props) => (
-                  <div>
-                    <ToggleList
-                      contextual="warning"
-                      className="list-custom-class btn-block"
-                      btnClassName="list-btn-custom-class"
-                      {...props.columnToggleProps}
-                    />
-                    <hr />
-                    <BootstrapTable
-                      headerClasses="header-class"
-                      filter={filterFactory()}
-                      {...props.baseProps}
-                    />
-                  </div>
-                )}
-              </ToolkitProvider>
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Job Number: {this.state.insertJob} <br />
+            Option: {this.state.sumc} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+          <div style={this.state.disp1p1}>
+            <ToolkitProvider
+              keyField="ID"
+              data={this.state.products}
+              columns={column.columns6}
+              columnToggle
             >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+              {(props) => (
+                <div>
+                  <ToggleList
+                    contextual="warning"
+                    className="list-custom-class btn-block"
+                    btnClassName="list-btn-custom-class"
+                    {...props.columnToggleProps}
+                  />
+                  <hr />
+                  <BootstrapTable
+                    headerClasses="header-class"
+                    filter={filterFactory()}
+                    {...props.baseProps}
+                  />
+                </div>
+              )}
+            </ToolkitProvider>
           </div>
-        </main>
+        </React.Fragment>
       );
     }
     if (x === "Find Positioned Details") {
       const { ToggleList } = ColumnToggle;
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Job Number: {this.state.insertJob} <br />
-              Description: {this.state.descrip} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <ToolkitProvider
-                keyField="ID"
-                data={this.state.products}
-                columns={columns7}
-                columnToggle
-              >
-                {(props) => (
-                  <div>
-                    <ToggleList
-                      contextual="warning"
-                      className="list-custom-class btn-block"
-                      btnClassName="list-btn-custom-class"
-                      {...props.columnToggleProps}
-                    />
-                    <hr />
-                    <BootstrapTable
-                      headerClasses="header-class"
-                      {...props.baseProps}
-                    />
-                  </div>
-                )}
-              </ToolkitProvider>
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Job Number: {this.state.insertJob} <br />
+            Description: {this.state.descrip} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+          <div style={this.state.disp1p1}>
+            <ToolkitProvider
+              keyField="ID"
+              data={this.state.products}
+              columns={column.columns7}
+              columnToggle
             >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+              {(props) => (
+                <div>
+                  <ToggleList
+                    contextual="warning"
+                    className="list-custom-class btn-block"
+                    btnClassName="list-btn-custom-class"
+                    {...props.columnToggleProps}
+                  />
+                  <hr />
+                  <BootstrapTable
+                    headerClasses="header-class"
+                    {...props.baseProps}
+                  />
+                </div>
+              )}
+            </ToolkitProvider>
           </div>
-        </main>
+        </React.Fragment>
       );
     }
     if (x === "Find Positioned Client Container") {
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Client Name: {this.state.clientName} <br />
-              Container: {this.state.cont} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="ID"
-                data={this.state.products}
-                columns={columns8}
-              />
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Client Name: {this.state.clientName} <br />
+            Container: {this.state.cont} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
-            >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+          <div style={this.state.disp1p1}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="ID"
+              data={this.state.products}
+              columns={column.columns8}
+            />
           </div>
-        </main>
+        </React.Fragment>
       );
     }
     if (x === "Remove Job") {
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Job Number: {this.state.delJob} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns9}
-              />
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Job Number: {this.state.delJob} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
-            >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+          <div style={this.state.disp1p1}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns9}
+            />
           </div>
-        </main>
+        </React.Fragment>
       );
     }
     if (x === "Remove Client") {
       return (
-        <main>
-          <div className="left0 bg-dark"></div>
-          <div className="mid0 midy bg-light mx-auto">
-            <p style={this.state.displays} className="text-center text-warning">
-              <br />
-              <br />
-              <br />
-              Outline: <br />
-              Client Name: {this.state.delClientName} <br />
-            </p>
-            <div style={this.state.disp1}>
-              <JsonToTable json={[this.state.jstb]} />
-            </div>
-            <div style={this.state.disp1p1}>
-              <BootstrapTable
-                headerClasses="header-class"
-                keyField="Updated"
-                data={this.state.products}
-                columns={columns10}
-              />
-            </div>
+        <React.Fragment>
+          <p style={this.state.displays} className="text-center text-warning">
+            <br />
+            <br />
+            <br />
+            Outline: <br />
+            Client Name: {this.state.delClientName} <br />
+          </p>
+          <div style={this.state.disp1}>
+            <JsonToTable json={[this.state.jstb]} />
           </div>
-          <div className="right0 bg-dark">
-            <div
-              className="buu float-right"
-              onClick={() => this.setState({ redirect: { pathname: "/" } })}
-            >
-              <div className="bur"></div>
-              <div className="bur"></div>
-              <div className="bur"></div>
-            </div>
+          <div style={this.state.disp1p1}>
+            <BootstrapTable
+              headerClasses="header-class"
+              keyField="Updated"
+              data={this.state.products}
+              columns={column.columns10}
+            />
           </div>
-        </main>
+        </React.Fragment>
       );
     }
   };
@@ -1215,18 +697,21 @@ class Store extends React.Component {
       );
     }
   };
-  rest1 = () => {
-    window.event.preventDefault();
-    let send = {
-      insertJob: this.state.insertJob,
-      clientName: this.state.clientName,
-    };
+  rest0 = () => {
     this.rss(this.state.page);
     document.getElementById("a1").remove();
     let div = document.createElement("div");
     div.setAttribute("id", "a1");
     document.getElementById("foot").appendChild(div);
     ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+  };
+  rest1 = () => {
+    window.event.preventDefault();
+    let send = {
+      insertJob: this.state.insertJob,
+      clientName: this.state.clientName,
+    };
+    this.rest0();
     this.state.socket.emit("post1", send);
     this.state.socket.on("post1", (res) => {
       res.e
@@ -1251,12 +736,7 @@ class Store extends React.Component {
       cont: this.state.cont,
       descrip: this.state.descrip,
     };
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post2", send);
     this.state.socket.on("post2", (res) => {
       res.e
@@ -1282,15 +762,7 @@ class Store extends React.Component {
         posi: this.state.posi,
         weight: this.state.weight,
       };
-      this.rss(this.state.page);
-      document.getElementById("a1").remove();
-      let div = document.createElement("div");
-      div.setAttribute("id", "a1");
-      document.getElementById("foot").appendChild(div);
-      ReactDOM.render(
-        this.form(this.state.page),
-        document.getElementById("a1")
-      );
+      this.rest0();
       this.state.socket.emit("post3", send);
       this.state.socket.on("post3", (res) => {
         res.e
@@ -1314,12 +786,7 @@ class Store extends React.Component {
   rest4 = () => {
     window.event.preventDefault();
     let send = { insertJobID: this.state.insertJobID };
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post4", send);
     this.state.socket.on("post4", (res) => {
       res.e
@@ -1340,12 +807,7 @@ class Store extends React.Component {
   rest5 = () => {
     window.event.preventDefault();
     let send = { clientName: this.state.clientName };
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post5", send);
     this.state.socket.on("post5", (res) => {
       res.e
@@ -1354,12 +816,14 @@ class Store extends React.Component {
             disp1: { display: "block" },
             disp1p1: { display: "none" },
             displays: { display: "none" },
+            disp1p11: { display: "none" },
           })
         : this.setState({
             products: res.u,
             disp1p1: { display: "block" },
             disp1: { display: "none" },
             displays: { display: "none" },
+            disp1p11: { display: "none" },
           });
     });
   };
@@ -1371,15 +835,7 @@ class Store extends React.Component {
           insertJob: this.state.insertJob,
           sumc: this.state.sumc,
         };
-        this.rss(this.state.page);
-        document.getElementById("a1").remove();
-        let div = document.createElement("div");
-        div.setAttribute("id", "a1");
-        document.getElementById("foot").appendChild(div);
-        ReactDOM.render(
-          this.form(this.state.page),
-          document.getElementById("a1")
-        );
+        this.rest0();
         this.state.socket.emit("post6", send);
         this.state.socket.on("post6", (res) => {
           res.e
@@ -1413,12 +869,7 @@ class Store extends React.Component {
       insertJob: this.state.insertJob,
       descrip: this.state.descrip,
     };
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post7", send);
     this.state.socket.on("post7", (res) => {
       res.e
@@ -1442,12 +893,7 @@ class Store extends React.Component {
       clientName: this.state.clientName,
       cont: this.state.cont,
     };
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post8", send);
     this.state.socket.on("post8", (res) => {
       res.e
@@ -1468,12 +914,7 @@ class Store extends React.Component {
   rest9 = () => {
     window.event.preventDefault();
     let send = { delJob: this.state.delJob };
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post9", send);
     this.state.socket.on("post9", (res) => {
       res.e
@@ -1494,12 +935,7 @@ class Store extends React.Component {
   rest10 = () => {
     window.event.preventDefault();
     let send = { delClientName: this.state.delClientName };
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post10", send);
     this.state.socket.on("post10", (res) => {
       res.e
@@ -1518,12 +954,7 @@ class Store extends React.Component {
     });
   };
   rest11 = () => {
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post11");
     this.state.socket.on("post11", (res) => {
       res.e
@@ -1547,15 +978,7 @@ class Store extends React.Component {
     window.event.preventDefault();
     if (this.state.posii.length === 8) {
       let send = { posii: this.state.posii };
-      this.rss(this.state.page);
-      document.getElementById("a1").remove();
-      let div = document.createElement("div");
-      div.setAttribute("id", "a1");
-      document.getElementById("foot").appendChild(div);
-      ReactDOM.render(
-        this.form(this.state.page),
-        document.getElementById("a1")
-      );
+      this.rest0();
       this.state.socket.emit("post12", send);
       this.state.socket.on("post12", (res) => {
         res.e
@@ -1587,12 +1010,7 @@ class Store extends React.Component {
     }
   };
   rest13 = () => {
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post13");
     this.state.socket.on("post13", (res) => {
       res.e
@@ -1621,12 +1039,7 @@ class Store extends React.Component {
     });
   };
   rest14 = () => {
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post14");
     this.state.socket.on("post14", (res) => {
       res.e
@@ -1655,12 +1068,7 @@ class Store extends React.Component {
     });
   };
   rest15 = () => {
-    this.rss(this.state.page);
-    document.getElementById("a1").remove();
-    let div = document.createElement("div");
-    div.setAttribute("id", "a1");
-    document.getElementById("foot").appendChild(div);
-    ReactDOM.render(this.form(this.state.page), document.getElementById("a1"));
+    this.rest0();
     this.state.socket.emit("post15");
     this.state.socket.on("post15", (res) => {
       res.e
@@ -1773,7 +1181,22 @@ class Store extends React.Component {
         <header className="bg-dark">
           <h1 className="text-white pr-5 mr-5">{this.state.page}</h1>
         </header>
-        {this.go(this.state.page)}
+        <main>
+          <div className="left0 bg-dark"></div>
+          <div className="mid0 midy bg-light mx-auto">
+            {this.go(this.state.page)}
+          </div>
+          <div className="right0 bg-dark">
+            <div
+              className="buu float-right"
+              onClick={() => this.setState({ redirect: { pathname: "/" } })}
+            >
+              <div className="bur"></div>
+              <div className="bur"></div>
+              <div className="bur"></div>
+            </div>
+          </div>
+        </main>
         <footer id="foot" className="bg-dark">
           <div className="text-center" style={this.state.disp2}>
             <Alertb alert="Select Checked In or Out or Un Allocated" />
