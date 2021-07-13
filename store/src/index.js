@@ -8,22 +8,27 @@ import Store from "./store";
 import { io } from "socket.io-client";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import "./index.css"
+import "./index.css";
 
 function Index() {
   const [token, setToken] = useState(false);
   axios("/tok", {
     method: "post",
     withCredentials: true,
-  }).then((res) => {
-    if (res.data) {
-      let use = jwt.verify(res.data, process.env.REACT_APP_JWT_SECRET);
-      setToken(use.token);
+  })
+    .then((res) => {
+      if (res.data) {
+        let use = jwt.verify(res.data, process.env.REACT_APP_JWT_SECRET);
+        setToken(use.token);
+      }
+      if (!res.data) {
+        setToken(res.data);
+      }
+    })
+    .catch((error) => {
+      alert(error);
     }
-    if (!res.data) {
-      setToken(res.data);
-    }
-  });
+  );
   if (token !== process.env.REACT_APP_TOKEN_SECRET) {
     return <Home setToken={setToken} />;
   }

@@ -13,33 +13,36 @@ class Home extends React.Component {
       disp: { display: "none" },
       disp1: { display: "block" },
     };
-  } 
+  }
   log = () => {
     window.event.preventDefault();
     let s = { user: this.state.uname, psw: this.state.psw };
-    axios.post(`/post0`, s, {
-      withCredentials: true
-      }).then((res) => {
-      if (res.data) {
-        let use = jwt.verify(
-          res.data,
-          process.env.REACT_APP_JWT_SECRET
-        );
-      this.props.setToken(use.token);
-      }
-      if (!res.data) {
-        this.setState({
-          disp: { display: "block", height: "117px" },
-          disp1: { display: "none" },
-        });
-        setTimeout(() => {
+    axios
+      .post(`/post0`, s, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data) {
+          let use = jwt.verify(res.data, process.env.REACT_APP_JWT_SECRET);
+          this.props.setToken(use.token);
+        }
+        if (!res.data) {
           this.setState({
-            disp: { display: "none" },
-            disp1: { display: "block" },
+            disp: { display: "block", height: "117px" },
+            disp1: { display: "none" },
           });
-        }, 1500);
+          setTimeout(() => {
+            this.setState({
+              disp: { display: "none" },
+              disp1: { display: "block" },
+            });
+          }, 1500);
+        }
+      })
+      .catch((error) => {
+        alert(error);
       }
-    });
+    );
   };
   change = (event) => {
     let nam = event.target.name;
@@ -81,7 +84,11 @@ class Home extends React.Component {
                   required
                   onChange={this.change}
                 ></input>
-                <button id="form3" type="submit" className="btn btn-light btn-block">
+                <button
+                  id="form3"
+                  type="submit"
+                  className="btn btn-light btn-block"
+                >
                   Login
                 </button>
               </form>
