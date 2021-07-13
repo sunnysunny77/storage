@@ -24,6 +24,7 @@ class Store extends React.Component {
       descrip: null,
       sumc: null,
       cont: "Container = N/A",
+      contt: "All",
       posi: "",
       posii: "",
       weight: null,
@@ -57,6 +58,7 @@ class Store extends React.Component {
       descrip: null,
       sumc: null,
       cont: "Container = N/A",
+      contt: "All",
       posi: "",
       posii: "",
       weight: null,
@@ -336,7 +338,7 @@ class Store extends React.Component {
         </React.Fragment>
       );
     }
-    if (x === "Find Positioned Client Container") {
+    if (x === "Find Positioned Client") {
       return (
         <React.Fragment>
           <p style={this.state.displays} className="text-center text-warning">
@@ -635,7 +637,7 @@ class Store extends React.Component {
         </Form>
       );
     }
-    if (x === "Find Positioned Client Container") {
+    if (x === "Find Positioned Client") {
       return (
         <Form onSubmit={this.rest8}>
           <Input
@@ -646,7 +648,8 @@ class Store extends React.Component {
             onChange={this.change}
           ></Input>
           <h4 className="text-white">↓ Select Container</h4>
-          <Input required type="select" name="cont" onChange={this.change}>
+          <Input required type="select" name="contt" onChange={this.change}>
+            <option value="All">All</option>
             <option value="Container = N/A">N/A:</option>
             <option value="200L Drum">200L Drum</option>
             <option value="Cage">Cage</option>
@@ -889,7 +892,7 @@ class Store extends React.Component {
     window.event.preventDefault();
     let send = {
       clientName: this.state.clientName,
-      cont: this.state.cont,
+      contt: this.state.contt,
     };
     this.rest0();
     this.state.socket.emit("post8", send);

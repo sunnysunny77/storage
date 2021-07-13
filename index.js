@@ -612,7 +612,7 @@ io.on("connection", (socket) => {
   socket.on("post8", (req) => {
     let obj = req;
     let x = obj.clientName;
-    let h = obj.cont;
+    let h = obj.contt;
     pool.query(
       "SELECT jobNum, clientName FROM store.jobBook WHERE clientName = '" +
         x +
@@ -622,20 +622,21 @@ io.on("connection", (socket) => {
           return io.to(socket.id).emit("post8", { e: error });
         } else if (!error && results.length) {
           let w = results.length;
-          let t;
           let s = "";
           for (let op = 0; op < w; op++) {
-            t = results[op]["jobNum"];
+            let t = results[op]["jobNum"];
+            let q =
+              h === "All"
+                ? ";"
+                : "WHERE store." + t + ".entryContainer = '" + h + "';";
             s +=
               "SELECT * FROM store." +
               t +
               " INNER JOIN store.posiInfo ON store." +
               t +
-              ".ID = store.posiInfo.ID WHERE store." +
-              t +
-              ".entryContainer = '" +
-              h +
-              "'; ";
+              ".ID = store.posiInfo.ID " +
+              q +
+              "";
           }
           let n = s.lastIndexOf(";");
           let r = s.substr(0, n);

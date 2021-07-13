@@ -87,9 +87,9 @@ class Nav extends React.Component {
               </li>
               <li>
                 <button
-                  onClick={() => this.show("Find Positioned Client Container")}
+                  onClick={() => this.show("Find Positioned Client")}
                 >
-                  Find Positioned Client Container
+                  Find Positioned Client
                 </button>
               </li>
             </ul>
