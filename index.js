@@ -848,7 +848,7 @@ io.on('connection', (socket) => {
     )
   })
 
-  socket.on('post13', (req) => {
+  socket.on('post13', () => {
     const loc = fs.readFileSync('/home/ubuntu/files/positions/positions.json')
     let a = JSON.parse(loc)
     a = a.positions
@@ -871,7 +871,7 @@ io.on('connection', (socket) => {
     }
   })
 
-  socket.on('post14', (req) => {
+  socket.on('post14', () => {
     pool.query('SELECT * FROM store.posiInfo', function (error, results) {
       if (error) {
         return io.to(socket.id).emit('post14', { e: error })
@@ -898,7 +898,7 @@ io.on('connection', (socket) => {
     })
   })
 
-  socket.on('post15', (req) => {
+  socket.on('post15', () => {
     pool.query(
       'SELECT * FROM store.posiInfo ORDER BY posiPosition',
       function (error, results) {
