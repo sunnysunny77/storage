@@ -674,7 +674,6 @@ io.on('connection', (socket) => {
                     })
                   }
                 }
-
                 return io.to(socket.id).emit('post8', { u: resul })
               } else {
                 return io.to(socket.id).emit('post8', {
