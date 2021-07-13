@@ -645,7 +645,7 @@ io.on("connection", (socket) => {
               return io.to(socket.id).emit("post8", { e: error });
             } else if (!error && results.length) {
               let resul = [];
-              if (results.length < 2) {
+              if (results[0][0] === undefined && results[0].length === undefined) {
                 for (let op in results) {
                   let ed = moment(results[op]["entryDate"]).format(
                     "YYYY-MM-DD HH:mm:ss"
@@ -662,7 +662,8 @@ io.on("connection", (socket) => {
                   });
                 }
                 return io.to(socket.id).emit("post8", { u: resul });
-              } else if (results.length >= 2 && results[0][0]) {
+              } else if (results[0][0] ) {
+          
                 for (let op in results) {
                   for (let i in results[op]) {
                     let ed = moment(results[op][i]["entryDate"]).format(
@@ -680,12 +681,14 @@ io.on("connection", (socket) => {
                     });
                   }
                 }
+                
                 return io.to(socket.id).emit("post8", { u: resul });
               } else {
+
                 return io.to(socket.id).emit("post8", {
                   e: {
                     code: " IS_NOT_VALID",
-                    sqlMessage: "entryContainer '" + h + "' doesn't exist",
+                    sqlMessage: "entryContainer'" + h + "' doesn't exist",
                   },
                 });
               }
@@ -693,7 +696,7 @@ io.on("connection", (socket) => {
               return io.to(socket.id).emit("post8", {
                 e: {
                   code: " IS_NOT_VALID",
-                  sqlMessage: "entryContainer '" + h + "' doesn't exist",
+                  sqlMessage: "entryContainer'" + h + "' doesn't exist",
                 },
               });
             }
@@ -863,7 +866,7 @@ io.on("connection", (socket) => {
     if (w) {
       for (let op = 0; op < w; op++) {
         resul.push({
-          Positions: a[op],
+          AllPositions: a[op],
         });
       }
       return io.to(socket.id).emit("post13", { u: resul });
@@ -890,7 +893,7 @@ io.on("connection", (socket) => {
           (item) => !results.map((item) => item.posiPosition).includes(item)
         );
         filtered = filtered.map((item) => {
-          return { Positions: item };
+          return { FreePositions: item };
         });
         return io.to(socket.id).emit("post14", { u: filtered });
       } else {

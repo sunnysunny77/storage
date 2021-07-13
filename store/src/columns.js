@@ -4,17 +4,14 @@ const columns1 = [
   {
     dataField: "Updated",
     text: "Updated",
-    sort: true,
   },
   {
     dataField: "Client",
     text: "Client",
-    sort: true,
   },
   {
     dataField: "In_D",
     text: "In_D",
-    sort: true,
   },
 ];
 
@@ -22,27 +19,22 @@ const columns2 = [
   {
     dataField: "Updated",
     text: "Updated",
-    sort: true,
   },
   {
     dataField: "ID",
     text: "ID",
-    sort: true,
   },
   {
     dataField: "Details",
     text: "Details",
-    sort: true,
   },
   {
     dataField: "In_D",
     text: "In_D",
-    sort: true,
   },
   {
     dataField: "Container",
     text: "Container",
-    sort: true,
   },
 ];
 
@@ -50,22 +42,18 @@ const columns3 = [
   {
     dataField: "Updated",
     text: "Updated",
-    sort: true,
   },
   {
     dataField: "ID",
     text: "ID",
-    sort: true,
   },
   {
     dataField: "Position",
     text: "Position",
-    sort: true,
   },
   {
     dataField: "Weight",
     text: "Weight",
-    sort: true,
   },
 ];
 
@@ -73,12 +61,10 @@ const columns4 = [
   {
     dataField: "Cked_Out",
     text: "Cked_Out",
-    sort: true,
   },
   {
     dataField: "Out_D",
     text: "Out_D",
-    sort: true,
   },
 ];
 
@@ -319,14 +305,12 @@ const columns9 = [
   {
     dataField: "Updated",
     text: "Updated",
-    sort: true,
   },
 ];
 const columns10 = [
   {
     dataField: "Updated",
     text: "Updated",
-    sort: true,
   },
 ];
 
@@ -373,7 +357,7 @@ const columns12 = [
 
 const columns13 = [
   {
-    dataField: "Positions",
+    dataField: "AllPositions",
     text: "All Positions",
     sort: true,
   },
@@ -381,7 +365,7 @@ const columns13 = [
 
 const columns14 = [
   {
-    dataField: "Positions",
+    dataField: "FreePositions",
     text: "Free Positions",
     sort: true,
   },
